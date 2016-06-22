@@ -1,0 +1,12 @@
+
+ENV["FLASK_APP"] = "flaskr.py"
+
+task :db do
+  sh "flask initdb"
+end
+
+task :run => :db do
+  sh "python flaskr.py"
+end
+
+task :default => :run
