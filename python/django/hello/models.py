@@ -14,7 +14,7 @@ class Greeting(models.Model):
 def explicit_query_error():
     log.info("making err query")
     cursor = connection.cursor()
-    return cursor.execute("select * from").fetchall()
+    return cursor.execute("select error from non_existant_table").fetchall()
 
 def explicit_query_pass():
     cursor = connection.cursor()
