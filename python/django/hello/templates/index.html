@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+
+{% block content %}
+<div class="container">
+
+ <p>
+    this page will crate an entry every time you visit.
+    check out <a href="/admin">admin</a> too.
+    </p>
+
+<ul>
+  <li><a href="/admin">admin</a></li>
+  <li><a href="/error">error</a></li>
+  <li><a href="/index">this page with a class based view</a></li>
+</ul>
+
+
+<h2>Views</h2>
+
+<ul>
+
+{% for greeting in greetings %}
+    <li>{{ greeting.when }}</li>
+{% endfor %}
+
+</ul>
+
+</div>
+
+{% endblock %}

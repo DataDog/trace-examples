@@ -1,0 +1,24 @@
+
+task :run do
+  sh "python manage.py runserver 0.0.0.0:8000"
+end
+
+task :deps do
+  sh "pip install -r requirements.txt"
+end
+
+task :migrate do
+  sh "python manage.py migrate"
+end
+
+task :user do
+  sh "python manage.py createsuperuser --username admin --email admin@example.com"
+end
+
+task :static do
+  sh "python manage.py collectstatic"
+end
+
+task :setup => [:deps, :migrate, :user, :static]
+
+task :default => [:run]
