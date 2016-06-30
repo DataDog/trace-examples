@@ -18,8 +18,6 @@ def explicit_query_error():
 
 def explicit_query_pass():
     cursor = connection.cursor()
-    out = cursor.execute("select * from sqlite_master").fetchall()
-    log.info("made pass query")
-    return out
+    cursor.execute("select 1 from hello_greeting")
 
 
