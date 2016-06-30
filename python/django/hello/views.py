@@ -25,7 +25,6 @@ def error(request):
     raise Exception("it's a sin!")
 
 
-
 class IndexView(TemplateView):
     template_name = "index.html"
 
