@@ -10,16 +10,22 @@ from ddtrace.tracer import Tracer
 from ddtrace.ext import http as httpx
 from ddtrace.ext import sql as sqlx
 
-db_conn = sqlite3.connect('sample_app.db')
+
+s = 0.01
+tracer = Tracer()
+log = logging.getLogger("dd.trace-example")
+
+from ddtrace.contrib.sqlite3 import connection_factory
+factory = connection_factory(tracer, service="sqlite_db")
+db_conn = sqlite3.connect(":memory:", factory=factory)
+
+# db_conn = sqlite3.connect('sample_app.db')
 db_cursor = db_conn.cursor()
 db_cursor.execute('''CREATE TABLE IF NOT EXISTS stocks
              (date text, trans text, symbol text, qty real, price real)''')
 db_cursor.execute("DELETE FROM stocks")
 db_conn.commit()
 
-s = 0.01
-tracer = Tracer()
-log = logging.getLogger("dd.trace-example")
 
 
 def _handle_web_request():
@@ -40,14 +46,14 @@ def _handle_web_request():
         time.sleep(s)
 
 def _simulate_web_request():
-    span = tracer.trace("web_request", service="web_server", resource="/home")
-    span.set_tag("http.header.user_agent", "DDTrace/0.1")
-    span.set_tag("org.user_name", "awang")
-    try:
-        _handle_web_request()
-    finally:
-        span.finish()
-        print "finished span: %s" % span
+    with tracer.trace("web_request", service="web_server", resource="/home") as span:    
+        span.set_tag("http.header.user_agent", "DDTrace/0.1")
+        span.set_tag("org.user_name", "awang")
+        try:
+            _handle_web_request()
+        finally:
+            span.finish()
+            print "finished span: %s" % span
 
 
 def run():
