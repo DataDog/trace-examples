@@ -6,16 +6,16 @@ import time
 import logging
 import sqlite3
 
-from ddtrace.tracer import Tracer
+from ddtrace.contrib.sqlite3 import connection_factory
 from ddtrace.ext import http as httpx
 from ddtrace.ext import sql as sqlx
+from ddtrace.tracer import Tracer
 
 
 s = 0.01
 tracer = Tracer()
 log = logging.getLogger("dd.trace-example")
 
-from ddtrace.contrib.sqlite3 import connection_factory
 factory = connection_factory(tracer, service="sqlite_db")
 db_conn = sqlite3.connect(":memory:", factory=factory)
 
