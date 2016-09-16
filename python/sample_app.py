@@ -16,7 +16,7 @@ s = 0.01
 tracer = Tracer()
 log = logging.getLogger("dd.trace-example")
 
-factory = connection_factory(tracer, service="sqlite_db")
+factory = connection_factory(tracer)
 db_conn = sqlite3.connect(":memory:", factory=factory)
 
 # db_conn = sqlite3.connect('sample_app.db')
@@ -29,18 +29,15 @@ db_conn.commit()
 
 
 def _handle_web_request():
-    with tracer.trace("SQL", span_type=sqlx.TYPE) as child_span:
-        db_cursor = db_conn.cursor()
-        query = '''INSERT INTO stocks VALUES ('2006-01-05','BUY','RHAT',100,35.14)'''
-        child_span.set_tag('sql.query',query)
-        db_cursor.execute(query)
-        db_conn.commit()
-    with tracer.trace("SELECT stocks", span_type=sqlx.TYPE) as child_span:
-        db_cursor = db_conn.cursor()
-        query = "SELECT * FROM stocks WHERE symbol='RHAT'"
-        child_span.set_tag('sql.query',query)
-        db_cursor.execute(query)
-        res=db_cursor.fetchall()
+    db_cursor = db_conn.cursor()
+    query = '''INSERT INTO stocks VALUES ('2006-01-05','BUY','RHAT',100,35.14)'''
+    db_cursor.execute(query)
+    db_conn.commit()
+
+    db_cursor = db_conn.cursor()
+    query = "SELECT * FROM stocks WHERE symbol='RHAT'"
+    db_cursor.execute(query)
+    res=db_cursor.fetchall()
     with tracer.trace("sleep_span", span_type=httpx.TYPE) as child_span:
         child_span.set_tag('sleep_duration',s)
         time.sleep(s)
