@@ -19,14 +19,13 @@ log = logging.getLogger("dd.trace-example")
 factory = connection_factory(tracer)
 db_conn = sqlite3.connect(":memory:", factory=factory)
 
-# db_conn = sqlite3.connect('sample_app.db')
-db_cursor = db_conn.cursor()
-db_cursor.execute('''CREATE TABLE IF NOT EXISTS stocks
-             (date text, trans text, symbol text, qty real, price real)''')
-db_cursor.execute("DELETE FROM stocks")
-db_conn.commit()
 
-
+def _init_database():
+    db_cursor = db_conn.cursor()
+    db_cursor.execute('''CREATE TABLE IF NOT EXISTS stocks
+                 (date text, trans text, symbol text, qty real, price real)''')
+    db_cursor.execute("DELETE FROM stocks")
+    db_conn.commit()
 
 def _handle_web_request():
     db_cursor = db_conn.cursor()
@@ -38,24 +37,20 @@ def _handle_web_request():
     query = "SELECT * FROM stocks WHERE symbol='RHAT'"
     db_cursor.execute(query)
     res=db_cursor.fetchall()
-    with tracer.trace("sleep_span", span_type=httpx.TYPE) as child_span:
-        child_span.set_tag('sleep_duration',s)
-        time.sleep(s)
 
 def _simulate_web_request():
-    with tracer.trace("web_request", service="web_server", resource="/home") as span:    
+    with tracer.trace("web_request", service="web_server", resource="/home") as span:
         span.set_tag("http.header.user_agent", "DDTrace/0.1")
         span.set_tag("org.user_name", "awang")
-        try:
-            _handle_web_request()
-        finally:
-            span.finish()
-            print "finished span: %s" % span
+        _handle_web_request()
+    print "finished span: %s" % span
 
 
 def run():
+    _init_database()
     while True:
         _simulate_web_request()
+        time.sleep(s)
         log.info("doing it")
 
 
