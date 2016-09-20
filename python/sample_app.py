@@ -33,7 +33,7 @@ def init_database():
 # the decorator will set the span name to the name of your func
 @tracer.wrap(name='request', service='sample-app', resource='db_calls')
 def trace_db_calls():
-    print "trying trace_db_calls"
+    print("trying trace_db_calls")
     # this will create a first span for that query
     cursor = db.cursor()
     query = "INSERT INTO stocks VALUES ('2006-01-05', 'BUY', 'RHAT', 100, 35.14)"
@@ -48,7 +48,7 @@ def trace_db_calls():
 
 @tracer.wrap(name='request', service='sample-app', resource='ctx_manager')
 def trace_ctx_manager():
-    print "trying trace_ctx_manager"
+    print("trying trace_ctx_manager")
     # some complicated work
     def fibo(n):
         from math import sqrt
@@ -67,7 +67,7 @@ def trace_ctx_manager():
 
 @tracer.wrap(name='request', service='sample-app', resource='rpc')
 def trace_rpc():
-    print "trying trace_rpc"
+    print("trying trace_rpc")
     # to allow tracing across apps/hosts you need to pass
     # as metadata to your remote call
     # * the trace ID (and the other side needs to set it as its trace ID as well)
@@ -104,7 +104,7 @@ def run():
 
     try:
         while True:
-            print random.choice(funcs)()
+            print(random.choice(funcs)())
             time.sleep(1)
     except KeyboardInterrupt:
         print "exiting"
