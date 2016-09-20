@@ -39,6 +39,7 @@ def _handle_web_request():
     res=db_cursor.fetchall()
 
 def _simulate_web_request():
+    # Use context-manager to create a span and automatically finish() it
     with tracer.trace("web_request", service="web_server", resource="/home") as span:
         span.set_tag("http.header.user_agent", "DDTrace/0.1")
         span.set_tag("org.user_name", "awang")
