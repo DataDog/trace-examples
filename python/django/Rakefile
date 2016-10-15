@@ -15,10 +15,6 @@ task :user do
   sh "python manage.py createsuperuser --username admin --email admin@example.com"
 end
 
-task :static do
-  sh "python manage.py collectstatic"
-end
-
-task :setup => [:deps, :migrate, :user, :static]
+task :setup => [:deps, :migrate, :user]
 
 task :default => [:run]

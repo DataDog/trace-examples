@@ -1,16 +1,14 @@
+from django.contrib import admin
 from django.conf.urls import include, url
 
-from django.contrib import admin
+from hello.views import GreetingsView, index_page, error_page
+
+
 admin.autodiscover()
 
-import hello.views
-from hello.views import IndexView
-
-app_name = "hello"
-
 urlpatterns = [
-    url(r'^$', hello.views.index, name='index'),
-    url(r'^error', hello.views.error, name='error'),
-    url(r'^index', IndexView.as_view()),
+    url(r'^$', index_page, name='index'),
+    url(r'^error/$', error_page, name='error'),
+    url(r'^index/$', GreetingsView.as_view(), name='index-cbv'),
     url(r'^admin/', include(admin.site.urls)),
 ]
