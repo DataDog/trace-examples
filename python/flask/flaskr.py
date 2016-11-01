@@ -22,6 +22,10 @@ from ddtrace import tracer
 from ddtrace.contrib.sqlite3 import connection_factory
 from ddtrace.contrib.flask import TraceMiddleware
 
+# start a dummy trace here to ensure we start tracing
+# before we fork.
+with tracer.trace("aaaa"):
+    pass
 
 tracer.debug_logging = True
 
