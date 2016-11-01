@@ -10,26 +10,27 @@
     :license: BSD, see LICENSE for more details.
 """
 
+# setup logging first
+import logging
+logging.basicConfig(level=logging.DEBUG)
+
+# autopatch tracing.
+from ddtrace.contrib import autopatch
+autopatch.autopatch()
 
 import os
-import logging
-
 from sqlite3 import dbapi2 as sqlite3
 from flask import Flask, request, session, g, redirect, url_for, abort, \
      render_template, flash
 
 from ddtrace import tracer
-from ddtrace.contrib.sqlite3 import connection_factory
 from ddtrace.contrib.flask import TraceMiddleware
+
 
 # start a dummy trace here to ensure we start tracing
 # before we fork.
-with tracer.trace("aaaa"):
-    pass
-
 tracer.debug_logging = True
-
-logging.basicConfig(level=logging.DEBUG)
+with tracer.trace("flaskr.test"): pass
 
 
 # create our little application :)
@@ -49,8 +50,7 @@ traced_app = TraceMiddleware(app, tracer, service="flaskr")
 
 def connect_db():
     """Connects to the specific database."""
-    factory = connection_factory(tracer, service="flaskr-db")
-    rv = sqlite3.connect(app.config['DATABASE'], factory=factory)
+    rv = sqlite3.connect(app.config['DATABASE'])
     rv.row_factory = sqlite3.Row
     return rv
 
@@ -134,4 +134,6 @@ def logout():
     return redirect(url_for('show_entries'))
 
 if __name__ == '__main__':
-    app.run(host="127.0.0.1", port=5002)
+    port = 5002
+    print('running on %s', port)
+    app.run(host="127.0.0.1", port=port)
