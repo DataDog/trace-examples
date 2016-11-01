@@ -51,7 +51,6 @@ traced_app = TraceMiddleware(app, tracer, service="flaskr")
 def connect_db():
     """Connects to the specific database."""
     rv = sqlite3.connect(app.config['DATABASE'])
-    print rv.datadog_service
     rv.row_factory = sqlite3.Row
     return rv
 
