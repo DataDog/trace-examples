@@ -24,6 +24,7 @@ from ddtrace.contrib.flask import TraceMiddleware
 
 # Auto-patch SQLite
 from ddtrace import patch_all, patch
+patch_all()
 
 # start a dummy trace here to ensure we start tracing
 # before we fork.
