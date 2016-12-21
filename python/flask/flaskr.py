@@ -22,6 +22,9 @@ from ddtrace import tracer
 from ddtrace.contrib.sqlite3 import connection_factory
 from ddtrace.contrib.flask import TraceMiddleware
 
+# Auto-patch SQLite
+from ddtrace import patch_all, patch
+
 # start a dummy trace here to ensure we start tracing
 # before we fork.
 with tracer.trace("aaaa"):
