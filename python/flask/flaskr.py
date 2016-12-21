@@ -19,11 +19,10 @@ from flask import Flask, request, session, g, redirect, url_for, abort, \
      render_template, flash
 
 from ddtrace import tracer
-from ddtrace.contrib.sqlite3 import connection_factory
 from ddtrace.contrib.flask import TraceMiddleware
 
 # Auto-patch SQLite
-from ddtrace import patch_all, patch
+from ddtrace import patch_all
 patch_all()
 
 # start a dummy trace here to ensure we start tracing
@@ -53,8 +52,7 @@ traced_app = TraceMiddleware(app, tracer, service="flaskr")
 
 def connect_db():
     """Connects to the specific database."""
-    factory = connection_factory(tracer, service="flaskr-db")
-    rv = sqlite3.connect(app.config['DATABASE'], factory=factory)
+    rv = sqlite3.connect(app.config['DATABASE'])
     rv.row_factory = sqlite3.Row
     return rv
 
