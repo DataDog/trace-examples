@@ -1,0 +1,9 @@
+click==6.6
+Flask==0.11.1
+itsdangerous==0.24
+Jinja2==2.8
+MarkupSafe==0.23
+msgpack-python==0.4.8
+virtualenv==15.1.0
+Werkzeug==0.11.11
+wrapt==1.10.8
