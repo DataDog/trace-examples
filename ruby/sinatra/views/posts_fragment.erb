@@ -1,0 +1,11 @@
+
+<% posts.each do |post| %>
+  <div class="post row">
+    <div class="col-md-offset-4 col-md-4">
+      <h2 class="title">
+        <span class="cdate"><%= post.cdate.strftime('%F') %></span> — <%= post.title %>
+      </h2>
+      <p class="body"><%= post.body %></p>
+    </div>
+  </div>
+<% end %>

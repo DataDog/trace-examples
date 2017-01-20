@@ -1,0 +1,9 @@
+source 'https://rubygems.org'
+
+gem 'connection_pool'
+gem 'json'
+gem 'redis'
+gem 'sinatra'
+gem 'sinatra-contrib'
+
+gem 'ddtrace', :source => 'http://gems.datadoghq.com/trace/'
