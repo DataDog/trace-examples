@@ -12,6 +12,7 @@ tracing compatibility issues with early versions of Rails.
 * MySQL adapter
 * Redis adapter
 * Unicorn 4.8.3
+* Passenger 5.0.28
 
 ## Backing services
 
@@ -33,6 +34,10 @@ Install dependencies and launch Unicorn:
 
     bundle install
     bundle exec unicorn -c config/unicorn.rb
+
+or Passenger:
+
+    bundle exec passenger start
 
 ## Available environment variables
 
