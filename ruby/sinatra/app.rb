@@ -16,10 +16,14 @@ class App < Sinatra::Application
   REDIS_HOST = ENV['SINATRA_REDIS_HOST'] || '127.0.0.1'.freeze()
   REDIS_PORT = ENV['SINATRA_REDIS_PORT'] || 6379
   SERVICE = ENV['SINATRA_SERVICE'] || 'sinatra-demo'
+  PROTECTED_USER = ENV['PROTECTED_USER']
+  PROTECTED_PASSWORD = ENV['PROTECTED_PASSWORD']
+  DATADOG_TRACER = ENV['DATADOG_TRACER']
 
   configure do
     settings.datadog_tracer.configure(
         default_service: SERVICE,
+        trace_agent_hostname: DATADOG_TRACER,
     )
 
     pool = ConnectionPool.new(size: 10) do
@@ -33,6 +37,17 @@ class App < Sinatra::Application
       settings.redis_pool.with do |conn|
         yield conn
       end
+    end
+
+    def protected!
+      return if authorized?
+      headers['WWW-Authenticate'] = 'Basic realm="Restricted Area"'
+      halt 401, "Not authorized\n"
+    end
+
+    def authorized?
+      @auth ||=  Rack::Auth::Basic::Request.new(request.env)
+      @auth.provided? and @auth.basic? and @auth.credentials and @auth.credentials == [PROTECTED_USER, PROTECTED_PASSWORD]
     end
   end
 
@@ -60,6 +75,7 @@ class App < Sinatra::Application
   end
 
   post '/api/posts' do
+    protected!
     data = JSON.parse(request.body.read)
 
     post = Post.unmarshal(data)
