@@ -1,4 +1,3 @@
-
 require 'date'
 require 'securerandom'
 

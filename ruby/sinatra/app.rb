@@ -1,4 +1,3 @@
-
 require 'bundler/setup'
 
 require 'connection_pool'
@@ -14,12 +13,14 @@ require 'ddtrace/contrib/sinatra/tracer'
 require './post.rb'
 
 class App < Sinatra::Application
-  REDIS_HOST = '127.0.0.1'.freeze()
-  REDIS_PORT = 6379
+  REDIS_HOST = ENV['SINATRA_REDIS_HOST'] || '127.0.0.1'.freeze()
+  REDIS_PORT = ENV['SINATRA_REDIS_PORT'] || 6379
+  SERVICE = ENV['SINATRA_SERVICE'] || 'sinatra-demo'
 
   configure do
-    settings.datadog_tracer.configure(default_service: 'sinatra-demo',
-                                      debug: true)
+    settings.datadog_tracer.configure(
+        default_service: SERVICE,
+    )
 
     pool = ConnectionPool.new(size: 10) do
       Redis.new(host: REDIS_HOST, port: REDIS_PORT)
