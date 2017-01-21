@@ -1,3 +1,4 @@
-class Comment < ApplicationRecord
-  belongs_to :article
+class Comment < ActiveRecord::Base
+  belongs_to :post
+  attr_accessible :body, :commenter
 end

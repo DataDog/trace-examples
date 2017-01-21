@@ -1,7 +1,8 @@
-Rails.application.routes.draw do
-  resources :articles do
+Blog::Application.routes.draw do
+  resources :posts do
     resources :comments
   end
 
-  root 'welcome#index'
+  get "home/index"
+  root :to => "home#index"
 end
