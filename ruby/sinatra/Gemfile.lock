@@ -1,11 +1,18 @@
+GIT
+  remote: https://github.com/DataDog/dd-trace-rb
+  revision: 8dcff9b3b5569f8289be4907d9fcbf98ddf529f2
+  ref: 8dcff9b3b5569f8289be4907d9fcbf98ddf529f2
+  specs:
+    ddtrace (0.3.1)
+      msgpack
+
 GEM
   remote: https://rubygems.org/
-  remote: http://gems.datadoghq.com/trace/
   specs:
     backports (3.6.8)
     connection_pool (2.2.1)
-    ddtrace (0.1.5)
     json (2.0.3)
+    msgpack (1.0.2)
     multi_json (1.12.1)
     rack (1.6.5)
     rack-protection (1.5.3)
@@ -38,4 +45,4 @@ DEPENDENCIES
   sinatra-contrib
 
 BUNDLED WITH
-   1.13.7
+   1.14.0
