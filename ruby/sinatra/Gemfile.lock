@@ -1,16 +1,10 @@
-GIT
-  remote: https://github.com/DataDog/dd-trace-rb
-  revision: 8dcff9b3b5569f8289be4907d9fcbf98ddf529f2
-  ref: 8dcff9b3b5569f8289be4907d9fcbf98ddf529f2
-  specs:
-    ddtrace (0.3.1)
-      msgpack
-
 GEM
   remote: https://rubygems.org/
   specs:
     backports (3.6.8)
     connection_pool (2.2.1)
+    ddtrace (0.4.0)
+      msgpack
     json (2.0.3)
     msgpack (1.0.2)
     multi_json (1.12.1)
@@ -38,11 +32,14 @@ PLATFORMS
 
 DEPENDENCIES
   connection_pool
-  ddtrace!
+  ddtrace (= 0.4.0)
   json
   redis
   sinatra
   sinatra-contrib
+
+RUBY VERSION
+   ruby 2.1.7p400
 
 BUNDLED WITH
    1.14.0
