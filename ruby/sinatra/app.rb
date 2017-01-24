@@ -58,17 +58,26 @@ class App < Sinatra::Application
   get '/api/posts', provides: :json do
     posts = []
     with_redis_conn do |conn|
-      posts = Post.load_all(conn)
+      posts = Post.all(conn)
     end
 
     post_data = posts.map {|post| post.marshal()}
     json post_data
   end
 
+  get '/api/posts/:id', :provides => :json do
+    with_redis_conn do |conn|
+      post = Post.get(conn, params[:id])
+      return status 404 unless post
+
+      json post.marshal()
+    end
+  end
+
   get '/api/posts', provides: :html do
     posts = []
     with_redis_conn do |conn|
-      posts = Post.load_all(conn)
+      posts = Post.all(conn)
     end
 
     erb :posts_fragment, layout: nil, locals: {posts: posts}

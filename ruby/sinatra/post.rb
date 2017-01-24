@@ -21,7 +21,7 @@ class Post < Object
     conn.set(redis_key(), marshal())
   end
 
-  def self.load_all(conn)
+  def self.all(conn)
     keys = conn.keys("sinatra-demo:post:*")
 
     values = conn.mget(keys)
@@ -32,6 +32,14 @@ class Post < Object
 
     values.sort_by! {|v| v.cdate }
     values.reverse
+  end
+
+  def self.get(conn, id)
+    value = conn.get("sinatra-demo:post:#{id}")
+    return unless value
+
+    data = JSON.parse(value)
+    Post.unmarshal(data)
   end
 
   def marshal
