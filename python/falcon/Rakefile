@@ -1,0 +1,10 @@
+
+task :install do
+  sh 'pip install -r requirements.txt'
+end
+
+task :run do
+  sh 'uwsgi -p 1 --http :9090 --mount /=demo:app'
+end
+
+task :default => [:install, :run]
