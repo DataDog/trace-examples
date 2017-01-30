@@ -3,13 +3,13 @@ import ddtrace
 import redis
 
 from ddtrace import Pin, patch
+from ddtrace.async import tracer
 from ddtrace.async.tracer import AsyncTracer
 from ddtrace.async.helpers import ensure_future
 
 
 # async tracer
-# TODO: this will not be the public API
-tracer = AsyncTracer()
+# TODO: this is a temporary behavior
 ddtrace.tracer = tracer
 
 # patch redis

@@ -1,10 +1,8 @@
 import asyncio
 
+from ddtrace.async import tracer
 from ddtrace.async.tracer import AsyncTracer
 from ddtrace.async.helpers import ensure_future
-
-
-tracer = AsyncTracer()
 
 
 async def delayed_job():
