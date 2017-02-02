@@ -3,8 +3,8 @@ import asyncio
 
 from aiohttp import web
 
-from ddtrace.async import tracer
-from ddtrace.async.aio import TraceMiddleware
+from ddtrace.contrib.asyncio import tracer
+from ddtrace.contrib.aiohttp.middlewares import TraceMiddleware
 
 
 BASE_DIR = os.path.dirname(os.path.realpath(__file__))
@@ -31,11 +31,11 @@ async def some_work(request):
 
 # your application
 app = web.Application()
-app.router.add_get("/", handle)
-app.router.add_get("/{name}", handle)
+app.router.add_get("/users", handle)
+app.router.add_get("/users/{name}", handle)
 app.router.add_static('/statics', STATIC_DIR)
 
-# Trace it!
+# asynchronous tracing
 TraceMiddleware(app, tracer, service='async-web')
 
-web.run_app(app)
+web.run_app(app, port=8000)
