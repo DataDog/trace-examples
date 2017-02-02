@@ -3,17 +3,12 @@ import ddtrace
 import redis
 
 from ddtrace import Pin, patch
-from ddtrace.async import tracer
-from ddtrace.async.tracer import AsyncTracer
-from ddtrace.async.helpers import ensure_future
+from ddtrace.contrib.asyncio import tracer
+from ddtrace.contrib.asyncio.helpers import ensure_future
 
-
-# async tracer
-# TODO: this is a temporary behavior
-ddtrace.tracer = tracer
 
 # patch redis
-patch(redis=True)
+patch(redis=True, tracer=tracer)
 client = redis.StrictRedis(host="localhost", port=6379, db=0)
 Pin.override(client, service='redis-queue')
 
