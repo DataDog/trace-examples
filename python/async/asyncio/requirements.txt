@@ -1,0 +1,5 @@
+# third party
+redis==2.10.5
+
+# tracer
+git+https://github.com/DataDog/dd-trace-py.git@palazzem/async-new-api#egg=ddtrace
