@@ -1,0 +1,11 @@
+source 'https://rubygems.org'
+
+gem 'connection_pool'
+gem 'json'
+gem 'redis'
+gem 'sidekiq'
+gem 'sinatra'
+gem 'sinatra-contrib'
+
+# tracing
+gem 'ddtrace', :git => 'https://github.com/DataDog/dd-trace-rb', :ref => '10e4534db082d8787382dd54126560f72dcd4a76'
