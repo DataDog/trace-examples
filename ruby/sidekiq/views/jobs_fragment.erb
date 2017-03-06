@@ -1,0 +1,17 @@
+<% jobs.each do |job| %>
+  <div class="job row">
+    <div class="col-md-offset-4 col-md-4">
+      <h3>
+        <span class="id"><%= job.cdate.strftime('%FT%T%z') %></span> — <%= job.duration %> seconds
+      </h3>
+      <p class="small"><%= job.id %></p>
+      <p class="small bold">
+      <% if job.running? %>
+        running
+      <% else %>
+        queued
+      <% end %>
+      </p>
+    </div>
+  </div>
+<% end %>
