@@ -1,0 +1,5 @@
+# third party
+aiohttp==1.2.0
+
+# tracer
+ddtrace==0.6.0
