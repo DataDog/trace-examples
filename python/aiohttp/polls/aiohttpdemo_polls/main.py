@@ -17,9 +17,8 @@ from aiohttpdemo_polls.utils import TRAFARET
 
 # tracing code
 from ddtrace import patch
-from ddtrace.contrib.asyncio import tracer
-from ddtrace.contrib.aiohttp.middlewares import TraceMiddleware
-patch(aiohttp=True, tracer=tracer)
+from ddtrace.contrib.aiohttp import trace_app
+patch(aiohttp=True)
 
 
 def init(loop, argv):
@@ -52,7 +51,7 @@ def init(loop, argv):
     setup_middlewares(app)
 
     # tracing
-    TraceMiddleware(app, tracer, service='async-web')
+    trace_app(app, tracer, service='async-web')
     return app
 
 
