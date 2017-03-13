@@ -1,0 +1,6 @@
+# application
+tornado
+redis
+
+# tracing (palazzem/tornado-support branch)
+-e git+https://github.com/DataDog/dd-trace-py.git@4b4b8802b8e3c719979cb70ff8951c5f7beac9d8#egg=ddtrace-dev
