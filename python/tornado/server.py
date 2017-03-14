@@ -35,6 +35,7 @@ def count_unit():
 class MainHandler(tornado.web.RequestHandler):
     @tornado.gen.coroutine
     def get(self):
+        yield tornado.gen.sleep(0.05)
         yield self.delayed_work()
 
         # external interaction that is automatically traced
@@ -68,6 +69,8 @@ def make_app():
     return tornado.web.Application([
         (r'/count/', MainHandler),
         (r'/broken/', BrokenHandler),
+        (r'/redirect/', tornado.web.RedirectHandler, {'url': '/count/'}),
+        (r'/statics/(.*)', tornado.web.StaticFileHandler, {'path': STATIC_DIR}),
     ])
 
 
