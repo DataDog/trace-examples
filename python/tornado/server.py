@@ -15,6 +15,9 @@ PORT = int(os.getenv('APP_PORT', '8000'))
 BASE_DIR = os.path.dirname(os.path.realpath(__file__))
 STATIC_DIR = os.path.join(BASE_DIR, 'statics')
 
+# configure the tracer
+tracer.configure(hostname=DATADOG_TRACER)
+
 # patch redis with Pin
 patch(redis=True)
 url = os.getenv('REDIS_URL', 'redis://localhost:6379')
