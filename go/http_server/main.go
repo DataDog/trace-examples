@@ -8,7 +8,7 @@ import (
 	"sync"
 	"time"
 
-	"github.com/Datadog/dd-trace-go/tracer"
+	"github.com/DataDog/dd-trace-go/tracer"
 )
 
 const (
