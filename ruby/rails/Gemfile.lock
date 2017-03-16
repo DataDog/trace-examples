@@ -1,5 +1,6 @@
 GEM
   remote: https://rubygems.org/
+  remote: http://gems.datadoghq.com/trace-dev/
   specs:
     actionmailer (3.2.22.4)
       actionpack (= 3.2.22.4)
@@ -42,7 +43,7 @@ GEM
       execjs
     coffee-script-source (1.12.2)
     daemons (1.2.4)
-    ddtrace (0.4.0)
+    ddtrace (0.6.0.pre.730)
       msgpack
     delayed_job (4.1.2)
       activesupport (>= 3.0, < 5.1)
@@ -63,7 +64,7 @@ GEM
       mime-types (~> 1.16)
       treetop (~> 1.4.8)
     mime-types (1.25.1)
-    msgpack (1.0.2)
+    msgpack (1.1.0)
     multi_json (1.12.1)
     mysql (2.9.1)
     mysql2 (0.3.21)
@@ -144,7 +145,7 @@ DEPENDENCIES
   activerecord-mysql-adapter
   coffee-rails (~> 3.2.1)
   daemons
-  ddtrace (= 0.4.0)
+  ddtrace (= 0.6.0.pre.730)!
   delayed_job_active_record
   jquery-rails
   mysql2 (= 0.3.21)
@@ -156,7 +157,7 @@ DEPENDENCIES
   unicorn (= 4.8.3)
 
 RUBY VERSION
-   ruby 2.1.7p400
+   ruby 1.9.3p551
 
 BUNDLED WITH
-   1.14.0
+   1.14.5

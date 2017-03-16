@@ -1,8 +1,9 @@
 source 'https://rubygems.org'
-ruby "2.1.7"
+ruby "1.9.3"
 
 # tracing
-gem 'ddtrace', '0.4.0'
+# gem 'ddtrace', '0.6.0'
+gem 'ddtrace', '0.6.0.pre.730', :source => 'http://gems.datadoghq.com/trace-dev/'
 
 # rails
 gem 'rails', '3.2.22.4'
