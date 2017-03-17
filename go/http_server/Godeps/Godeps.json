@@ -1,0 +1,16 @@
+{
+	"ImportPath": "github.com/palazzem/http_server",
+	"GoVersion": "go1.8",
+	"GodepVersion": "v75",
+	"Deps": [
+		{
+			"ImportPath": "github.com/DataDog/dd-trace-go/tracer",
+			"Comment": "v0.2.0-15-gf579e7b",
+			"Rev": "f579e7b1c3d14d7b0a073612421fccf9522b70e5"
+		},
+		{
+			"ImportPath": "github.com/ugorji/go/codec",
+			"Rev": "faddd6128c66c4708f45fdc007f575f75e592a3c"
+		}
+	]
+}

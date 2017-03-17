@@ -1,6 +1,0 @@
-hash: 2a00f562c74162b19f77a437b9444236659de80f2adb689d4cb7726aec414899
-updated: 2017-03-16T19:50:42.258012437+01:00
-imports:
-- name: github.com/DataDog/dd-trace-go
-  version: 3a07d13d93a6b13373b6f986a7dee110f6f8b2bb
-testImports: []
