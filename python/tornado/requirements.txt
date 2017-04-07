@@ -7,6 +7,7 @@
 -e git+https://github.com/DataDog/dd-trace-py.git@f4339bdc4d687c1bda9eea8bdaee07eecef2e62c#egg=ddtrace-dev
 backports-abc==0.5        # via tornado
 certifi==2017.1.23        # via tornado
+futures==3.0.5
 msgpack-python==0.4.8
 redis==2.10.5
 singledispatch==3.4.0.3   # via tornado
