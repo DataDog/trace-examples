@@ -15,6 +15,8 @@ It also serves static files and has access to a local Redis cache.
 
 ## Getting started
 
-Launch the application
+Launch all backing services using `docker-compose`, and then execute the
+application:
 
+    docker-compose up -d
     python server.py
