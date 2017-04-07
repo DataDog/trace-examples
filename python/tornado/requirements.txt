@@ -4,7 +4,7 @@
 #
 #    pip-compile --output-file requirements.txt requirements.in
 #
--e git+https://github.com/DataDog/dd-trace-py.git@4b4b8802b8e3c719979cb70ff8951c5f7beac9d8#egg=ddtrace-dev
+-e git+https://github.com/DataDog/dd-trace-py.git@f4339bdc4d687c1bda9eea8bdaee07eecef2e62c#egg=ddtrace-dev
 backports-abc==0.5        # via tornado
 certifi==2017.1.23        # via tornado
 msgpack-python==0.4.8
