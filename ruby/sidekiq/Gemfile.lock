@@ -1,17 +1,12 @@
-GIT
-  remote: https://github.com/DataDog/dd-trace-rb
-  revision: 10e4534db082d8787382dd54126560f72dcd4a76
-  ref: 10e4534db082d8787382dd54126560f72dcd4a76
-  specs:
-    ddtrace (0.4.3)
-      msgpack
-
 GEM
   remote: https://rubygems.org/
+  remote: http://gems.datadoghq.com/trace-dev/
   specs:
     backports (3.6.8)
     concurrent-ruby (1.0.5)
     connection_pool (2.2.1)
+    ddtrace (0.6.2.pre.856)
+      msgpack
     json (2.0.3)
     msgpack (1.1.0)
     multi_json (1.12.1)
@@ -44,7 +39,7 @@ PLATFORMS
 
 DEPENDENCIES
   connection_pool
-  ddtrace!
+  ddtrace (= 0.6.2.pre.856)!
   json
   redis
   sidekiq
