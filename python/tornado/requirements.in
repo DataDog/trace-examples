@@ -4,4 +4,5 @@ tornado
 redis
 
 # tracing (palazzem/tornado-support branch)
--e git+https://github.com/DataDog/dd-trace-py.git@f4339bdc4d687c1bda9eea8bdaee07eecef2e62c#egg=ddtrace-dev
+--find-links=https://s3.amazonaws.com/pypi.datadoghq.com/trace-dev/index.html
+ddtrace==0.8.0+master1789

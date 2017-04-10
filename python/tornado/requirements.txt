@@ -4,13 +4,14 @@
 #
 #    pip-compile --output-file requirements.txt requirements.in
 #
--e git+https://github.com/DataDog/dd-trace-py.git@f4339bdc4d687c1bda9eea8bdaee07eecef2e62c#egg=ddtrace-dev
 backports-abc==0.5        # via tornado
 certifi==2017.1.23        # via tornado
+--find-links=https://s3.amazonaws.com/pypi.datadoghq.com/trace-dev/index.html
+ddtrace==0.8.0+master1789
 futures==3.0.5
-msgpack-python==0.4.8
+msgpack-python==0.4.8     # via ddtrace
 redis==2.10.5
 singledispatch==3.4.0.3   # via tornado
 six==1.10.0               # via singledispatch
 tornado==4.4.2
-wrapt==1.10.8
+wrapt==1.10.8             # via ddtrace
