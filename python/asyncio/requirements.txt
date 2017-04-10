@@ -2,4 +2,5 @@
 redis==2.10.5
 
 # tracer
-ddtrace==0.6.0
+--find-links=https://s3.amazonaws.com/pypi.datadoghq.com/trace-dev/index.html
+ddtrace==0.8.0+master1789
