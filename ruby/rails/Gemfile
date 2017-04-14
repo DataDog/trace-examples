@@ -1,12 +1,15 @@
 source 'https://rubygems.org'
-ruby "1.9.3"
+ruby "2.3.1"
 
 # tracing
 # gem 'ddtrace', '0.6.0'
-gem 'ddtrace', '0.6.2.pre.856', :source => 'http://gems.datadoghq.com/trace-dev/'
+# gem 'ddtrace', '0.6.2.pre.856', :source => 'http://gems.datadoghq.com/trace-dev/'
+# gem 'ddtrace', path: '/Users/emanuele/workspaces/dd/dd-trace-rb'
+gem 'ddtrace', :git => 'https://github.com/DataDog/dd-trace-rb.git', :ref => '45dc54b'
 
 # rails
 gem 'rails', '3.2.22.4'
+gem 'grape'
 gem 'redis-rails'
 
 # database
