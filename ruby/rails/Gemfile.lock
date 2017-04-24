@@ -1,13 +1,6 @@
-GIT
-  remote: https://github.com/DataDog/dd-trace-rb.git
-  revision: 45dc54bd741d04008f49eca7617e0df469e0bb65
-  ref: 45dc54b
-  specs:
-    ddtrace (0.6.3)
-      msgpack
-
 GEM
   remote: https://rubygems.org/
+  remote: http://gems.datadoghq.com/trace-dev/
   specs:
     actionmailer (3.2.22.4)
       actionpack (= 3.2.22.4)
@@ -56,6 +49,8 @@ GEM
       execjs
     coffee-script-source (1.12.2)
     daemons (1.2.4)
+    ddtrace (0.7.0.pre.922)
+      msgpack
     delayed_job (4.1.2)
       activesupport (>= 3.0, < 5.1)
     delayed_job_active_record (4.1.1)
@@ -183,7 +178,7 @@ DEPENDENCIES
   activerecord-mysql-adapter
   coffee-rails (~> 3.2.1)
   daemons
-  ddtrace!
+  ddtrace (= 0.7.0.pre.922)!
   delayed_job_active_record
   grape
   jquery-rails
