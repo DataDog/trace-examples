@@ -33,6 +33,10 @@ module Blog
     # config.i18n.load_path += Dir[Rails.root.join('my', 'locales', '*.{rb,yml}').to_s]
     # config.i18n.default_locale = :de
 
+    # Auto-load API and its subdirectories
+    config.paths.add 'app/api', glob: '**/*.rb'
+    config.autoload_paths += Dir["#{Rails.root}/app/api/*"]
+
     # Configure the default encoding used in templates for Ruby 1.9.
     config.encoding = "utf-8"
 

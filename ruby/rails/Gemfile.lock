@@ -34,7 +34,13 @@ GEM
       i18n (~> 0.6, >= 0.6.4)
       multi_json (~> 1.0)
     arel (3.0.3)
+    axiom-types (0.1.1)
+      descendants_tracker (~> 0.0.4)
+      ice_nine (~> 0.11.0)
+      thread_safe (~> 0.3, >= 0.3.1)
     builder (3.0.4)
+    coercible (1.0.0)
+      descendants_tracker (~> 0.0.1)
     coffee-rails (3.2.2)
       coffee-script (>= 2.2.0)
       railties (~> 3.2.0)
@@ -43,17 +49,32 @@ GEM
       execjs
     coffee-script-source (1.12.2)
     daemons (1.2.4)
-    ddtrace (0.6.2.pre.856)
+    ddtrace (0.7.0.pre.922)
       msgpack
     delayed_job (4.1.2)
       activesupport (>= 3.0, < 5.1)
     delayed_job_active_record (4.1.1)
       activerecord (>= 3.0, < 5.1)
       delayed_job (>= 3.0, < 5)
+    descendants_tracker (0.0.4)
+      thread_safe (~> 0.3, >= 0.3.1)
+    equalizer (0.0.11)
     erubis (2.7.0)
     execjs (2.7.0)
+    grape (0.19.2)
+      activesupport
+      builder
+      hashie (>= 2.1.0)
+      multi_json (>= 1.3.2)
+      multi_xml (>= 0.5.2)
+      mustermann-grape (~> 1.0.0)
+      rack (>= 1.3.0)
+      rack-accept
+      virtus (>= 1.0.0)
+    hashie (3.5.5)
     hike (1.2.3)
-    i18n (0.7.0)
+    i18n (0.8.1)
+    ice_nine (0.11.2)
     journey (1.0.4)
     jquery-rails (3.1.4)
       railties (>= 3.0, < 5.0)
@@ -66,6 +87,10 @@ GEM
     mime-types (1.25.1)
     msgpack (1.1.0)
     multi_json (1.12.1)
+    multi_xml (0.6.0)
+    mustermann (1.0.0)
+    mustermann-grape (1.0.0)
+      mustermann (~> 1.0.0)
     mysql (2.9.1)
     mysql2 (0.3.21)
     passenger (5.0.28)
@@ -73,7 +98,9 @@ GEM
       rake (>= 0.8.1)
     polyglot (0.3.5)
     rack (1.4.7)
-    rack-cache (1.6.1)
+    rack-accept (0.4.5)
+      rack (>= 0.4)
+    rack-cache (1.7.0)
       rack (>= 0.4)
     rack-ssl (1.3.4)
       rack
@@ -94,11 +121,11 @@ GEM
       rake (>= 0.8.7)
       rdoc (~> 3.4)
       thor (>= 0.14.6, < 2.0)
-    raindrops (0.17.0)
+    raindrops (0.18.0)
     rake (12.0.0)
     rdoc (3.12.2)
       json (~> 1.4)
-    redis (3.3.2)
+    redis (3.3.3)
     redis-actionpack (3.2.4)
       actionpack (~> 3.2.0)
       redis-rack (~> 1.4.4)
@@ -126,17 +153,23 @@ GEM
       rack (~> 1.0)
       tilt (~> 1.1, != 1.3.0)
     thor (0.19.4)
+    thread_safe (0.3.6)
     tilt (1.4.1)
     treetop (1.4.15)
       polyglot
       polyglot (>= 0.3.1)
-    tzinfo (0.3.52)
-    uglifier (3.0.4)
+    tzinfo (0.3.53)
+    uglifier (3.2.0)
       execjs (>= 0.3.0, < 3)
     unicorn (4.8.3)
       kgio (~> 2.6)
       rack
       raindrops (~> 0.7)
+    virtus (1.0.5)
+      axiom-types (~> 0.1)
+      coercible (~> 1.0)
+      descendants_tracker (~> 0.0, >= 0.0.3)
+      equalizer (~> 0.0, >= 0.0.9)
 
 PLATFORMS
   ruby
@@ -145,8 +178,9 @@ DEPENDENCIES
   activerecord-mysql-adapter
   coffee-rails (~> 3.2.1)
   daemons
-  ddtrace (= 0.6.2.pre.856)!
+  ddtrace (= 0.7.0.pre.922)!
   delayed_job_active_record
+  grape
   jquery-rails
   mysql2 (= 0.3.21)
   passenger (= 5.0.28)
@@ -157,7 +191,7 @@ DEPENDENCIES
   unicorn (= 4.8.3)
 
 RUBY VERSION
-   ruby 1.9.3p551
+   ruby 2.3.1p112
 
 BUNDLED WITH
    1.14.6

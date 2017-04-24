@@ -4,5 +4,6 @@ Blog::Application.routes.draw do
   end
 
   get "home/index"
+  mount API => '/'
   root :to => "home#index"
 end
