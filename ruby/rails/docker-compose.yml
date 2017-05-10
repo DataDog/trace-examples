@@ -8,8 +8,33 @@ services:
         - MYSQL_PASSWORD=123456
         - MYSQL_USER=test
     ports:
-        - "127.0.0.1:3306:3306"
+        - "3306:3306"
   redis:
     image: redis:3.2
     ports:
-        - "127.0.0.1:6379:6379"
+        - "6379:6379"
+  web:
+    build: .
+    command: bundle exec unicorn -c config/unicorn.rb -l 3000
+    volumes:
+      - .:/myapp
+    ports:
+      - "3000:3000"
+    depends_on:
+      - mysql
+      - redis
+      - datadog
+    environment:
+      - PROTECTED_USER=me
+      - PROTECTED_PASSWORD=123456
+  datadog:
+    image: datadog/docker-dd-agent
+    ports:
+      - "8126:8126"
+    environment:
+     - API_KEY
+     - DD_APM_ENABLED=true
+    volumes:
+     - /var/run/docker.sock:/var/run/docker.sock
+     - /proc/mounts:/host/proc/mounts:ro
+     - /sys/fs/cgroup:/host/sys/fs/cgroup:ro

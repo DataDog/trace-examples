@@ -1,4 +1,6 @@
 Blog::Application.configure do
+  config.secret_token = 'something_that_is_quite_long_but_not_secure'
+
   # Settings specified here will take precedence over those in config/application.rb
 
   # In the development environment your application's code is reloaded on

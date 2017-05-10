@@ -1,7 +1,7 @@
 # MySQL demo
 
 default: &default
-  host: 127.0.0.1
+  host: mysql
   adapter: mysql2
   username: root
   password: 123456

@@ -21,31 +21,16 @@ tracing compatibility issues with early versions of Rails.
 
 ## Getting started
 
-Launch backing services:
+Launch application:
 
-    docker-compose up -d
+    docker-compose up
 
-Set environment variables for POST permissions (Basic AUTH):
+In a second console:
 
-    export PROTECTED_USER=me
-    export PROTECTED_PASSWORD=123456
+    docker-compose run web rake db:create
+    docker-compose run web rake db:migrate
 
-Install dependencies and launch Unicorn:
+Back in the first console, stop docker with CTRL-C, then:
 
-    bundle install
-    bundle exec unicorn -c config/unicorn.rb
-
-or Passenger:
-
-    bundle exec passenger start
-
-## Available environment variables
-
-Set the following environment variables during the deploy:
-
-* ``RAILS_ENV=production``
-* ``SECRET_KEY_BASE``
-* ``DATABASE_URL``
-* ``REDIS_URL``
-* ``PROTECTED_USER``
-* ``PROTECTED_PASSWORD``
+    docker-compose stop
+    docker-compose up
