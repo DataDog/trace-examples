@@ -2,7 +2,7 @@ source 'https://rubygems.org'
 ruby "2.3.1"
 
 # tracing
-gem 'ddtrace', '0.7.0.pre.922', :source => 'http://gems.datadoghq.com/trace-dev/'
+gem 'ddtrace', '0.7.1.pre.944', :source => 'http://gems.datadoghq.com/trace-dev/'
 
 # rails
 gem 'rails', '3.2.22.4'

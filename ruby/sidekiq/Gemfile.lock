@@ -5,7 +5,7 @@ GEM
     backports (3.6.8)
     concurrent-ruby (1.0.5)
     connection_pool (2.2.1)
-    ddtrace (0.6.2.pre.856)
+    ddtrace (0.7.1.pre.944)
       msgpack
     json (2.0.3)
     msgpack (1.1.0)
@@ -39,7 +39,7 @@ PLATFORMS
 
 DEPENDENCIES
   connection_pool
-  ddtrace (= 0.6.2.pre.856)!
+  ddtrace (= 0.7.1.pre.944)!
   json
   redis
   sidekiq
