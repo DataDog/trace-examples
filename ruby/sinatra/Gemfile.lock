@@ -1,10 +1,9 @@
 GEM
   remote: https://rubygems.org/
-  remote: http://gems.datadoghq.com/trace-dev/
   specs:
     backports (3.6.8)
     connection_pool (2.2.1)
-    ddtrace (0.7.1.pre.944)
+    ddtrace (0.8.0)
       msgpack
     json (2.0.3)
     msgpack (1.1.0)
@@ -33,7 +32,7 @@ PLATFORMS
 
 DEPENDENCIES
   connection_pool
-  ddtrace (= 0.7.1.pre.944)!
+  ddtrace (= 0.8.0)
   json
   redis
   sinatra

@@ -8,4 +8,4 @@ gem 'sinatra'
 gem 'sinatra-contrib'
 
 # tracing
-gem 'ddtrace', '0.7.1.pre.944', :source => 'http://gems.datadoghq.com/trace-dev/'
+gem 'ddtrace', '0.8.0'
