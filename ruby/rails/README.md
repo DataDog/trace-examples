@@ -21,31 +21,26 @@ tracing compatibility issues with early versions of Rails.
 
 ## Getting started
 
-Launch backing services:
+Launch all services (it will trigger a Docker build):
 
-    docker-compose up -d
+    docker-compose up
 
-Set environment variables for POST permissions (Basic AUTH):
+When the MySQL service is up and running, launch in another console the following
+command to create the application database:
 
-    export PROTECTED_USER=me
-    export PROTECTED_PASSWORD=123456
+    docker-compose run web rake db:create
+    docker-compose run web rake db:migrate
 
-Install dependencies and launch Unicorn:
+Back in the first console, stop docker with CTRL-C, then:
 
-    bundle install
-    bundle exec unicorn -c config/unicorn.rb
+    docker-compose stop
+    DD_API_KEY=<your Datadog key> docker-compose up
 
-or Passenger:
+The above sends data to your Datadog account if the ``DD_API_KEY`` is valid.
 
-    bundle exec passenger start
+### Note about the build
 
-## Available environment variables
+Dependencies listed in the ``Gemfile`` are installed at build time, so if you need to change
+them for any reason, remember to re-build the container via:
 
-Set the following environment variables during the deploy:
-
-* ``RAILS_ENV=production``
-* ``SECRET_KEY_BASE``
-* ``DATABASE_URL``
-* ``REDIS_URL``
-* ``PROTECTED_USER``
-* ``PROTECTED_PASSWORD``
+    docker-compose build

@@ -9,5 +9,5 @@ Rails.configuration.datadog_trace = {
   default_database_service: ENV['RAILS_MYSQL_SERVICE'] || 'db-local',
   default_cache_service: ENV['RAILS_CACHE_SERVICE'] || 'cache-local',
   default_controller_service: ENV['RAILS_CONTROLLER_SERVICE'] || 'controller-local',
-  trace_agent_hostname: ENV['DATADOG_TRACER'] || 'localhost'
+  trace_agent_hostname: ENV['DATADOG_TRACER'] || 'datadog'
 }

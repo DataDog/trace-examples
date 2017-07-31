@@ -8,8 +8,29 @@ services:
         - MYSQL_PASSWORD=123456
         - MYSQL_USER=test
     ports:
-        - "127.0.0.1:3306:3306"
+        - "3306:3306"
   redis:
     image: redis:3.2
     ports:
-        - "127.0.0.1:6379:6379"
+        - "6379:6379"
+  web:
+    build: .
+    volumes:
+      - .:/app
+    ports:
+      - "3000:3000"
+    depends_on:
+      - mysql
+      - redis
+      - datadog
+    environment:
+      - PROTECTED_USER=me
+      - PROTECTED_PASSWORD=123456
+  datadog:
+    image: datadog/docker-dd-agent
+    environment:
+        - DD_APM_ENABLED=true
+        - DD_BIND_HOST=0.0.0.0
+        - DD_API_KEY
+    ports:
+        - "8126:8126"
