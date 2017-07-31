@@ -15,9 +15,8 @@ services:
         - "6379:6379"
   web:
     build: .
-    command: bundle exec unicorn -c config/unicorn.rb -l 3000
     volumes:
-      - .:/myapp
+      - .:/app
     ports:
       - "3000:3000"
     depends_on:
@@ -29,12 +28,9 @@ services:
       - PROTECTED_PASSWORD=123456
   datadog:
     image: datadog/docker-dd-agent
-    ports:
-      - "8126:8126"
     environment:
-     - API_KEY
-     - DD_APM_ENABLED=true
-    volumes:
-     - /var/run/docker.sock:/var/run/docker.sock
-     - /proc/mounts:/host/proc/mounts:ro
-     - /sys/fs/cgroup:/host/sys/fs/cgroup:ro
+        - DD_APM_ENABLED=true
+        - DD_BIND_HOST=0.0.0.0
+        - DD_API_KEY
+    ports:
+        - "8126:8126"

@@ -1,9 +1,17 @@
 FROM ruby:2.3.1
-RUN apt-get update -qq && apt-get install -y build-essential libpq-dev nodejs
-RUN mkdir /myapp
-WORKDIR /myapp
-ADD Gemfile /myapp/Gemfile
-ADD Gemfile.lock /myapp/Gemfile.lock
-RUN bundle install
-ADD . /myapp
 
+# install build-tools
+RUN apt-get update -qq \
+  && apt-get install -y \
+       build-essential \
+       libpq-dev \
+       nodejs
+
+# install application dependencies
+RUN mkdir /app
+WORKDIR /app
+ADD Gemfile /app
+ADD Gemfile.lock /app
+RUN bundle install
+
+CMD ["bundle", "exec", "unicorn", "-c", "config/unicorn.rb", "-l", "3000"]
