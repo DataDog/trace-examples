@@ -2,7 +2,7 @@ source 'https://rubygems.org'
 ruby "2.3.1"
 
 # tracing
-gem 'ddtrace', :git => 'https://github.com/DataDog/dd-trace-rb.git', :ref => '12cdddbc3272bcbc4e4c650c222ee819da6947c2'
+gem 'ddtrace', '0.8.0'
 
 # rails
 gem 'rails', '3.2.22.4'
@@ -31,4 +31,4 @@ gem 'jquery-rails'
 gem 'unicorn', '4.8.3'
 
 # Use passenger as app server
-gem 'passenger', '5.0.28', require: "phusion_passenger/rack_handler"
+# gem 'passenger', '5.0.28', require: "phusion_passenger/rack_handler"

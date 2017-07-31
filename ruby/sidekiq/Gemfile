@@ -8,4 +8,4 @@ gem 'sinatra'
 gem 'sinatra-contrib'
 
 # tracing
-gem 'ddtrace', :git => 'https://github.com/DataDog/dd-trace-rb.git', :ref => '12cdddbc3272bcbc4e4c650c222ee819da6947c2'
+gem 'ddtrace', '0.8.0'
