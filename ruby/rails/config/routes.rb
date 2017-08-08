@@ -6,4 +6,6 @@ Blog::Application.routes.draw do
   get "home/index"
   mount API => '/'
   root :to => "home#index"
+
+  get "error", to: "home#error"
 end

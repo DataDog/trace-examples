@@ -17,4 +17,8 @@ class HomeController < ApplicationController
       item = Item.new()
       item.delay.show_store()
   end
+
+  def error
+    raise "this is an error, should trigger a meaningfull stack-trace"
+  end
 end
