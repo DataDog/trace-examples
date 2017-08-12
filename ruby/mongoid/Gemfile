@@ -1,0 +1,11 @@
+source 'https://rubygems.org'
+
+# branch with MongoDB Ruby Driver instrumentation
+gem 'ddtrace', :git => 'https://github.com/DataDog/dd-trace-rb.git', :ref => '23903b15fb3297a08662fbbd28647561dd5d66a8'
+gem 'mongoid', '5.1.0'
+
+# rails gems
+gem 'rails', '4.2.9'
+
+# application server
+gem 'unicorn'
