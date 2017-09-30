@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 
 # branch with MongoDB Ruby Driver instrumentation
-gem 'ddtrace', :git => 'https://github.com/DataDog/dd-trace-rb.git', :ref => '23903b15fb3297a08662fbbd28647561dd5d66a8'
+gem 'ddtrace', :git => 'https://github.com/DataDog/dd-trace-rb.git', :ref => '2efc51aceb69a3a9ca2fb51817879877bb41e951'
 gem 'mongoid', '5.1.0'
 
 # rails gems

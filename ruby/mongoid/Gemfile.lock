@@ -1,9 +1,9 @@
 GIT
   remote: https://github.com/DataDog/dd-trace-rb.git
-  revision: 23903b15fb3297a08662fbbd28647561dd5d66a8
-  ref: 23903b15fb3297a08662fbbd28647561dd5d66a8
+  revision: 2efc51aceb69a3a9ca2fb51817879877bb41e951
+  ref: 2efc51aceb69a3a9ca2fb51817879877bb41e951
   specs:
-    ddtrace (0.8.1)
+    ddtrace (0.8.2)
       msgpack
 
 GEM
