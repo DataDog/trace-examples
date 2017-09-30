@@ -4,7 +4,7 @@ task :install do
 end
 
 task :run do
-  sh 'uwsgi -p 1 --http :9090 --mount /=demo:app'
+  sh 'uwsgi -p 1 --http :9090 --mount /=demo:app --enable-threads'
 end
 
 task :default => [:install, :run]
