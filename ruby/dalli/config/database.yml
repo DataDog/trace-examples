@@ -1,0 +1,18 @@
+# MySQL demo
+
+default: &default
+  host: mysql
+  adapter: mysql2
+  username: root
+  password: 123456
+
+development:
+  <<: *default
+  database: myblog-dev
+
+test:
+  <<: *default
+  database: myblog-test
+
+production:
+  url: <%= ENV['DATABASE_URL'] %>

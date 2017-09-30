@@ -1,0 +1,28 @@
+version: "3"
+
+services:
+  mysql:
+    image: mysql:5.6
+    environment:
+        - MYSQL_ROOT_PASSWORD=123456
+        - MYSQL_PASSWORD=123456
+        - MYSQL_USER=test
+  memcached:
+    image: memcached:1.5-alpine
+  web:
+    build: .
+    volumes:
+      - .:/app
+    ports:
+      - "127.0.0.1:3000:3000"
+    depends_on:
+      - mysql
+      - memcached
+      - datadog
+    environment:
+      - PROTECTED_USER=me
+      - PROTECTED_PASSWORD=123456
+  datadog:
+    image: datadog/docker-dd-agent
+    environment:
+        - DD_API_KEY
