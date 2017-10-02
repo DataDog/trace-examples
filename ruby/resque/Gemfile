@@ -1,0 +1,36 @@
+source 'https://rubygems.org'
+
+# tracing
+gem 'ddtrace', git: 'https://github.com/DataDog/dd-trace-rb.git', branch: 'rachel/adds-resque-integration'
+
+# rails
+gem 'rails', '3.2.22.4'
+gem 'grape'
+gem 'redis-rails'
+
+# database
+gem 'mysql2', '0.3.21'
+gem 'activerecord-mysql-adapter'
+
+# queues
+gem 'delayed_job_active_record'
+gem 'daemons'
+
+# Gems used only for assets and not required
+# in production environments by default.
+group :assets do
+  gem 'sass-rails',   '~> 3.2.3'
+  gem 'coffee-rails', '~> 3.2.1'
+  gem 'uglifier', '>= 1.0.3'
+end
+
+gem 'jquery-rails'
+
+# Use unicorn as the app server
+gem 'unicorn', '4.8.3'
+
+gem 'redis'
+gem 'resque', require: 'resque/server'
+
+# Use passenger as app server
+# gem 'passenger', '5.0.28', require: "phusion_passenger/rack_handler"
