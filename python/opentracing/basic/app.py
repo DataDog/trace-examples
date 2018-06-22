@@ -5,7 +5,6 @@ from ddtrace.opentracer import Tracer
 from ddtrace.opentracer.tracer import set_global_tracer
 
 
-
 def collect_laundry_from(area):
     print('  from %s' % area)
     num_items = random.uniform(0, 1) * 10
