@@ -1,0 +1,2 @@
+-e git+git://github.com/carlosalberto/opentracing-python.git@scope_managers_integration#egg=opentracing
+-e /Users/kyle.verhoog/dev/dd-trace-py

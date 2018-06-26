@@ -1,26 +1,19 @@
-# OpenTracing/basic example
+# OpenTracing/laundry example
+
+A simple example of how you could trace an application with Datadog's OpenTracer
+implementation.
 
 ## Install/Setup
 
-### Dependencies
+Please refer to the README in the directory above.
 
-install the dependencies run:
-```sh
-  $ virtualenv env
-  $ . ./env/bin/activate
-  $ pip install -r requirements.txt
-```
-
-*Note:* you must have an agent running on your machine that will collect the
-traces created by the tracer! See https://docs.datadoghq.com/agent/ for more
-information about the agent. Make sure you install the *trace* agent!
 
 ## Running
 
 Simply run:
 
 ```sh
-  $ python app.py
+$ DATADOG_SERVICE_NAME=laundry ddopentrace-run python laundry.py
 ```
 
 ## Explanation
@@ -29,7 +22,7 @@ This example provides a simple example of how to use Datadog's opentracer to
 trace your applications with Datadog.
 
 It is very silly but hopefully sheds some light on how tracing works and how you
-can trace with our opentracing-compatible tracer.
+can trace with our OpenTracing-compatible tracer.
 
 Hopefully the code is easy enough to read through, but the gist of it is that we
 are folding laundry.

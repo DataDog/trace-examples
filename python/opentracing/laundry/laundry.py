@@ -1,8 +1,6 @@
-import time
-import random
 import opentracing
-from ddtrace.opentracer import Tracer
-from ddtrace.opentracer.tracer import set_global_tracer
+import random
+import time
 
 
 def collect_laundry_from(area):
@@ -77,6 +75,8 @@ def fold(num_laundry):
 
 def do_laundry():
     with opentracing.tracer.start_span('laundry') as span:
+        # baggage tags will be copied down to all children of this span
+        span.set_baggage_item('laundry_run', (random.uniform(0, 1)*100))
         # set some metadata giving us some context about the event
         span.set_tag('date', time.strftime('%d/%m/%Y'))
         num = collect_laundry()
@@ -87,12 +87,5 @@ def do_laundry():
     print('done!')
 
 
-# initialize our tracer
-def init_dd_tracer():
-    tracer = Tracer('laundry', config={})
-    set_global_tracer(tracer)
-
-
 if __name__ == '__main__':
-    init_dd_tracer()
     do_laundry()
