@@ -13,7 +13,7 @@ Please refer to the README in the directory above.
 Simply run:
 
 ```sh
-$ DATADOG_SERVICE_NAME=laundry ddopentrace-run python laundry.py
+$ python laundry.py
 ```
 
 ## Explanation

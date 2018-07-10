@@ -22,7 +22,7 @@ Let's run this very simple application and get the trace showing up in Datadog.
 To do this we can run the following command:
 
 ```sh
-$ DATADOG_SERVICE_NAME=first_trace ddopentrace-run python 1_first_trace.py
+$ python 1_first_trace.py
 ```
 
 We set `DATADOG_SERVICE_NAME` manually here so we know what to look for in the
