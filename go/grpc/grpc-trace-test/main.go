@@ -6,7 +6,7 @@ import (
 	"net"
 	"os"
 
-	"github.com/DataDog/trace-examples/go/aws/grpc/grpc-trace-test/example"
+	"github.com/DataDog/trace-examples/go/grpc/grpc-trace-test/example"
 	"golang.org/x/sync/errgroup"
 	"google.golang.org/grpc"
 	grpctrace "gopkg.in/DataDog/dd-trace-go.v1/contrib/google.golang.org/grpc"
