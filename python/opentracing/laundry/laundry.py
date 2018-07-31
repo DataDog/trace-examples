@@ -1,8 +1,7 @@
 import opentracing
 import random
 import time
-from ddtrace.opentracer import Tracer
-from ddtrace.opentracer.tracer import set_global_tracer
+from ddtrace.opentracer import Tracer, set_global_tracer
 
 
 def collect_laundry_from(area):

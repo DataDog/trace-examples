@@ -1,1 +1,2 @@
--e git+git://github.com/DataDog/dd-trace-py@kyle-verhoog/opentracer#egg=ddtrace
+-e git+git://github.com/DataDog/dd-trace-py@opentracer#egg=ddtrace
+opentracing==2.0.0
