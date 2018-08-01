@@ -14,13 +14,13 @@ import (
 )
 
 func main() {
-	tracer.Start(tracer.WithDebugMode(true))
+	tracer.Start(tracer.WithDebugMode(true), tracer.WithServiceName("sqlite-example"))
 	defer tracer.Stop()
 
 	sqltrace.Register(
 		"sqlite",
 		&sqlite.SQLiteDriver{},
-		sqltrace.WithServiceName("sqlite-example2"))
+		sqltrace.WithServiceName("sqlite-example"))
 
 	os.Remove("./foo.db")
 	db, err := sqltrace.Open("sqlite", "./foo.db")
@@ -30,12 +30,13 @@ func main() {
 	defer db.Close()
 
 	// Create a root span, giving name, server and resource.
-	x, ctx := tracer.StartSpanFromContext(context.Background(), "my-query",
+	span, ctx := tracer.StartSpanFromContext(
+		context.Background(),
+		"my-query",
 		tracer.SpanType("db"),
-		tracer.ServiceName("sqlite-example2"),
 		tracer.ResourceName("initial-access"),
 	)
-	defer x.Finish()
+	defer span.Finish()
 
 	sqlStmt := `
 	create table foo (id integer not null primary key, name text);
@@ -47,7 +48,7 @@ func main() {
 		return
 	}
 
-	tx, err := db.Begin()
+	tx, err := db.BeginTx(ctx, nil)
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -65,47 +66,6 @@ func main() {
 	tx.Commit()
 
 	rows, err := db.QueryContext(ctx, "select id, name from foo")
-	if err != nil {
-		log.Fatal(err)
-	}
-	defer rows.Close()
-	for rows.Next() {
-		var id int
-		var name string
-		err = rows.Scan(&id, &name)
-		if err != nil {
-			log.Fatal(err)
-		}
-		fmt.Println(id, name)
-	}
-	err = rows.Err()
-	if err != nil {
-		log.Fatal(err)
-	}
-
-	stmt, err = db.PrepareContext(ctx, "select name from foo where id = ?")
-	if err != nil {
-		log.Fatal(err)
-	}
-	defer stmt.Close()
-	var name string
-	err = stmt.QueryRowContext(ctx, "3").Scan(&name)
-	if err != nil {
-		log.Fatal(err)
-	}
-	fmt.Println(name)
-
-	_, err = db.ExecContext(ctx, "delete from foo")
-	if err != nil {
-		log.Fatal(err)
-	}
-
-	_, err = db.ExecContext(ctx, "insert into foo(id, name) values(1, 'foo'), (2, 'bar'), (3, 'baz')")
-	if err != nil {
-		log.Fatal(err)
-	}
-
-	rows, err = db.QueryContext(ctx, "select id, name from foo")
 	if err != nil {
 		log.Fatal(err)
 	}
