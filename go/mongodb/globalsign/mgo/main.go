@@ -106,7 +106,7 @@ func main() {
 	}
 }
 
-func printCollection(collection *mgotracer.Collection) {
+func printCollection(collection *mgotracer.WrapCollection) {
 	results := collection.Find(nil)
 	iter := results.Iter()
 	var r bson.D
@@ -116,7 +116,7 @@ func printCollection(collection *mgotracer.Collection) {
 	iter.Close()
 }
 
-func useIterAll(collection *mgotracer.Collection) {
+func useIterAll(collection *mgotracer.WrapCollection) {
 	results := collection.Find(nil).Limit(10)
 	iter := results.Iter()
 
@@ -128,7 +128,7 @@ func useIterAll(collection *mgotracer.Collection) {
 	iter.Close()
 }
 
-func insertNDocsIntoCollection(n int, collection *mgotracer.Collection) {
+func insertNDocsIntoCollection(n int, collection *mgotracer.WrapCollection) {
 	for i := 0; i < n; i++ {
 		var set bson.D
 		set = append(
@@ -146,7 +146,7 @@ func insertNDocsIntoCollection(n int, collection *mgotracer.Collection) {
 	}
 }
 
-func bulkCollection(n int, collection *mgotracer.Collection) {
+func bulkCollection(n int, collection *mgotracer.WrapCollection) {
 	var documents []bson.D
 	for i := 0; i < n; i++ {
 		var set bson.D
@@ -180,7 +180,7 @@ func bulkCollection(n int, collection *mgotracer.Collection) {
 	bulk.Run()
 }
 
-func updateDocument(index int, collection *mgotracer.Collection) {
+func updateDocument(index int, collection *mgotracer.WrapCollection) {
 	var target bson.D
 	target = append(
 		target,
@@ -201,7 +201,7 @@ func updateDocument(index int, collection *mgotracer.Collection) {
 	collection.Update(target, update)
 }
 
-func updateByID(collection *mgotracer.Collection) {
+func updateByID(collection *mgotracer.WrapCollection) {
 	var set bson.D
 	set = append(
 		set,
@@ -232,14 +232,14 @@ func updateByID(collection *mgotracer.Collection) {
 	}
 }
 
-func updateAll(collection *mgotracer.Collection) {
+func updateAll(collection *mgotracer.WrapCollection) {
 	update := bson.M{
 		"$inc": bson.M{"index": 100},
 	}
 	collection.UpdateAll(nil, update)
 }
 
-func upsertDocument(index int, collection *mgotracer.Collection) {
+func upsertDocument(index int, collection *mgotracer.WrapCollection) {
 	var target bson.D
 	target = append(
 		target,
@@ -261,7 +261,7 @@ func upsertDocument(index int, collection *mgotracer.Collection) {
 	collection.Upsert(target, update)
 }
 
-func upsertByID(collection *mgotracer.Collection) {
+func upsertByID(collection *mgotracer.WrapCollection) {
 	var set bson.D
 	set = append(
 		set,
@@ -292,7 +292,7 @@ func upsertByID(collection *mgotracer.Collection) {
 	}
 }
 
-func removeDocument(index int, collection *mgotracer.Collection) {
+func removeDocument(index int, collection *mgotracer.WrapCollection) {
 	var set bson.D
 	set = append(
 		set,
@@ -304,7 +304,7 @@ func removeDocument(index int, collection *mgotracer.Collection) {
 	collection.Remove(set)
 }
 
-func removeDocumentByID(collection *mgotracer.Collection) {
+func removeDocumentByID(collection *mgotracer.WrapCollection) {
 	var set bson.D
 	set = append(
 		set,
@@ -327,7 +327,7 @@ func removeDocumentByID(collection *mgotracer.Collection) {
 	}
 }
 
-func removeAll(collection *mgotracer.Collection) {
+func removeAll(collection *mgotracer.WrapCollection) {
 	_, err := collection.RemoveAll(nil)
 	if err != nil {
 		log.Fatal(err)
