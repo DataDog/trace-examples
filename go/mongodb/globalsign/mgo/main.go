@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"log"
 
+	"github.com/globalsign/mgo"
 	"github.com/globalsign/mgo/bson"
 
 	mgotracer "gopkg.in/DataDog/dd-trace-go.v1/contrib/globalsign/mgo"
@@ -45,6 +46,8 @@ func main() {
 	removeDocumentByID(collection)
 	updateDocument(2, collection)
 	updateByID(collection)
+	upsertDocument(10, collection)
+	upsertByID(collection)
 	printCollection(collection)
 
 	fmt.Println("\nUpdate All")
@@ -58,6 +61,49 @@ func main() {
 
 	bulkCollection(10, collection)
 	useIterAll(collection)
+
+	var count int
+	count, err = collection.Count()
+	if err != nil {
+		log.Println(err)
+	} else {
+		fmt.Printf("Documents in Collection = %d\n", count)
+	}
+
+	// Test Index Functions
+	indexes, _ := collection.Indexes()
+	fmt.Println("\nIndexes")
+	for i, index := range indexes {
+		fmt.Printf("%d - %v\n", i, index.Name)
+	}
+	err = collection.EnsureIndex(indexes[0])
+	if err != nil {
+		log.Println(err)
+	}
+	err = collection.EnsureIndexKey("_id_")
+	if err != nil {
+		log.Println(err)
+	}
+
+	err = collection.DropAllIndexes()
+	if err != nil {
+		log.Println(err)
+	}
+
+	err = collection.DropIndexName("_id_")
+	if err != nil {
+		log.Println(err)
+	}
+
+	err = collection.DropCollection()
+	if err != nil {
+		log.Println(err)
+	}
+
+	err = collection.Create(&mgo.CollectionInfo{})
+	if err != nil {
+		log.Println(err)
+	}
 }
 
 func printCollection(collection *mgotracer.Collection) {
@@ -134,18 +180,6 @@ func bulkCollection(n int, collection *mgotracer.Collection) {
 	bulk.Run()
 }
 
-func removeDocument(index int, collection *mgotracer.Collection) {
-	var set bson.D
-	set = append(
-		set,
-		bson.DocElem{
-			Name: "insert",
-			Value: bson.DocElem{
-				Name:  "index",
-				Value: index}})
-	collection.Remove(set)
-}
-
 func updateDocument(index int, collection *mgotracer.Collection) {
 	var target bson.D
 	target = append(
@@ -203,6 +237,71 @@ func updateAll(collection *mgotracer.Collection) {
 		"$inc": bson.M{"index": 100},
 	}
 	collection.UpdateAll(nil, update)
+}
+
+func upsertDocument(index int, collection *mgotracer.Collection) {
+	var target bson.D
+	target = append(
+		target,
+		bson.DocElem{
+			Name: "insert",
+			Value: bson.DocElem{
+				Name:  "index",
+				Value: index}})
+
+	var update bson.D
+	update = append(
+		update,
+		bson.DocElem{
+			Name: "upsert",
+			Value: bson.DocElem{
+				Name:  "index",
+				Value: index}})
+
+	collection.Upsert(target, update)
+}
+
+func upsertByID(collection *mgotracer.Collection) {
+	var set bson.D
+	set = append(
+		set,
+		bson.DocElem{
+			Name: "insert",
+			Value: bson.DocElem{
+				Name:  "index",
+				Value: 100}})
+	var update bson.D
+	update = append(
+		update,
+		bson.DocElem{
+			Name: "upsert",
+			Value: bson.DocElem{
+				Name:  "index",
+				Value: 100}})
+	collection.Insert(set)
+	query := collection.Find(set)
+	iter := query.Iter()
+	var r bson.D
+	for iter.Next(&r) {
+		id := r.Map()["_id"]
+		fmt.Printf("Upserting Id: %v\n", id)
+		_, err := collection.UpsertId(id, update)
+		if err != nil {
+			log.Fatal(err)
+		}
+	}
+}
+
+func removeDocument(index int, collection *mgotracer.Collection) {
+	var set bson.D
+	set = append(
+		set,
+		bson.DocElem{
+			Name: "insert",
+			Value: bson.DocElem{
+				Name:  "index",
+				Value: index}})
+	collection.Remove(set)
 }
 
 func removeDocumentByID(collection *mgotracer.Collection) {
