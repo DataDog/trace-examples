@@ -85,11 +85,6 @@ func main() {
 		log.Println(err)
 	}
 
-	err = collection.DropAllIndexes()
-	if err != nil {
-		log.Println(err)
-	}
-
 	err = collection.DropIndexName("_id_")
 	if err != nil {
 		log.Println(err)
