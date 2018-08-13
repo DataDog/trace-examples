@@ -61,6 +61,7 @@ func main() {
 
 	bulkCollection(10, collection)
 	useIterAll(collection)
+	usePipe(collection)
 
 	var count int
 	count, err = collection.Count()
@@ -121,6 +122,28 @@ func useIterAll(collection *mgotracer.Collection) {
 		fmt.Printf("%d - %v\n", i, r)
 	}
 	iter.Close()
+}
+
+func usePipe(collection *mgotracer.Collection) {
+	printIter := func(iter *mgotracer.Iter) {
+		var result bson.D
+		fmt.Println("\n=======\nPipe Results")
+		for iter.Next(&result) {
+			fmt.Printf("%v", result)
+		}
+		iter.Close()
+	}
+
+	collection.DropCollection()
+	insertNDocsIntoCollection(25, collection)
+	results := collection.Pipe(nil)
+	iter := results.Iter()
+	printIter(iter)
+
+	results = collection.Pipe([]bson.M{{"$match": bson.M{"name": "insert"}}})
+	var result bson.D
+	results.One(&result)
+	//fmt.Printf("\nPipe.One: %v", result)
 }
 
 func insertNDocsIntoCollection(n int, collection *mgotracer.Collection) {
