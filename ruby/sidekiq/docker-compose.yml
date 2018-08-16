@@ -1,7 +1,36 @@
-version: "2"
-
+version: "3.2"
 services:
   redis:
-    image: redis:3.2
+    image: redis:4.0
+  datadog:
+    image: datadog/agent
+    environment:
+      - DD_APM_ENABLED=true
+      - DD_BIND_HOST=0.0.0.0
+      - DD_API_KEY
+  web:
+    build: .
+    command: bundle exec ruby app.rb
+    volumes:
+      - .:/app
     ports:
-        - "127.0.0.1:6379:6379"
+      - "3000:3000"
+    depends_on:
+      - redis
+      - datadog
+    environment:
+      - PROTECTED_USER=me
+      - PROTECTED_PASSWORD=123456
+      - REDIS_HOST=redis
+      - DATADOG_TRACER=datadog
+  sidekiq:
+    build: .
+    command: bundle exec sidekiq -r ./job.rb
+    volumes:
+      - .:/app
+    depends_on:
+      - redis
+      - datadog
+    environment:
+      - REDIS_HOST=redis
+      - DATADOG_TRACER=datadog

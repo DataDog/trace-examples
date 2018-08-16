@@ -31,5 +31,5 @@ $(document).ready(function() {
   $("#form-newjob").submit(onNewJobSubmit);
 
   reloadJobs();
-  window.setInterval(reloadJobs, 1000);
+  window.setInterval(reloadJobs, 5000);
 });

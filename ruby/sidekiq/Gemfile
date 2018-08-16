@@ -8,4 +8,4 @@ gem 'sinatra'
 gem 'sinatra-contrib'
 
 # tracing
-gem 'ddtrace', '0.8.0'
+gem 'ddtrace'

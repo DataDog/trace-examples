@@ -1,4 +1,3 @@
-
 require 'date'
 
 require 'sidekiq/api'
@@ -6,13 +5,16 @@ require 'sidekiq/api'
 require 'ddtrace'
 require 'ddtrace/contrib/sidekiq/tracer'
 
-Sidekiq.configure_server do |config|
-  config.server_middleware do |chain|
-    service = ENV['SIDEKIQ_SERVICE'] || 'sidekiq-demo'.freeze()
+Datadog.configure do |c|
+  c.tracer hostname: ENV['DATADOG_TRACER'] || 'localhost'.freeze
+  c.use :sidekiq, service: ENV['SIDEKIQ_SERVICE'] || 'sidekiq-demo'.freeze
+end
 
-    chain.add(Datadog::Contrib::Sidekiq::Tracer,
-              default_service: service, debug: true)
-  end
+
+Sidekiq.configure_server do |config|
+  host = ENV['REDIS_HOST'] || 'localhost'.freeze
+  port = ENV['REDIS_PORT'] || 6379
+  config.redis = { url: "redis://#{host}:#{port}" }
 end
 
 class SleepWorker
