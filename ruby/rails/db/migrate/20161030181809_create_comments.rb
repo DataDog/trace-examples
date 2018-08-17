@@ -1,4 +1,4 @@
-class CreateComments < ActiveRecord::Migration
+class CreateComments < ActiveRecord::Migration[5.2]
   def change
     create_table :comments do |t|
       t.string :commenter
@@ -7,6 +7,5 @@ class CreateComments < ActiveRecord::Migration
 
       t.timestamps
     end
-    add_index :comments, :post_id
   end
 end

@@ -1,34 +1,38 @@
 source 'https://rubygems.org'
-ruby "2.3.1"
+ruby "2.5.1"
 
 # tracing
-gem 'ddtrace', '0.8.0'
+gem 'ddtrace'
 
 # rails
-gem 'rails', '3.2.22.4'
+gem 'rails'
 gem 'grape'
 gem 'redis-rails'
 
 # database
-gem 'mysql2', '0.3.21'
-gem 'activerecord-mysql-adapter'
+gem 'mysql2'
 
 # queues
 gem 'delayed_job_active_record'
 gem 'daemons'
 
+# testing
+gem 'rails-controller-testing'
+gem 'rails-perftest'
+gem 'ruby-prof'
+
 # Gems used only for assets and not required
 # in production environments by default.
 group :assets do
-  gem 'sass-rails',   '~> 3.2.3'
-  gem 'coffee-rails', '~> 3.2.1'
-  gem 'uglifier', '>= 1.0.3'
+  gem 'sass-rails'
+  gem 'coffee-rails'
+  gem 'uglifier'
 end
 
 gem 'jquery-rails'
 
 # Use unicorn as the app server
-gem 'unicorn', '4.8.3'
+gem 'unicorn'
 
 # Use passenger as app server
-# gem 'passenger', '5.0.28', require: "phusion_passenger/rack_handler"
+# gem 'passenger', require: "phusion_passenger/rack_handler"

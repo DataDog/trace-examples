@@ -1,7 +1,7 @@
-# Rails 5.2 example
+# Rails 5.2 + Mongoid example
 
-Blog application built using the [official Rails tutorial][1]. This version is meant to test
-tracing compatibility issues with Rails.
+A web application built on [Rails][1] that uses MongoDB. This version is meant to test
+tracing compatibility issues with Rails and MongoDB.
 
 [1]: http://guides.rubyonrails.org/getting_started.html
 
@@ -9,31 +9,21 @@ tracing compatibility issues with Rails.
 
 * Ruby 2.5.1
 * Rails 5.2.1
-* MySQL adapter (mysql2)
-* Redis 4.0.1
+* Mongoid 7.0.1
 * Unicorn 5.4.1
-* Passenger 5.3.4
 
 ## Backing services
 
-* MySQL 8.0
-* Redis 4.0.11
+* MongoDB 4.1.1
 
 ## Getting started
 
-Launch all services (it will trigger a Docker build):
+Build the Docker images first with:
 
-    docker-compose up
+    docker-compose build
 
-When the MySQL service is up and running, launch in another console the following
-command to create the application database:
+Then run the application with:
 
-    docker-compose run --rm web rake db:create
-    docker-compose run --rm web rake db:migrate
-
-Back in the first console, stop docker with CTRL-C, then:
-
-    docker-compose stop
     DD_API_KEY=<your Datadog key> docker-compose up
 
 The above sends data to your Datadog account if the ``DD_API_KEY`` is valid.
@@ -51,4 +41,5 @@ them for any reason, remember to remove then re-build the image via:
 
 ### Using the example application
 
-Access the blog at http://localhost:3000/ and login using the default user/password `me`/`123456`.
+Access the application at http://localhost:3000/ to view a list of documents.
+Add a document by visiting http://localhost:3000/document/add

@@ -5,26 +5,26 @@ class Post < Object
   attr_accessor :id, :cdate, :title, :body
 
   def self.generate_id
-    SecureRandom.uuid()
+    SecureRandom.uuid
   end
 
   def initialize(id:, cdate:, title:, body:)
     @id = id
-    @cdate = cdate || DateTime.now()
+    @cdate = cdate || DateTime.now
     @title = title || ''
     @body = body || ''
   end
 
   def store(conn)
     raise "post already stored with id #{@id}" unless @id.nil?
-    @id = Post.generate_id()
-    conn.set(redis_key(), marshal())
+    @id = Post.generate_id
+    conn.set(redis_key, marshal)
   end
 
   def self.all(conn)
     keys = conn.keys("sinatra-demo:post:*")
 
-    values = conn.mget(keys)
+    values = keys.empty? ? [] : conn.mget(*keys)
     values.map! do |value|
       data = JSON.parse(value)
       Post.unmarshal(data)
@@ -43,7 +43,7 @@ class Post < Object
   end
 
   def marshal
-    {id: @id, cdate: @cdate, title: @title, body: @body}.to_json()
+    {id: @id, cdate: @cdate, title: @title, body: @body}.to_json
   end
 
   def self.unmarshal(data)

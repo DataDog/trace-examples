@@ -1,10 +1,10 @@
-# Rails instrumentation
-Rails.configuration.datadog_trace = {
-  auto_instrument: true,
-  default_service: 'example-rails-mongoid'
-}
+require 'ddtrace'
 
-# Mongoid instrumentation with a custom service name
-Datadog::Monkey.patch_module(:mongo)
-pin = Datadog::Pin.get_from(Mongoid::Clients.default)
-pin.service = 'example-mongodb'
+Datadog.configure do |c|
+  # Configure tracer settings
+  c.tracer hostname: ENV['DATADOG_TRACER'] || 'datadog'
+
+  # Activate and configure integrations
+  c.use :rails, service_name: ENV['RAILS_SERVICE'] || 'example-rails-mongoid'
+  c.use :mongo, service_name: ENV['MONGO_SERVICE'] || 'example-mongodb'
+end

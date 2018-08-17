@@ -1,17 +1,21 @@
-version: '3'
-
+version: '3.2'
 services:
   mongodb:
-    image: mongo:3.5
-    ports:
-      - "127.0.0.1:27017:27017"
+    image: mongo:4.1
     volumes:
-      - ./fava:/data/db
-
+      - ./db/data:/data/db
   datadog:
-    image: datadog/docker-dd-agent
+    image: datadog/agent
     environment:
+      - DD_APM_ENABLED=true
       - DD_BIND_HOST=0.0.0.0
       - DD_API_KEY
+  web:
+    build: .
+    volumes:
+      - .:/app
     ports:
-      - "127.0.0.1:8126:8126"
+      - "127.0.0.1:3000:3000"
+    depends_on:
+      - mongodb
+      - datadog

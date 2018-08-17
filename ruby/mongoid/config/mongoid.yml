@@ -4,4 +4,4 @@ development:
     default:
       database: mongoid_app
       hosts:
-        - localhost:27017
+        - mongodb:27017
