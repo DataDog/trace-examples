@@ -11,7 +11,7 @@ https://docs.djangoproject.com/en/1.9/ref/settings/
 """
 
 import os
-# import lightstep.tracer
+# import datadog tracer
 from ddtrace.opentracer import Tracer
 import django_opentracing
 
@@ -126,3 +126,6 @@ OPENTRACING_TRACE_ALL = False
 OPENTRACING_TRACED_ATTRIBUTES = ['META']
 
 
+DATADOG_TRACE = {
+    'ENABLED': True,
+}

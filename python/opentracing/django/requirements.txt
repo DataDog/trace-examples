@@ -1,4 +1,4 @@
--e git+git://github.com/DataDog/dd-trace-py@opentracer#egg=ddtrace
+-e /Users/kyle.verhoog/dev/dd-trace-py/
 opentracing==2.0.0
 django_opentracing
 django
