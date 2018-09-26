@@ -1,0 +1,28 @@
+version: "3.4"
+
+services:
+  agent:
+    image: datadog/agent:latest
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro 
+      - /proc/:/host/proc/:ro 
+      - /sys/fs/cgroup/:/host/sys/fs/cgroup:ro 
+    environment:
+      - DD_API_KEY=${DATADOG_API_KEY}
+      - DD_APM_ENABLED=true
+      # - DD_LOG_LEVEL=debug
+    ports:
+      - 8126:8126
+  django-apache2:
+    build:
+      context: django_demo_app
+      dockerfile: Dockerfile_django-apache2
+    ports:
+      - '8000:80'
+      - '3500:3500'
+      - '8006:81'
+    environment:
+      DATADOG_TRACE_AGENT_HOSTNAME: agent
+      SOME_RANDOME_VALUE: hey_you
+    volumes:
+      - $PWD/django_demo_app:/var/www/html/django_demo_app
