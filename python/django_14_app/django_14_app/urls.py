@@ -5,7 +5,9 @@ from django.conf.urls import patterns, include, url
 # admin.autodiscover()
 
 urlpatterns = patterns('',
-    (r'^polls', 'polls.views.current_datetime'),
+    (r'^polls/datetime', 'polls.views.current_datetime'),
+    (r'^polls/templated', 'polls.views.templated_view'),
+    (r'^polls/cached', 'polls.views.cached_templated_view'),
     # Examples:
     # url(r'^$', 'django_14_app.views.home', name='home'),
     # url(r'^django_14_app/', include('django_14_app.foo.urls')),

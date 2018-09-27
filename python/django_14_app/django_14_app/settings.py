@@ -24,6 +24,19 @@ DATABASES = {
     }
 }
 
+DATADOG_TRACE = {
+    'DEFAULT_SERVICE': 'my-django-1_4-app',
+    'INSTRUMENT_TEMPLATE': True,
+    'TAGS': {'env': 'aaa'},
+}
+
+CACHES = {
+    'default': {
+        'BACKEND': 'django.core.cache.backends.locmem.LocMemCache',
+        'LOCATION': 'unique-snowflake'
+    }
+}
+
 # Local time zone for this installation. Choices can be found here:
 # http://en.wikipedia.org/wiki/List_of_tz_zones_by_name
 # although not all choices may be available on all operating systems.
@@ -119,7 +132,7 @@ INSTALLED_APPS = (
     'django.contrib.sites',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'ddtrace.contrib.django',
+    'ddtrace.contrib.django.legacy',
     # Uncomment the next line to enable the admin:
     # 'django.contrib.admin',
     # Uncomment the next line to enable admin documentation:
