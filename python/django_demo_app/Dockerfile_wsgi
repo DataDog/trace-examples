@@ -12,7 +12,9 @@ RUN pip install django ptvsd ddtrace
 RUN ln -sf /proc/self/fd/1 /var/log/apache2/access.log && \
     ln -sf /proc/self/fd/1 /var/log/apache2/error.log
 
-ADD ./django_demo_site.conf /etc/apache2/sites-available/000-default.conf
+ADD ./wsgi_site.conf /etc/apache2/sites-available/000-default.conf
 
-EXPOSE 8000 3500
-CMD ["apache2ctl", "-D", "FOREGROUND"]
+WORKDIR /var/www/html/app
+
+EXPOSE 80
+CMD sh -c "python manage.py makemigrations polls; python manage.py migrate polls; apache2ctl -D FOREGROUND"
