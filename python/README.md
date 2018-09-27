@@ -16,7 +16,7 @@ docker-compose up -d agent
 
 ## Django sample app
 
-The django sample app is a super simlpèe app as per the django getting started tutorial.
+The django sample app is a super simple app as per the django getting started tutorial.
 
 While you can certainly run the abb through the `manage.py` script, you can also use a Apache2+WSGI container which
 replicated a common deployment scenario for our apps.
@@ -26,3 +26,13 @@ docker-compose up django-apache2
 ```
 
 Note that both the error log and the access log are redirected to the std out for debug purposes.
+
+## Django 1.4 sample app
+
+The django sample app is a super simple app as per the django getting started tutorial.
+
+At the moment a WSGI image is not provided to run this image.
+
+Note that you may need a virtual env with python2.7 installed. Once you have it you will find a requirements.txt file in the app folder.
+
+
