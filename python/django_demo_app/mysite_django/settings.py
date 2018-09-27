@@ -28,7 +28,7 @@ DEBUG = False
 ALLOWED_HOSTS = ['localhost', '127.0.0.1']
 
 DATADOG_TRACE = {
-    'DEFAULT_SERVICE': 'my-django-app',
+    'DEFAULT_SERVICE': 'my-django-2_0-app',
     'TAGS': {'env': 'aaa'},
 }
 
@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'polls.apps.PollsConfig',
     'ddtrace.contrib.django',
 ]
 
@@ -85,6 +86,13 @@ DATABASES = {
     }
 }
 
+CACHES = {
+    'default': {
+        'BACKEND': 'django.core.cache.backends.locmem.LocMemCache',
+        'LOCATION': 'unique-snowflake',
+    }
+}
+
 LOGGING = {
     'version': 1,
     'disable_existing_loggers': False,
@@ -102,6 +110,11 @@ LOGGING = {
         },
     },
     'loggers': {
+        'django.request': {
+            'handlers': ['console'],
+            'level': 'ERROR',
+            'propagate': True,
+        },
         'ddtrace': {
             'handlers': ['console'],
             'level': 'DEBUG',
