@@ -1,2 +1,2 @@
--e /Users/kyle.verhoog/dev/dd-trace-py
-pymemcache
+ddtrace==0.14.0
+pymemcache==1.4.4
