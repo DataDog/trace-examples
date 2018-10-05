@@ -25,4 +25,6 @@ ADD ./wsgi_site.conf /etc/apache2/sites-available/000-default.conf
 WORKDIR /var/www/html/app
 
 EXPOSE 80
-CMD sh -c "python manage.py syncdb --noinput; apache2ctl -D FOREGROUND"
+
+CMD sh -c "python manage.py syncdb --noinput; echo '------------- now starting apache ----------------'; apache2ctl -e error -D FOREGROUND"
+#CMD sh -c "pip install -e /var/www/html/dd-trace-py; python manage.py syncdb --noinput; echo '-----------------------------'; apache2ctl -e error -D FOREGROUND"
