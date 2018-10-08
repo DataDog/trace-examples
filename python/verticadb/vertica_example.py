@@ -1,5 +1,6 @@
 import os
 import vertica_python
+from vertica_python.errors import VerticaSyntaxError
 
 from ddtrace import tracer
 
@@ -15,7 +16,18 @@ VERTICA_CONFIG = {
 }
 
 
-def connect_and_query_vertica():
+def invalid_query():
+    conn = vertica_python.connect(**VERTICA_CONFIG)
+    cur = conn.cursor()
+
+    with conn:
+        try:
+            cur.execute("INVALID QUERY")
+        except VerticaSyntaxError:
+            pass
+
+
+def query():
     conn = vertica_python.connect(**VERTICA_CONFIG)
     cur = conn.cursor()
 
@@ -39,10 +51,45 @@ def connect_and_query_vertica():
         assert row[1] == "aa"
 
 
+def fetching():
+    conn = vertica_python.connect(**VERTICA_CONFIG)
+    cur = conn.cursor()
+    with conn:
+        cur.execute(
+            """
+            INSERT INTO {} (a, b)
+            SELECT 1, 'a'
+            UNION ALL
+            SELECT 2, 'b'
+            UNION ALL
+            SELECT 3, 'c'
+            UNION ALL
+            SELECT 4, 'd'
+            UNION ALL
+            SELECT 5, 'e'
+            """.format(TEST_TABLE)
+        )
+        assert cur.rowcount == -1
+
+        cur.execute("SELECT * FROM {};".format(TEST_TABLE))
+        cur.fetchone()
+        cur.rowcount == 1
+        cur.fetchone()
+        cur.rowcount == 2
+        cur.fetchall()
+        cur.rowcount == 5
+
+
 def main():
     print('querying vertica')
     with tracer.trace('vertica_example', service="vertica-example"):
-        connect_and_query_vertica()
+        query()
+
+    with tracer.trace('vertica_example_error', service="vertica-example"):
+        invalid_query()
+
+    with tracer.trace('vertica_example_fetching', service="vertica-example"):
+        fetching()
 
 
 main()
