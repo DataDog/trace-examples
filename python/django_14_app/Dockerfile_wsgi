@@ -13,9 +13,9 @@ RUN apt-get install -y \
     libapache2-mod-wsgi
 
 RUN pip install --upgrade pip
-RUN pip install \
-    'django==1.4.22' \
-    git+https://github.com/Datadog/dd-trace-py.git@django-legacy-support
+
+RUN pip install 'django==1.4.1'
+RUN pip install git+https://github.com/Datadog/dd-trace-py.git@labbati/final-django-legacy
 
 RUN ln -sf /proc/self/fd/1 /var/log/apache2/access.log && \
     ln -sf /proc/self/fd/1 /var/log/apache2/error.log
