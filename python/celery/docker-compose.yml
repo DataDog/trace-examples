@@ -1,0 +1,42 @@
+version: '3'
+services:
+  redis:
+    image: 'redis:latest'
+    ports:
+      - '6379:6379'
+
+  worker:
+    build: '.'
+    command: 'ddtrace-run celery -A app worker -E --loglevel=INFO'
+    depends_on:
+      - 'agent'
+      - 'redis'
+    environment:
+      - 'DATADOG_TRACE_AGENT_HOSTNAME=agent'
+      - 'DATADOG_SERVICE_NAME=worker'
+    volumes:
+      - '.:/app/'
+
+  app:
+    build: '.'
+    depends_on:
+      - 'agent'
+      - 'redis'
+      - 'worker'
+    environment:
+      - 'DATADOG_TRACE_AGENT_HOSTNAME=agent'
+      - 'DATADOG_SERVICE_NAME=app'
+    volumes:
+      - '.:/app/'
+
+  agent:
+    image: 'datadog/agent:latest'
+    env_file:
+      - '.env'
+    environment:
+      - 'DD_APM_ENABLED=true'
+      - 'DD_TAGS=env:dev'
+    volumes:
+      - '/var/run/docker.sock:/var/run/docker.sock:ro'
+      - '/proc/:/host/proc/:ro'
+      - '/sys/fs/cgroup/:/host/sys/fs/cgroup:ro'
