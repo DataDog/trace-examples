@@ -3,11 +3,8 @@ import logging
 import sys
 import falcon
 
-from ddtrace import tracer
+from ddtrace import tracer, config
 from ddtrace.contrib.falcon import TraceMiddleware
-
-
-
 
 
 logging.basicConfig(stream=sys.stdout, level=logging.DEBUG)
@@ -27,6 +24,8 @@ class Resource200(object):
             1/0
         except Exception:
             pass
+
+        resp.set_header('X-SPECIAL', 'value1')
 
         resp.status = falcon.HTTP_200
         resp.body = self.BODY
@@ -50,6 +49,7 @@ class ResourceExc(object):
         raise Exception("argh")
 
 
+config.http.trace_headers('*', 'falcon')
 
 # run the thing
 trace_middleware = TraceMiddleware(tracer, 'my-falcon-app')
