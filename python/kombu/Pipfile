@@ -1,0 +1,13 @@
+[[source]]
+url = "https://pypi.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[packages]
+celery = {version = "*", extras = ["redis"]}
+ddtrace = {ref = "kombu-trace", git = "https://github.com/tebriel/dd-trace-py.git"}
+
+[dev-packages]
+
+[requires]
+python_version = "3.6"
