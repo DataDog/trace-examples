@@ -13,7 +13,7 @@ def run():
     with grpc.insecure_channel('localhost:50051') as channel:
         stub = HelloStub(channel)
         response = stub.SayHello(HelloRequest(name="test"))
-        print response
+        print(response)
 
 if __name__ == '__main__':
     run()

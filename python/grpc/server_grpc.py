@@ -11,16 +11,16 @@ class SendBackDatadogHeaders(object):
     def SayHello(self, request, context):
         """Send back Hello!
         """
-        print 'Incoming request'
+        print('Incoming request')
         context.set_code(grpc.StatusCode.OK)
         return HelloReply(message='Hello!')
 
 def serve():
     server = grpc.server(futures.ThreadPoolExecutor(max_workers=2))
-    server.add_insecure_port('[::]:%d' %(GRPC_PORT))
+    server.add_insecure_port('[::]:%d' % (GRPC_PORT))
     add_HelloServicer_to_server(SendBackDatadogHeaders(), server)
     server.start()
-    print 'Waiting on port %d' %(GRPC_PORT)
+    print('Waiting on port %d' % (GRPC_PORT))
     try:
         while True:
             time.sleep(_ONE_DAY_IN_SECONDS)
