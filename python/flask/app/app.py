@@ -178,6 +178,15 @@ def index():
                 dict(label='GET /bp/unkown', url=url_for('bp.unknown')),
             ],
         ),
+        dict(
+            rule='GET /static/test.txt',
+            description=[
+                'Endpoint to fetch a simple .txt static file.',
+            ],
+            links=[
+                dict(label='GET /static/test.txt', url=url_for('static', filename='test.txt')),
+            ],
+        ),
     ]
     return render_template('index.jinja2', routes=routes)
 
