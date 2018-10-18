@@ -5,7 +5,9 @@ import requests
 
 from ddtrace import config
 
-config.http.trace_headers('*', integrations='requests')
+config.requests.http.trace_headers('.*')
 
 headers = {'user-agent': 'my-app/0.0.1'}
-r = requests.get('https://api.github.com/events', headers=headers)
+response = requests.get('https://api.github.com/events', headers=headers)
+
+print ('Received response headers', getattr(response, 'headers', {}))
