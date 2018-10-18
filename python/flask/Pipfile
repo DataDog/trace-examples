@@ -1,0 +1,18 @@
+[[source]]
+url = "https://pypi.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[packages]
+blinker = "*"
+ddtrace = "*"
+flask = "*"
+requests = "*"
+flask-caching = "*"
+flask-cors = "*"
+flask-limiter = "*"
+
+[dev-packages]
+
+[requires]
+python_version = "3.7"

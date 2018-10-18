@@ -1,0 +1,16 @@
+<html>
+  <head>
+    <link rel="stylesheet" href="{{ url_for('static', filename='bulma.min.css') }} " />
+    <style>
+      .card { margin-bottom: 1rem; }
+      .card-header-title code { width: 100%; }
+    </style>
+  </head>
+  <body>
+    <section class="section">
+      <div class="container">
+        {% block content %}{% endblock %}
+      </div>
+    </section>
+  </body>
+</html>
