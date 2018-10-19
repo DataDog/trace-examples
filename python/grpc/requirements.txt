@@ -1,3 +1,4 @@
-grpc
-futures
 ddtrace
+futures
+googleapis-common-protos
+grpcio
