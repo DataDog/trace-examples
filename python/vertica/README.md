@@ -7,7 +7,7 @@ This directory contains an example for the [vertica-python][verticadb] library
 
 ## Install/Setup
 
-To get an instance of `verticadb` up and running run the following command:
+To get an instance of `vertica` up and running run the following command:
 
 ```sh
 $ docker-compose up -d
@@ -33,12 +33,3 @@ Run:
 ```sh
 $ ddtrace-run python vertica_example.py
 ```
-
-
-## Examples
-
-### Simple Manual
-
-Simple manual is an application which increments a value stored in a
-`verticadb` instance.
-
