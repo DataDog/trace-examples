@@ -1,0 +1,87 @@
+{% extends "layout.jinja2" %}
+{% block content %}
+  <div class="content">
+    <h1>Flask Example App</h1>
+    <p>
+      This example apps configures a simple Flask app which tries to utilize as many features
+      of Flask as possible to allow for easy testing of various application flows.
+    </p>
+
+    <p>
+      This app uses the following Flask middleware/extensions:
+    </p>
+
+    <ul>
+      <li><a href="https://github.com/thadeusb/flask-cache" target="_blank">Flask-Cache</a></li>
+      <li><a href="https://github.com/CoryDolphin/flask-cors" target="_blank">Flask-CORS</a></li>
+      <li><a href="https://github.com/alisaifee/flask-limiter/" target="_blank">Flask-Limiter</a></li>
+    </ul>
+
+    <p>
+      This app also configures hooks for all that Flask provides:
+    </p>
+
+    <ul>
+      <li>after_request</li>
+      <li>before_first_request</li>
+      <li>before_request</li>
+      <li>teardown_request</li>
+    </ul>
+
+    <p>
+      As well as all hooks that Flask <a href="http://flask.pocoo.org/docs/1.0/blueprints/" target="_blank">Blueprints</a> provide:
+    </p>
+
+    <ul>
+      <li>after_app_request</li>
+      <li>after_request</li>
+      <li>before_app_first_request</li>
+      <li>before_app_request</li>
+      <li>before_request</li>
+      <li>teardown_request</li>
+    </ul>
+
+    <p>
+      Along with each available Flask <a href="http://flask.pocoo.org/docs/1.0/signals/" target="_blank">signal</a> as well:
+    </p>
+
+    <ul>
+      <li>appcontext_popped</li>
+      <li>appcontext_pushed</li>
+      <li>appcontext_tearing_down</li>
+      <li>before_render_template</li>
+      <li>got_request_exception</li>
+      <li>request_finished</li>
+      <li>request_started</li>
+      <li>request_tearing_down</li>
+      <li>template_rendered</li>
+    </ul>
+
+    <p>
+      Lastly, we define two app level error handlers for <code>404</code> and <code>500</code>
+      errors and one blueprint level error handler for <code>404</code> errors.
+    </p>
+  </div>
+
+  {% for route in routes %}
+    <div class="card">
+      <div class="card-header">
+        <p class="card-header-title">
+          <code>{{ route.rule|e }}</code>
+        </p>
+      </div>
+      <div class="card-content">
+        <div class="content">
+          {% for text in route.description %}
+            <p>{{ text }}</p>
+          {% endfor %}
+        </div>
+      </div>
+      <div class="card-footer">
+        {% for link in route.links %}
+          <a href="{{ link.url }}" class="card-footer-item">{{ link.label }}</a>
+        {% endfor %}
+      </div>
+    </div>
+  {% endfor %}
+{% endblock %}
