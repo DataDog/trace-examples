@@ -49,7 +49,10 @@ class ResourceExc(object):
         raise Exception("argh")
 
 
-config.http.trace_headers('*', 'falcon')
+config.falcon.http.trace_headers([
+    'Session',
+    'Host',
+])
 
 # run the thing
 trace_middleware = TraceMiddleware(tracer, 'my-falcon-app')

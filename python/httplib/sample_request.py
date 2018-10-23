@@ -6,7 +6,8 @@ patch(httplib=True)
 
 import httplib
 from ddtrace import config, Pin
-config.http.trace_headers('*', integrations='httplib')
+config.httplib.http.trace_headers(['user-agent', 'last-modified'])
+
 
 url = 'example.com'
 path = '/'
