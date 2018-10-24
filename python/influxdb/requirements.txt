@@ -1,0 +1,2 @@
+-e /Users/kyle.verhoog/dev/contrib/alanjcastonguay
+influxdb==5.2.0
