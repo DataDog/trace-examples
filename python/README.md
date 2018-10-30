@@ -22,7 +22,7 @@ While you can certainly run the abb through the `manage.py` script, you can also
 replicated a common deployment scenario for our apps.
 
 ```
-docker-compose up django-apache2
+docker-compose up django2-apache2
 ```
 
 Note that both the error log and the access log are redirected to the std out for debug purposes.
