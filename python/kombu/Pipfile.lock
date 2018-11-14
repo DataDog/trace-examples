@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "f2fd1bd9956f12cae8bfb05850859281b7eb3e3e9d65229559f3153a5fc309cf"
+            "sha256": "7a5f932a272f4000edb5bf814074cee1ed3bfef7de2d56e701b3b74ab6ef1067"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -38,22 +38,32 @@
             "version": "==4.2.1"
         },
         "ddtrace": {
-            "git": "https://github.com/tebriel/dd-trace-py.git",
-            "ref": "2cc7b577955efaaf167d8e50b326a8acf6c7aa2a"
+            "hashes": [
+                "sha256:6173c607d4f391dce414abfee67d2acca54885f4e109d92c36f4f76241d62839"
+            ],
+            "index": "pypi",
+            "version": "==0.16"
         },
         "kombu": {
             "hashes": [
                 "sha256:86adec6c60f63124e2082ea8481bbe4ebe04fde8ebed32c177c7f0cd2c1c9082",
                 "sha256:b274db3a4eacc4789aeb24e1de3e460586db7c4fc8610f7adcc7a3a1709a60af"
             ],
+            "index": "pypi",
             "version": "==4.2.1"
+        },
+        "msgpack-python": {
+            "hashes": [
+                "sha256:378cc8a6d3545b532dfd149da715abae4fda2a3adb6d74e525d0d5e51f46909b"
+            ],
+            "version": "==0.5.6"
         },
         "pytz": {
             "hashes": [
-                "sha256:a061aa0a9e06881eb8b3b2b43f05b9439d6583c206d0a6c340ff72a7b6669053",
-                "sha256:ffb9ef1de172603304d9d2819af6f5ece76f2e85ec10692a524dd876e72bf277"
+                "sha256:31cb35c89bd7d333cd32c5f278fca91b523b0834369e757f4c5641ea252236ca",
+                "sha256:8e0f8568c118d3077b46be7d654cc8167fa916092e28320cde048e54bfc9f1e6"
             ],
-            "version": "==2018.5"
+            "version": "==2018.7"
         },
         "redis": {
             "hashes": [
@@ -68,6 +78,12 @@
                 "sha256:6849544be74ec3638e84d90bc1cf2e1e9224cc10d96cd4383ec3f69e9bce077b"
             ],
             "version": "==1.1.4"
+        },
+        "wrapt": {
+            "hashes": [
+                "sha256:d4d560d479f2c21e1b5443bbd15fe7ec4b37fe7e53d335d3b9b0a7b1226fe3c6"
+            ],
+            "version": "==1.10.11"
         }
     },
     "develop": {}

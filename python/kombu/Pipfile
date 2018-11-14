@@ -5,7 +5,8 @@ name = "pypi"
 
 [packages]
 celery = {version = "*", extras = ["redis"]}
-ddtrace = {ref = "kombu-trace", git = "https://github.com/tebriel/dd-trace-py.git"}
+ddtrace = "==0.16"
+kombu = "==4.2.1"
 
 [dev-packages]
 
