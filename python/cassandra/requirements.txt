@@ -1,0 +1,5 @@
+cassandra-driver==3.16.0
+ddtrace==0.16.0
+msgpack-python==0.5.6
+six==1.11.0
+wrapt==1.10.11
