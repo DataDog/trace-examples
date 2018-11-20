@@ -4,7 +4,9 @@
 	"keywords": ["framework", "laravel"],
 	"license": "MIT",
 	"require": {
-		"laravel/framework": "4.2.*"
+		"laravel/framework": "4.2.*",
+		"opentracing/opentracing": "^1.0@beta",
+		"datadog/dd-trace": "^0.4.0"
 	},
 	"autoload": {
 		"classmap": [
@@ -32,5 +34,5 @@
 	"config": {
 		"preferred-install": "dist"
 	},
-	"minimum-stability": "stable"
+	"minimum-stability": "beta"
 }

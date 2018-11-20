@@ -17,6 +17,7 @@ class HomeController extends BaseController {
 
 	public function showWelcome()
 	{
+		error_log("Serving showWelcome");
 		return View::make('hello');
 	}
 

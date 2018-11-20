@@ -1,4 +1,7 @@
 <?php
+
+ini_set('error_log', '/var/www/html/app/storage/logs/error.log');
+
 /**
  * Laravel - A PHP Framework For Web Artisans
  *
