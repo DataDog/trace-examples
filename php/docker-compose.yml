@@ -25,5 +25,17 @@ services:
     environment:
       DD_AGENT_HOST: agent
 
+  laravel42_php56_nginx:
+    build:
+      context: Laravel42
+      dockerfile: Dockerfile_php56_nginx
+    volumes:
+      - ./Laravel42:/var/www
+      - ./Laravel42/php56_nginx_default.conf:/etc/nginx/sites-enabled/default.conf
+    ports:
+      - 0.0.0.0:8043:80
+    environment:
+      DD_AGENT_HOST: agent
+
 volumes:
   composer-cache:
