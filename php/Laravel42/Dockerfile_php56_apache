@@ -12,5 +12,4 @@ RUN php -m | grep ddtrace
 
 RUN composer self-update
 
-RUN composer require opentracing/opentracing
-RUN composer require datadog/dd-trace
+WORKDIR /var/www/html

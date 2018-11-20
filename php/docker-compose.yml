@@ -16,10 +16,14 @@ services:
   laravel42_php56_apache:
     build:
       context: Laravel42
-      dockerfile: Dockerfile_php56
+      dockerfile: Dockerfile_php56_apache
     volumes:
       - ./Laravel42:/var/www/html
+      - composer-cache:/root/.composer/cache
     ports:
       - 8042:80
     environment:
       DD_AGENT_HOST: agent
+
+volumes:
+  composer-cache:
