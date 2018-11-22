@@ -11,7 +11,8 @@ POSTGRES_CONFIG = {
 }
 
 
-dsn = 'dbname=postgres user=postgres password=postgres host=127.0.0.1'
+dsn = 'dbname={dbname} user={user} password={password} host={host}'.format(**POSTGRES_CONFIG)
+
 
 async def go():
     pool = await aiopg.create_pool(dsn)

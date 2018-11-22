@@ -1,2 +1,3 @@
-asyncio
-aiopg
+aiopg==0.15.0
+asyncio==3.4.3
+ddtrace==0.16
