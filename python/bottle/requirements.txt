@@ -1,0 +1,2 @@
+bottle==0.12.13
+ddtrace==0.16
