@@ -25,6 +25,25 @@ from .exceptions import AppException
 from .limiter import limiter
 from .signals import connect_signals
 
+# basic logging with trace information
+from logging.config import dictConfig
+
+dictConfig({
+    'version': 1,
+    'formatters': {'default': {
+        'format': '[%(asctime)s] %(levelname)s in %(module)s: %(message)s - dd.trace_id=%(trace_id)s dd.span_id=%(span_id)s',
+    }},
+    'handlers': {'wsgi': {
+        'class': 'logging.StreamHandler',
+        'stream': 'ext://flask.logging.wsgi_errors_stream',
+        'formatter': 'default'
+    }},
+    'root': {
+        'level': 'INFO',
+        'handlers': ['wsgi']
+    }
+})
+
 # Create a new app
 app = Flask(__name__)
 
@@ -49,33 +68,33 @@ def inject_url_map():
 # Hook to run before the first request
 @app.before_first_request
 def before_first_request():
-    print('Hook: before_first_request')
+    app.logger.debug('Hook: before_first_request')
 
 
 # Hook to run before each request
 @app.before_request
 def before_request():
-    print('Hook: before_request')
+    app.logger.debug('Hook: before_request')
 
 
 # Hook to run after each request
 @app.after_request
 def after_request(response):
-    print('Hook: after_request')
+    app.logger.debug('Hook: after_request')
     return response
 
 
 # Hook to run on request teardown
 @app.teardown_request
 def teardown_request(response):
-    print('Hook: teardown_request')
+    app.logger.debug('Hook: teardown_request')
     return response
 
 
 # Hook to run on app context teardown
 @app.teardown_appcontext
 def teardown_appcontext(appcontext):
-    print('Hook: teardown_appcontext')
+    app.logger.debug('Hook: teardown_appcontext')
 
 
 # Index route with rate custom rate limited decorator
@@ -199,7 +218,7 @@ def joke():
 
     @after_this_request
     def after_joke(response):
-        print('Hook: after_this_request')
+        app.logger.debug('Hook: after_this_request')
         return response
 
     return res.content
