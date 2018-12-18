@@ -5,7 +5,7 @@ name = "pypi"
 
 [packages]
 blinker = "*"
-ddtrace = "*"
+ddtrace = {git = "https://github.com/DataDog/dd-trace-py.git", editable = true, ref = "majorgreys/trace-logs"}
 flask = "*"
 requests = "*"
 flask-caching = "*"

@@ -8,17 +8,17 @@ services:
       - 'DATADOG_TRACE_ENABLED=true'
       - 'DATADOG_TRACE_AGENT_HOSTNAME=agent'
       - 'DATADOG_TRACE_DEBUG=true'
-      - 'FLASK_ENV=development'
+      - 'DD_LOGS_INJECTION=true'
     ports:
       - '5000:5000'
 
   agent:
     image: 'datadog/docker-dd-agent'
     environment:
-      - 'DD_APM_ENABLED=true'
       - 'DD_HOSTNAME=trace-examples-flask'
       - 'DD_TAGS=env:dev'
       - 'DD_API_KEY=${DD_API_KEY}'
+      - 'DD_APM_ENABLED=true'
       - 'DD_LOGS_ENABLED=true'
       - 'DD_LOGS_CONFIG_CONTAINER_COLLECT_ALL=true'
       - 'DD_AC_EXCLUDE="name:datadog-agent"'
@@ -28,5 +28,5 @@ services:
     volumes:
       - '/var/run/docker.sock:/var/run/docker.sock:ro'
       - '/proc/:/host/proc/:ro'
-      - '/sys/fs/cgroup/:/host/sys/fs/cgroup:ro'
       - '/opt/datadog-agent/run:/opt/datadog-agent/run:rw'
+      - '/sys/fs/cgroup/:/host/sys/fs/cgroup:ro'

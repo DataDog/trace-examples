@@ -4,7 +4,7 @@ COPY . /code
 WORKDIR /code
 
 RUN pip install pipenv
-RUN pipenv install --deploy
+RUN pipenv install
 
 EXPOSE 5000
 CMD ["pipenv", "run", "ddtrace-run", "python", "run.py"]
