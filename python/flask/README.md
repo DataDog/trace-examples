@@ -7,13 +7,7 @@ The best way to get started is to clone this repo and run:
 
 ```bash
 cd trace-examples/python/flask/
-pipenv install
-
-pipenv run python run.py
-
-# OR
-
-pipenv run ddtrace-run python run.py
+docker-compose run --rm app
 ```
 
 Then open your browser to http://127.0.0.1:5000/

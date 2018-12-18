@@ -8,4 +8,4 @@ RUN pipenv install --deploy
 
 EXPOSE 5000
 
-CMD ["pipenv", "run", "python", "run.py"]
+CMD ["pipenv", "run", "ddtrace-run", "python", "run.py"]
