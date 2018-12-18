@@ -7,7 +7,7 @@ The best way to get started is to clone this repo and run:
 
 ```bash
 cd trace-examples/python/flask/
-docker-compose up --build 
+docker-compose up -d
 ```
 
 Then open your browser to http://127.0.0.1:5000/
