@@ -15,7 +15,7 @@ services:
   laravel42_php56_apache:
     build:
       context: .
-      dockerfile: Dockerfile_laravel42_php56_apache
+      dockerfile: Dockerfile_php56_apache
     volumes:
       - ./apache2.conf:/etc/apache2/apache2.conf
       - ./Laravel42:/var/www
@@ -28,7 +28,23 @@ services:
     environment:
       DD_AGENT_HOST: agent
       ddtrace_app_name: some_app
-      DD_DISTRIBUTED_TRACING: 'true'
+
+  symfony34_php56_apache:
+    build:
+      context: .
+      dockerfile: Dockerfile_php56_apache
+    volumes:
+      - ./apache2.conf:/etc/apache2/apache2.conf
+      - ./Symfony34:/var/www
+      - ./Symfony34/web:/var/www/html
+      - composer-cache:/root/.composer/cache
+    depends_on:
+      - agent
+    ports:
+      - 8034:80
+    environment:
+      DD_AGENT_HOST: agent
+      ddtrace_app_name: some_app
 
 volumes:
   composer-cache:
