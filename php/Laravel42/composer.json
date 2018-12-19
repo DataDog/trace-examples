@@ -5,8 +5,8 @@
 	"license": "MIT",
 	"require": {
 		"laravel/framework": "4.2.*",
-		"opentracing/opentracing": "^1.0@beta",
-		"datadog/dd-trace": "^0.4.0"
+		"opentracing/opentracing": "@beta",
+		"datadog/dd-trace": "*"
 	},
 	"autoload": {
 		"classmap": [

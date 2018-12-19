@@ -5,40 +5,30 @@ services:
   agent:
     image: datadog/agent:latest
     volumes:
-      - /var/run/docker.sock:/var/run/docker.sock:ro 
-      - /proc/:/host/proc/:ro 
-      - /sys/fs/cgroup/:/host/sys/fs/cgroup:ro 
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+      - /proc/:/host/proc/:ro
+      - /sys/fs/cgroup/:/host/sys/fs/cgroup:ro
     environment:
       - DD_API_KEY=${DATADOG_API_KEY}
       - DD_APM_ENABLED=true
-      # - DD_LOG_LEVEL=debug
 
   laravel42_php56_apache:
     build:
-      context: Laravel42
-      dockerfile: Dockerfile_php56_apache
+      context: .
+      dockerfile: Dockerfile_laravel42_php56_apache
     volumes:
-      - ./Laravel42:/var/www/html
-      - ${DATADOG_PHP_TRACER_ROOT}:/var/datadog/dd-trace-php
+      - ./apache2.conf:/etc/apache2/apache2.conf
+      - ./Laravel42:/var/www
+      - ./Laravel42/public:/var/www/html
       - composer-cache:/root/.composer/cache
+    depends_on:
+      - agent
     ports:
       - 8042:80
     environment:
       DD_AGENT_HOST: agent
       ddtrace_app_name: some_app
       DD_DISTRIBUTED_TRACING: 'true'
-
-  laravel42_php56_nginx:
-    build:
-      context: Laravel42
-      dockerfile: Dockerfile_php56_nginx
-    volumes:
-      - ./Laravel42:/var/www
-      - ./Laravel42/php56_nginx_default.conf:/etc/nginx/sites-enabled/default.conf
-    ports:
-      - 0.0.0.0:8043:80
-    environment:
-      DD_AGENT_HOST: agent
 
 volumes:
   composer-cache:

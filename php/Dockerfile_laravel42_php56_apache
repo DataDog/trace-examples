@@ -1,0 +1,38 @@
+FROM php:5.6-apache
+
+ARG DDTRACE_VERSION=0.8.1
+
+RUN apt-get update \
+# Install base packages
+    && apt-get install -y \
+        curl \
+        wget \
+        mysql-client \
+        git \
+        gnupg2 \
+        zlib1g-dev \
+        unzip \
+        libmcrypt-dev \
+# Install relevant php extensions
+    && docker-php-source extract \
+    && docker-php-ext-install mcrypt \
+    && docker-php-ext-install pdo_mysql \
+    && docker-php-ext-install pdo \
+    && docker-php-ext-install zip \
+    && docker-php-source delete \
+# Install DDTrace deb
+    && wget -O datadog-php-tracer.deb https://github.com/DataDog/dd-trace-php/releases/download/${DDTRACE_VERSION}/datadog-php-tracer_${DDTRACE_VERSION}-beta_amd64.deb \
+    && dpkg -i datadog-php-tracer.deb \
+    && apt-get install -f \
+# Install composer
+    && php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');" \
+    && php composer-setup.php  --install-dir="/usr/bin" --filename=composer \
+    && php -r "unlink('composer-setup.php');" \
+    && composer self-update \
+# Remove installation cache
+    && rm -rf /var/lib/apt/lists/*
+
+VOLUME /var/www
+VOLUME /var/www/public/
+
+WORKDIR /var/www
