@@ -19,11 +19,14 @@ services:
       dockerfile: Dockerfile_php56_apache
     volumes:
       - ./Laravel42:/var/www/html
+      - ${DATADOG_PHP_TRACER_ROOT}:/var/datadog/dd-trace-php
       - composer-cache:/root/.composer/cache
     ports:
       - 8042:80
     environment:
       DD_AGENT_HOST: agent
+      ddtrace_app_name: some_app
+      DD_DISTRIBUTED_TRACING: 'true'
 
   laravel42_php56_nginx:
     build:

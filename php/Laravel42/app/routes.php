@@ -11,4 +11,6 @@
 |
 */
 
-Route::get('/', 'HomeController@showWelcome');
+Route::get('/', ['uses' => 'HomeController@showWelcome', 'as' => 'simple_route_name']);
+Route::get('/distributed-tracing', 'HomeController@distributedTracing');
+Route::get('/distributed-tracing-backend', 'HomeController@distributedTracingBackend');
