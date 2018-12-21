@@ -23,3 +23,5 @@ Run the image you intend to try out:
     # Php 5.6 - Nginx/fpm - Laravel 4.2
     $ docker-compose run --rm laravel42_php56_nginx composer update
     $ docker-compose up laravel42_php56_nginx
+
+Now you should be able to visit [localhost:8042](http://localhost:8042/) and see the Laravel welcome screen. A trace should be generated and be available for viewing in the [APM UI](https://app.datadoghq.com/apm/services) within a minute or two.
