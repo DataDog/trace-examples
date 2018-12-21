@@ -8,6 +8,7 @@ services:
       - /var/run/docker.sock:/var/run/docker.sock:ro
       - /proc/:/host/proc/:ro
       - /sys/fs/cgroup/:/host/sys/fs/cgroup:ro
+      - ./datadog.yaml:/etc/datadog-agent/datadog.yaml
     environment:
       - DD_API_KEY=${DATADOG_API_KEY}
       - DD_APM_ENABLED=true
@@ -29,6 +30,26 @@ services:
       DD_AGENT_HOST: agent
       ddtrace_app_name: some_app
       DD_DISTRIBUTED_TRACING: 'true'
+
+  mongo_app:
+    build:
+      context: .
+      dockerfile: Dockerfile_mongo
+    volumes:
+      - ./mongo:/var/app
+      - composer-cache:/root/.composer/cache
+    working_dir: /var/app
+    depends_on:
+      - agent
+      - mongodb_4_server
+    environment:
+      DD_AGENT_HOST: agent
+
+  mongodb_4_server:
+    image: "circleci/mongo:4.0"
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=test
+      - MONGO_INITDB_ROOT_PASSWORD=test
 
 volumes:
   composer-cache:

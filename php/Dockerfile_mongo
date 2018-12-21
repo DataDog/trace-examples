@@ -1,0 +1,21 @@
+FROM datadog/docker-library:ddtrace_php_5_6
+
+ARG DDTRACE_VERSION=0.8.1
+
+USER root
+
+RUN \
+# Install apm
+    wget -O datadog-php-tracer.deb https://github.com/DataDog/dd-trace-php/releases/download/${DDTRACE_VERSION}/datadog-php-tracer_${DDTRACE_VERSION}-beta_amd64.deb \
+    && dpkg -i datadog-php-tracer.deb \
+    && apt-get install -f \
+# Install composer
+    && php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');" \
+    && php composer-setup.php  --install-dir="/usr/bin" --filename=composer \
+    && php -r "unlink('composer-setup.php');"
+
+VOLUME /var/app
+
+WORKDIR /var/app
+
+CMD bash

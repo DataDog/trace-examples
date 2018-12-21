@@ -1,0 +1,25 @@
+## Provides autodetected defaults, for vanilla Docker environments,
+## please see datadog.yaml.example for all supported options
+
+# Autodiscovery settings for vanilla Docker
+listeners:
+- name: docker
+config_providers:
+- name: docker
+  polling: true
+
+# Run two runners by default, this needs to be adjusted depending
+# on the number of checks (static + AD) expected to run.
+check_runners: 2
+
+# Enable APM by setting the DD_APM_ENABLED envvar to true, or override this configuration
+apm_config:
+  enabled: false
+  env: trace_examples_php
+  apm_non_local_traffic: true
+  obfuscation:
+    mongodb:
+      enabled: true
+
+# Use java cgroup memory awareness
+jmx_use_cgroup_memory_limit: true

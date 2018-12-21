@@ -1,0 +1,8 @@
+{
+    "name": "trace-examples/mongo",
+    "type": "project",
+    "require": {
+        "datadog/dd-trace": "*",
+        "opentracing/opentracing": "@beta"
+    }
+}
