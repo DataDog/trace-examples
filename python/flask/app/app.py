@@ -47,6 +47,9 @@ dictConfig({
 # Create a new app
 app = Flask(__name__)
 
+# add log entry for app creation
+app.logger.info('Flask app created: {}'.format(__name__))
+
 # Register our blueprint and it's endpoints on our app
 app.register_blueprint(bp)
 
