@@ -1,0 +1,40 @@
+FROM php:72-apache
+
+RUN apt-get update \
+# Install base packages
+    && apt-get install -y \
+        libmemcached-dev \
+        valgrind \
+        vim \
+        mysql-client \
+        libmcrypt-dev \
+    && pecl install redis \
+    && pecl install mcrypt-1.0.1 \
+    && docker-php-ext-enable redis \
+    && pecl install memcached \
+    && docker-php-ext-enable mcrypt \
+    && docker-php-ext-enable memcached \
+    && docker-php-ext-install mysqli pdo pdo_mysql \
+    && docker-php-ext-enable mysqli \
+    && docker-php-ext-enable pdo \
+    && docker-php-ext-enable pdo_mysql \
+    && docker-php-ext-install pcntl \
+    && docker-php-ext-enable pcntl \
+    && docker-php-source delete
+
+# Install DDTrace deb
+    && wget -O datadog-php-tracer.deb https://9653-119990860-gh.circle-artifacts.com/0/datadog-php-tracer_0.9.0-beta_amd64.deb \
+    && dpkg -i datadog-php-tracer.deb \
+    && apt-get install -f \
+# Install composer
+    && php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');" \
+    && php composer-setup.php  --install-dir="/usr/bin" --filename=composer \
+    && php -r "unlink('composer-setup.php');" \
+    && composer self-update \
+# Remove installation cache
+    && rm -rf /var/lib/apt/lists/*
+
+VOLUME /var/www
+VOLUME /var/www/public/
+
+WORKDIR /var/www

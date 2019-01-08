@@ -25,4 +25,15 @@ class HomeController extends BaseController
     {
         return "This is backend";
     }
+
+    public function actionThatExits()
+    {
+        $this->someCustomRequestHandler();
+        exit(0);
+    }
+
+    private function someCustomRequestHandler()
+    {
+        echo "echoed";
+    }
 }
