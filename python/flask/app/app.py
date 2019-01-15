@@ -31,7 +31,7 @@ from logging.config import dictConfig
 dictConfig({
     'version': 1,
     'formatters': {'default': {
-        'format': '[%(asctime)s] %(levelname)s in %(module)s: %(message)s - dd.trace_id=%(trace_id)s dd.span_id=%(span_id)s',
+        'format': '%(asctime)s %(levelname)s [%(name)s] [%(filename)s:%(lineno)d] [dd.trace_id=%(dd.trace_id)s dd.span_id=%(dd.span_id)s] - %(message)s',
     }},
     'handlers': {'wsgi': {
         'class': 'logging.StreamHandler',
