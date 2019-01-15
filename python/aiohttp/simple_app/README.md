@@ -17,4 +17,4 @@ multiple coroutines for the same handler and it serves a static file.
 
 Launch the application
 
-    python server.py
+    DD_LOGS_INJECTION=true ddtrace-run python server.py
