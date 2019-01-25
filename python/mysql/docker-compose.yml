@@ -1,0 +1,35 @@
+version: '3'
+services:
+  app:
+    build: .
+    depends_on:
+      - agent
+      - mysql
+    environment:
+      - 'DATADOG_TRACE_ENABLED=true'
+      - 'DATADOG_TRACE_AGENT_HOSTNAME=agent'
+
+  mysql:
+      image: mysql:5.7
+      environment:
+          - MYSQL_ROOT_PASSWORD=admin
+          - MYSQL_PASSWORD=test
+          - MYSQL_USER=test
+          - MYSQL_DATABASE=test
+      ports:
+          - 3306
+
+  agent:
+    image: 'datadog/docker-dd-agent'
+    environment:
+      - 'DD_APM_ENABLED=true'
+      - 'DD_HOSTNAME=multiple-traces'
+      - 'DD_TAGS=env:dev'
+      - 'DD_API_KEY=${DD_API_KEY}'
+    ports:
+      - 8125
+      - 8126
+    volumes:
+      - '/var/run/docker.sock:/var/run/docker.sock:ro'
+      - '/proc/:/host/proc/:ro'
+      - '/sys/fs/cgroup/:/host/sys/fs/cgroup:ro'
