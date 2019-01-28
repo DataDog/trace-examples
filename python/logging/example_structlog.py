@@ -1,6 +1,5 @@
 from ddtrace import tracer
 
-import logging
 import structlog
 
 structlog.configure(
@@ -9,8 +8,10 @@ structlog.configure(
 
 log = structlog.get_logger()
 
+
 @tracer.wrap()
 def hello():
     log.warn('Hello, World!')
+
 
 hello()

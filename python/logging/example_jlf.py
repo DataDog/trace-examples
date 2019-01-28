@@ -11,8 +11,10 @@ json_handler.setFormatter(formatter)
 logger = logging.getLogger()
 logger.addHandler(json_handler)
 
+
 @tracer.wrap()
 def hello():
     logger.warn('Hello, World!')
+
 
 hello()
