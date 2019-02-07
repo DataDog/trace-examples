@@ -4,12 +4,10 @@ This example has all Node APM features enabled on 3 services.
 
 The following modules are automatically instrumented by our integrations:
 
-- dns
 - express
 - graphql
 - http
 - mongodb-core
-- net
 - redis
 - winston
 
