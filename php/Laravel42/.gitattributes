@@ -1,5 +1,5 @@
-bootstrap/ linguist-generated
-public/ linguist-generated
+bootstrap/* linguist-generated
+public/* linguist-generated
 artisan linguist-generated
 composer.json linguist-generated
 composer.lock linguist-generated
