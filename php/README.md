@@ -11,17 +11,16 @@ Build the image you are interested in:
     # Php 5.6 - Apache - Laravel 4.2
     $ docker-compose build laravel42_php56_apache
 
-    # Php 5.6 - Nginx/fpm - Laravel 4.2
-    $ docker-compose build laravel42_php56_nginx
-
 Run the image you intend to try out:
 
     # Php 5.6 - Apache - Laravel 4.2
-    $ docker-compose run --rm laravel42_php56_apache composer update
     $ docker-compose up laravel42_php56_apache
 
-    # Php 5.6 - Nginx/fpm - Laravel 4.2
-    $ docker-compose run --rm laravel42_php56_nginx composer update
-    $ docker-compose up laravel42_php56_nginx
+The following end points are available
 
-Now you should be able to visit [localhost:8042](http://localhost:8042/) and see the Laravel welcome screen. A trace should be generated and be available for viewing in the [APM UI](https://app.datadoghq.com/apm/services) within a minute or two.
+    GET: /                          : the Laravel welcome screen
+    GET: /distributed-tracing       : a distributed tracing example
+
+Now you should be able to visit [localhost:8042](http://localhost:8042/) and see the Laravel welcome screen.
+A trace should be generated and be available for viewing in the [APM UI](https://app.datadoghq.com/apm/services)
+within a minute or two.

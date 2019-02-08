@@ -15,11 +15,11 @@ services:
   laravel42_php56_apache:
     build:
       context: .
-      dockerfile: Dockerfile_laravel42_php56_apache
+      dockerfile: Dockerfiles/Dockerfile_php56_apache
+      args:
+        - DDTRACE_VERSION=0.12.2
+        - WEB_APP_PATH=Laravel42
     volumes:
-      - ./apache2.conf:/etc/apache2/apache2.conf
-      - ./Laravel42:/var/www
-      - ./Laravel42/public:/var/www/html
       - composer-cache:/root/.composer/cache
     depends_on:
       - agent
@@ -27,8 +27,8 @@ services:
       - 8042:80
     environment:
       DD_AGENT_HOST: agent
-      ddtrace_app_name: some_app
-      DD_DISTRIBUTED_TRACING: 'true'
+      DD_TRACE_APP_NAME: laravel42_php56_apache
+      DD_TRACE_TRACE_DEBUG: "true"
 
 volumes:
   composer-cache:

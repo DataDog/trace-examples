@@ -2,9 +2,6 @@
 
 return array(
 
-
-    'name' => 'some_app',
-
 	/*
 	|--------------------------------------------------------------------------
 	| Application Debug Mode
@@ -124,9 +121,6 @@ return array(
 		'Illuminate\Validation\ValidationServiceProvider',
 		'Illuminate\View\ViewServiceProvider',
 		'Illuminate\Workbench\WorkbenchServiceProvider',
-
-		// DDTrace
-		DDTrace\Integrations\Laravel\V4\LaravelProvider::class,
 	),
 
 	/*
