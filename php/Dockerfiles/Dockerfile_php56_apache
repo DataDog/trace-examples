@@ -1,8 +1,5 @@
 FROM php:5.6-apache
 
-ARG DDTRACE_VERSION
-ARG WEB_APP_PATH
-
 RUN apt-get update \
 # Install base packages
     && apt-get install -y \
@@ -30,14 +27,18 @@ RUN apt-get update \
 # Remove installation cache
     && rm -rf /var/lib/apt/lists/*
 
+ARG DD_TRACE_VERSION
+ARG WEB_APP_PATH
+
 # Install DDTrace deb
-RUN wget -O datadog-php-tracer.deb https://github.com/DataDog/dd-trace-php/releases/download/${DDTRACE_VERSION}/datadog-php-tracer_${DDTRACE_VERSION}-beta_amd64.deb \
-    && dpkg -i datadog-php-tracer.deb
+ADD https://github.com/DataDog/dd-trace-php/releases/download/${DD_TRACE_VERSION}/datadog-php-tracer_${DD_TRACE_VERSION}-beta_amd64.deb datadog-php-tracer.deb
+RUN dpkg -i datadog-php-tracer.deb
 
 RUN a2enmod rewrite
 
 COPY Dockerfiles/apache2.conf /etc/apache2/apache2.conf
 COPY Dockerfiles/apache2-virtualhost.conf /etc/apache2/sites-available/000-default.conf
+COPY Dockerfiles/php-dd-ext.ini /usr/local/etc/php/conf.d/php-dd-ext.ini
 
 COPY ${WEB_APP_PATH} /var/www
 
@@ -45,6 +46,6 @@ WORKDIR /var/www
 
 RUN chmod -R a+w /var/www
 
-RUN composer update
+RUN php -d memory_limit=-1 /usr/bin/composer update
 
 CMD [ "apache2-foreground" ]
