@@ -31,7 +31,7 @@ ClassLoader::addDirectories(array(
 |
 */
 
-Log::useFiles(storage_path().'/logs/laravel.log');
+// Defaults to web server configured error_log target.
 
 /*
 |--------------------------------------------------------------------------
