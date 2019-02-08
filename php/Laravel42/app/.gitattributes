@@ -1,0 +1,12 @@
+# Directories
+commands/* linguist-generated
+config/* linguist-generated
+database/* linguist-generated
+lang/* linguist-generated
+models/* linguist-generated
+start/* linguist-generated
+storage/* linguist-generated
+views/* linguist-generated
+
+# Files
+filters.php linguist-generated

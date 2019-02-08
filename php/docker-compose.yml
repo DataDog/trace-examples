@@ -1,0 +1,34 @@
+version: "3.4"
+
+services:
+
+  agent:
+    image: datadog/agent:latest
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+      - /proc/:/host/proc/:ro
+      - /sys/fs/cgroup/:/host/sys/fs/cgroup:ro
+    environment:
+      - DD_API_KEY=${DATADOG_API_KEY}
+      - DD_APM_ENABLED=true
+
+  laravel42_php56_apache:
+    build:
+      context: .
+      dockerfile: Dockerfiles/Dockerfile_php56_apache
+      args:
+        - DDTRACE_VERSION=0.12.2
+        - WEB_APP_PATH=Laravel42
+    volumes:
+      - composer-cache:/root/.composer/cache
+    depends_on:
+      - agent
+    ports:
+      - 8042:80
+    environment:
+      DD_AGENT_HOST: agent
+      DD_TRACE_APP_NAME: laravel42_php56_apache
+      DD_TRACE_TRACE_DEBUG: "true"
+
+volumes:
+  composer-cache:
