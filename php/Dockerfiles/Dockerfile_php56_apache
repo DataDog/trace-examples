@@ -30,9 +30,9 @@ RUN apt-get update \
 ARG DD_TRACE_VERSION
 ARG WEB_APP_PATH
 
-## Install DDTrace deb
-#ADD https://github.com/DataDog/dd-trace-php/releases/download/${DD_TRACE_VERSION}/datadog-php-tracer_${DD_TRACE_VERSION}-beta_amd64.deb datadog-php-tracer.deb
-#RUN dpkg -i datadog-php-tracer.deb
+# Install DDTrace deb
+ADD https://github.com/DataDog/dd-trace-php/releases/download/${DD_TRACE_VERSION}/datadog-php-tracer_${DD_TRACE_VERSION}-beta_amd64.deb datadog-php-tracer.deb
+RUN dpkg -i datadog-php-tracer.deb
 
 RUN a2enmod rewrite
 
