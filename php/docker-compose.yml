@@ -39,6 +39,8 @@ services:
         - WEB_APP_PATH=Symfony34
     volumes:
       - composer-cache:/root/.composer/cache
+      - ./Symfony34:/var/www
+      - ./gen-php:/var/gen-php
     depends_on:
       - agent
     ports:
