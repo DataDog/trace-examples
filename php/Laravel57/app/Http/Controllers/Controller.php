@@ -2,12 +2,18 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Foundation\Bus\DispatchesJobs;
+use Illuminate\Http\Response;
 use Illuminate\Routing\Controller as BaseController;
-use Illuminate\Foundation\Validation\ValidatesRequests;
-use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 
 class Controller extends BaseController
 {
-    use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
+    public function pdoAction()
+    {
+        $pdo = new \PDO('mysql:host=mysql;dbname=test', 'test', 'test');
+        $stmt = $pdo->prepare("SELECT * from information_schema.tables LIMIT 1");
+        $stmt->execute();
+        $res = $stmt->fetch();
+        print_r($res);
+        return new Response();
+    }
 }
