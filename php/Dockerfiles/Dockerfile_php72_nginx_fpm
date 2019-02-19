@@ -59,6 +59,6 @@ WORKDIR /var/www
 
 RUN chmod -R a+w /var/www
 
-# RUN php -d memory_limit=-1 /usr/bin/composer update --no-dev
+RUN php -d memory_limit=-1 /usr/bin/composer update --no-dev
 
 CMD [ "supervisord", "-n" ]

@@ -1,0 +1,50 @@
+"A datetime string with format 'Y-m-d H:i:s', e.g. '2018-01-01 13:00:00'."
+scalar DateTime @scalar(class: "Nuwave\\Lighthouse\\Schema\\Types\\Scalars\\DateTime")
+
+"A date string with format 'Y-m-d', e.g. '2011-05-23'."
+scalar Date @scalar(class: "Nuwave\\Lighthouse\\Schema\\Types\\Scalars\\Date")
+
+tsype Query {
+    users: [User!]! @all(model: "App\\User")
+    user(id: ID @eq): User @find(model: "App\\User")
+    posts: [Post!]! @all(model: "App\\Post")
+    post(id: Int! @eq): Post @find(model: "App\\Post")
+}
+
+type Mutation {
+    createUser(
+        name: String @rules(apply: ["required"])
+        email: String @rules(apply: ["required", "email", "unique:users,email"])
+    ): User @create(model: "App\\User")
+    updateUser(
+        id: ID @rules(apply: ["required"])
+        name: String
+        email: String @rules(apply: ["email"])
+    ): User @update(model: "App\\User")
+    deleteUser(
+        id: ID @rules(apply: ["required"])
+    ): User @delete(model: "App\\User")
+}
+
+type User {
+    id: ID!
+    name: String!
+    email: String!
+    created_at: DateTime!
+    updated_at: DateTime!
+    posts: [Post!]! @hasMany
+}
+
+type Post {
+    id: ID!
+    title: String!
+    content: String!
+    user: User! @belongsTo
+    comments: [Comment!]! @hasMany
+}
+
+type Comment{
+    id: ID!
+    reply: String!
+    post: Post! @belongsTo
+}
