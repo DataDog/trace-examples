@@ -1,6 +1,7 @@
 bootstrap/* linguist-generated
 config/* linguist-generated
 database/* linguist-generated
+html/* linguist-generated
 public/* linguist-generated
 resources/* linguist-generated
 routes/* linguist-generated
