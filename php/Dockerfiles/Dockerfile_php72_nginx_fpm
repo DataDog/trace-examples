@@ -1,4 +1,4 @@
-FROM datadog/docker-library:ddtrace_alpine_php-7.2.9-debug
+FROM datadog/docker-library:ddtrace_alpine_php-7.2.9
 USER root
         
 ARG DD_TRACE_VERSION
@@ -32,23 +32,7 @@ RUN set -xe; \
     rm tmp.tar.gz; \
     make debug install; \
     echo "extension=ddtrace.so" > /usr/local/etc/php/conf.d/98-ddtrace.ini;
-
-# RUN cd /usr/local/etc; { \
-# 		echo '[global]'; \
-# 		echo 'error_log = /proc/self/fd/2'; \
-# 		echo '[www]'; \
-# 		echo 'access.log = /proc/self/fd/2'; \
-# 		echo 'clear_env = no'; \
-# 		echo '; Ensure worker stdout and stderr are sent to the main error log.'; \
-# 		echo 'catch_workers_output = yes'; \
-# 	} | tee php-fpm.d/docker.conf \
-# 	&& { \
-# 		echo '[global]'; \
-# 		echo 'daemonize = no'; \
-# 		echo; \
-# 		echo '[www]'; \
-# 		echo 'listen = 9000'; \
-# 	} | tee php-fpm.d/zz-docker.conf    
+    
 WORKDIR /var/www
 
 RUN chmod -R a+w /var/www
