@@ -1,71 +1,59 @@
-FROM php:7.2-fpm
-
-RUN apt-get update \
-    && apt-get install -y \
-        git \
-        libmcrypt-dev \
-        libmemcached-dev \
-        mysql-client \
-        nginx \
-        procps \
-        supervisor \
-        unzip \
-        valgrind \
-        vim \
-        zip \
-        zlib1g-dev \
-    && pecl install mcrypt-1.0.0 \
-    && docker-php-ext-enable mcrypt \
-    && docker-php-ext-install pcntl \
-    && docker-php-ext-enable pcntl \
-    && pecl install redis \
-    && docker-php-ext-enable redis \
-    && pecl install memcached \
-    && docker-php-ext-enable memcached \
-    && docker-php-ext-install mysqli pdo pdo_mysql \
-    && docker-php-ext-enable mysqli \
-    && docker-php-ext-enable pdo \
-    && docker-php-ext-enable pdo_mysql \
-    && docker-php-source delete \
-    && rm -rf /var/lib/apt/lists/*
-
-RUN apt-get update \
-    && docker-php-ext-install opcache \
-    && printf "\n" | pecl install apcu \
-    && docker-php-source delete
-
-# Install composer
-RUN php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');" \
-        && php composer-setup.php  --install-dir="/usr/bin" --filename=composer \
-        && php -r "unlink('composer-setup.php');" \
-        && composer self-update
-
+FROM datadog/docker-library:ddtrace_alpine_php-7.2.9-debug
+USER root
+        
 ARG DD_TRACE_VERSION
 ARG WEB_APP_PATH
 
 COPY ${WEB_APP_PATH} /var/www
 
 # Install DDTrace deb
-ADD packages/datadog-php-tracer_0.13.3-beta_amd64.deb datadog-php-tracer.deb
-RUN dpkg -i datadog-php-tracer.deb
-## Install DDTrace deb
-#ADD https://github.com/DataDog/dd-trace-php/releases/download/${DD_TRACE_VERSION}/datadog-php-tracer_${DD_TRACE_VERSION}-beta_amd64.deb datadog-php-tracer.deb
-#RUN dpkg -i datadog-php-tracer.deb
+ARG PKG_SRC=https://14831-119990860-gh.circle-artifacts.com/0/datadog-php-tracer_0.13.3-beta_noarch.apk
+RUN set -xe; \ 
+    curl -L -o datadog-php-tracer.apk ${PKG_SRC}; \
+    apk --allow-untrusted --no-cache add datadog-php-tracer.apk && rm datadog-php-tracer.apk
 
 ## Use the debug version instead
-#RUN echo "extension=/opt/datadog-php/extensions/ddtrace-20170718-debug.so" > /usr/local/etc/php/conf.d/98-ddtrace.ini
+RUN echo "extension=/opt/datadog-php/extensions/ddtrace-20170718-debug.so" > /usr/local/etc/php/conf.d/98-ddtrace.ini
 #RUN echo "ddtrace.request_init_hook=/opt/datadog-php/dd-trace-sources/bridge/dd_wrap_autoloader.php" >> /usr/local/etc/php/conf.d/98-ddtrace.ini
 
-
-COPY Dockerfiles/php_nginx_default.conf /etc/nginx/sites-available/default
+COPY Dockerfiles/php_nginx_default.conf /etc/nginx/conf.d/default.conf
 COPY Dockerfiles/supervisord-nginx-fpm.conf /etc/supervisord.conf
 COPY Dockerfiles/php-dd-ext.ini /usr/local/etc/php/conf.d/php-dd-ext.ini
 COPY Dockerfiles/opcache.ini /usr/local/etc/php/conf.d/opcache-dd-ext.ini
 COPY Dockerfiles/acpu.ini /usr/local/etc/php/conf.d/acpu-dd-ext.ini
 
+RUN apk --no-cache add supervisor nginx
+
+ARG DD_TRACE_BRANCH=update_images_and_enable_leak_detection
+RUN set -xe; \
+    mkdir /usr/src/dd-trace-php && cd /usr/src; \
+    curl -o tmp.tar.gz -L https://github.com/DataDog/dd-trace-php/archive/${DD_TRACE_BRANCH}.tar.gz; \
+    tar xf tmp.tar.gz --strip-component=1; \
+    rm tmp.tar.gz; \
+    make debug install; \
+    echo "extension=ddtrace.so" > /usr/local/etc/php/conf.d/98-ddtrace.ini;
+
+# RUN cd /usr/local/etc; { \
+# 		echo '[global]'; \
+# 		echo 'error_log = /proc/self/fd/2'; \
+# 		echo '[www]'; \
+# 		echo 'access.log = /proc/self/fd/2'; \
+# 		echo 'clear_env = no'; \
+# 		echo '; Ensure worker stdout and stderr are sent to the main error log.'; \
+# 		echo 'catch_workers_output = yes'; \
+# 	} | tee php-fpm.d/docker.conf \
+# 	&& { \
+# 		echo '[global]'; \
+# 		echo 'daemonize = no'; \
+# 		echo; \
+# 		echo '[www]'; \
+# 		echo 'listen = 9000'; \
+# 	} | tee php-fpm.d/zz-docker.conf    
 WORKDIR /var/www
 
 RUN chmod -R a+w /var/www
+#USER circleci
+# EXPOSE 8001:80
 
 ENV USE_ZEND_ALLOC 0
 ENV ZEND_DONT_UNLOAD_MODULES 1
