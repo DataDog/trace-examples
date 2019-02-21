@@ -51,7 +51,6 @@ COPY Dockerfiles/php_nginx_default.conf /etc/nginx/sites-available/default
 COPY Dockerfiles/supervisord-nginx-fpm.conf /etc/supervisord.conf
 COPY Dockerfiles/php-dd-ext.ini /usr/local/etc/php/conf.d/php-dd-ext.ini
 
-
 WORKDIR /var/www
 
 RUN chmod -R a+w /var/www
