@@ -2,6 +2,11 @@
 # yarn lockfile v1
 
 
+"@types/node@^10.12.18":
+  version "10.12.26"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-10.12.26.tgz#2dec19f1f7981c95cb54bab8f618ecb5dc983d0e"
+  integrity sha512-nMRqS+mL1TOnIJrL6LKJcNZPB8V3eTfRo9FQA2b5gDvrHurC8XbSA86KNe0dShlEL7ReWJv/OU9NL7Z0dnqWTg==
+
 accepts@~1.3.5:
   version "1.3.5"
   resolved "https://registry.yarnpkg.com/accepts/-/accepts-1.3.5.tgz#eb777df6011723a3b14e8a72c0805c8e86746bd2"
@@ -155,17 +160,19 @@ core-util-is@~1.0.0:
   resolved "https://registry.yarnpkg.com/core-util-is/-/core-util-is-1.0.2.tgz#b5fd54220aa2bc5ab57aab7140c940754503c1a7"
   integrity sha1-tf1UIgqivFq1eqtxQMlAdUUDwac=
 
-dd-trace@^0.8.0:
-  version "0.8.0"
-  resolved "https://registry.yarnpkg.com/dd-trace/-/dd-trace-0.8.0.tgz#371c102afb600da0944f6d06883eb802656b814f"
-  integrity sha512-LA7XNlNxlfJafbKECoUoTRLtELwqj0p0x/dmQ4ficjfODxBHew95UsgFmHgHfQEoBCDhhgNsxX+21JZ0JDDtzQ==
+dd-trace@^0.9.0:
+  version "0.9.0"
+  resolved "https://registry.yarnpkg.com/dd-trace/-/dd-trace-0.9.0.tgz#a8a1cc56e6c617214ba65e5124cd17cc06625c3d"
+  integrity sha512-lYZHsB5JSruxrF1mqG+lhkt8mpBvq8ujyXI/o+ZwfQnahcFu86mUsvrjoT+k1V6hvxSiQ66+nTa2OAA64nDTpw==
   dependencies:
+    "@types/node" "^10.12.18"
     async-hook-jl "^1.7.6"
     int64-buffer "^0.1.9"
     koalas "^1.0.2"
     lodash.kebabcase "^4.1.1"
     lodash.memoize "^4.1.2"
     lodash.pick "^4.4.0"
+    lodash.sortby "^4.7.0"
     lodash.truncate "^4.4.2"
     lodash.uniq "^4.5.0"
     methods "^1.1.2"
@@ -481,6 +488,11 @@ lodash.pick@^4.4.0:
   version "4.4.0"
   resolved "https://registry.yarnpkg.com/lodash.pick/-/lodash.pick-4.4.0.tgz#52f05610fff9ded422611441ed1fc123a03001b3"
   integrity sha1-UvBWEP/53tQiYRRB7R/BI6AwAbM=
+
+lodash.sortby@^4.7.0:
+  version "4.7.0"
+  resolved "https://registry.yarnpkg.com/lodash.sortby/-/lodash.sortby-4.7.0.tgz#edd14c824e2cc9c1e0b0a1b42bb5210516a42438"
+  integrity sha1-7dFMgk4sycHgsKG0K7UhBRakJDg=
 
 lodash.truncate@^4.4.2:
   version "4.4.2"
