@@ -21,7 +21,6 @@ class Controller extends BaseController
         /** @var Pipeline $pipeline */
         $pipeline = App::make(Pipeline::class);
 
-        print_r("Here\n");
         $pipeline
             ->send(10)
             ->through($pipes)
@@ -33,7 +32,6 @@ class Controller extends BaseController
         $stmt = $pdo->prepare("SELECT * from information_schema.tables LIMIT 1");
         $stmt->execute();
         $res = $stmt->fetch();
-        print_r($res);
         return new Response();
     }
 }
