@@ -14,3 +14,5 @@
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('/pdo', ['uses' => 'Controller@pdoAction', 'as' => 'pdo.endpoint']);
