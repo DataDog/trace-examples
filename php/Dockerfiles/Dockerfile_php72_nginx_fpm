@@ -46,16 +46,8 @@ ARG WEB_APP_PATH
 COPY ${WEB_APP_PATH} /var/www
 
 # Install DDTrace deb
-ADD packages/datadog-php-tracer_0.13.3-beta_amd64.deb datadog-php-tracer.deb
+ADD https://github.com/DataDog/dd-trace-php/releases/download/${DD_TRACE_VERSION}/datadog-php-tracer_${DD_TRACE_VERSION}-beta_amd64.deb datadog-php-tracer.deb
 RUN dpkg -i datadog-php-tracer.deb
-## Install DDTrace deb
-#ADD https://github.com/DataDog/dd-trace-php/releases/download/${DD_TRACE_VERSION}/datadog-php-tracer_${DD_TRACE_VERSION}-beta_amd64.deb datadog-php-tracer.deb
-#RUN dpkg -i datadog-php-tracer.deb
-
-## Use the debug version instead
-#RUN echo "extension=/opt/datadog-php/extensions/ddtrace-20170718-debug.so" > /usr/local/etc/php/conf.d/98-ddtrace.ini
-#RUN echo "ddtrace.request_init_hook=/opt/datadog-php/dd-trace-sources/bridge/dd_wrap_autoloader.php" >> /usr/local/etc/php/conf.d/98-ddtrace.ini
-
 
 COPY Dockerfiles/php_nginx_default.conf /etc/nginx/sites-available/default
 COPY Dockerfiles/supervisord-nginx-fpm.conf /etc/supervisord.conf
@@ -66,12 +58,5 @@ COPY Dockerfiles/acpu.ini /usr/local/etc/php/conf.d/acpu-dd-ext.ini
 WORKDIR /var/www
 
 RUN chmod -R a+w /var/www
-
-ENV USE_ZEND_ALLOC 0
-ENV ZEND_DONT_UNLOAD_MODULES 1
-
-# RUN php -d memory_limit=-1 /usr/bin/composer update --no-dev
-
-WORKDIR /extensions
 
 CMD [ "supervisord", "-n" ]

@@ -7,7 +7,6 @@ RUN apt-get update \
         curl \
         git \
         gnupg2 \
-        libapache2-mod-fastcgi \
         libmcrypt-dev \
         mysql-client \
         unzip \
