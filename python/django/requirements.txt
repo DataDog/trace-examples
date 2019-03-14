@@ -4,5 +4,5 @@
 #
 #    pip-compile --output-file requirements.txt requirements.in
 #
-django==1.8.14
+django==1.8.18
 whitenoise==3.2.1
