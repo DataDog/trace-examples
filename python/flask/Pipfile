@@ -5,7 +5,7 @@ name = "pypi"
 
 [packages]
 blinker = "*"
-ddtrace = {git = "https://github.com/DataDog/dd-trace-py.git", editable = true, ref = "majorgreys/trace-logs"}
+ddtrace = {git = "https://github.com/DataDog/dd-trace-py.git", editable = true, ref = "0.23-dev"}
 flask = "*"
 requests = "*"
 flask-caching = "*"
@@ -15,4 +15,4 @@ flask-limiter = "*"
 [dev-packages]
 
 [requires]
-python_version = "3.7"
+python_version = "3.6"

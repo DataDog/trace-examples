@@ -9,6 +9,7 @@ services:
       - 'DATADOG_TRACE_AGENT_HOSTNAME=agent'
       - 'DATADOG_TRACE_DEBUG=true'
       - 'DD_LOGS_INJECTION=true'
+      - 'DD_ANALYTICS_ENABLED=true'
     ports:
       - '5000:5000'
 
