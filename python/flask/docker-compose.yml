@@ -1,4 +1,6 @@
 version: '3'
+volumes:
+  data-agent-run:
 services:
   app:
     build: .
@@ -10,6 +12,8 @@ services:
       - 'DATADOG_TRACE_DEBUG=true'
       - 'DD_LOGS_INJECTION=true'
       - 'DD_ANALYTICS_ENABLED=true'
+      - 'DD_RUNTIME_METRICS_ENABLED=true'
+      - 'DD_RUNTIME_METRICS_DOGSTATSD_HOST=agent'
     ports:
       - '5000:5000'
 
@@ -23,11 +27,12 @@ services:
       - 'DD_LOGS_ENABLED=true'
       - 'DD_LOGS_CONFIG_CONTAINER_COLLECT_ALL=true'
       - 'DD_AC_EXCLUDE="name:datadog-agent"'
+      - 'DD_DOGSTATSD_NON_LOCAL_TRAFFIC=true'
     ports:
       - 8125
       - 8126
     volumes:
+      - "data-agent-run:/opt/datadog-agent/run:rw"
       - '/var/run/docker.sock:/var/run/docker.sock:ro'
       - '/proc/:/host/proc/:ro'
-        # - '/opt/datadog-agent/run:/opt/datadog-agent/run:rw'
       - '/sys/fs/cgroup/:/host/sys/fs/cgroup:ro'

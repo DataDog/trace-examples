@@ -5,9 +5,11 @@ name = "pypi"
 
 [packages]
 blinker = "*"
-ddtrace = {git = "https://github.com/DataDog/dd-trace-py.git", editable = true, ref = "0.23-dev"}
+psutil = "*"
+datadog = "*"
 flask = "*"
 requests = "*"
+ddtrace = {git = "https://github.com/DataDog/dd-trace-py.git", editable = true, ref = "kyle-verhoog/metrics"}
 flask-caching = "*"
 flask-cors = "*"
 flask-limiter = "*"
