@@ -16,3 +16,5 @@ Route::get('/', function () {
 });
 
 Route::get('/pdo', ['uses' => 'Controller@pdoAction', 'as' => 'pdo.endpoint']);
+
+Route::get('/curl-webservice', ['uses' => 'Controller@curlWebService', 'as' => 'curl.backservice']);

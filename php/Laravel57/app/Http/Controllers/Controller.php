@@ -34,4 +34,20 @@ class Controller extends BaseController
         $res = $stmt->fetch();
         return new Response();
     }
+
+    public function curlWebService()
+    {
+        $ch = curl_init();
+        curl_setopt_array($ch, [
+            CURLOPT_URL => 'http://httpbin/headers',
+            CURLOPT_USERPWD => 'clark:kent',
+            CURLOPT_HTTPHEADER => ['Accept: application/json', 'Host: api.vi.example.com'],
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_FAILONERROR => false,
+            CURLOPT_HEADER => false,
+        ]);
+        $found = json_decode(curl_exec($ch), 1);
+
+        return new Response("Here is the answer from httpbin: " . print_r(json_encode($found, JSON_PRETTY_PRINT), 1));
+    }
 }
