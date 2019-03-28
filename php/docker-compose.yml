@@ -11,6 +11,7 @@ services:
     environment:
       - DD_API_KEY=${DATADOG_API_KEY}
       - DD_APM_ENABLED=true
+      - DD_APM_ENV=trace_examples_php
 
   mysql:
     image: mysql:5.7
@@ -122,6 +123,27 @@ services:
     environment:
       DD_AGENT_HOST: agent
       DD_TRACE_APP_NAME: symfony_php56_apache
+      DD_TRACE_DEBUG: "true"
+
+  yii11_php72_apache_fpm:
+    build:
+      context: .
+      dockerfile: Dockerfiles/Dockerfile_php72_apache_fpm
+      args:
+        - DD_TRACE_VERSION=${DD_TRACE_VERSION}
+        - WEB_APP_PATH=Yii1
+    volumes:
+      - composer-cache:/root/.composer/cache
+      - ./Yii1:/var/www/public
+    depends_on:
+      - agent
+      - mysql
+      - redis
+    ports:
+      - 7060:80
+    environment:
+      DD_AGENT_HOST: agent
+      DD_TRACE_APP_NAME: yii1_php72_apache_fpm
       DD_TRACE_DEBUG: "true"
 
 volumes:

@@ -1,0 +1,88 @@
+2019/03/08 12:45:38 [error] [exception.Exception] Exception: Found route: Array
+(
+    [0] => 
+)
+ in /var/www/public/index.php:15
+Stack trace:
+#0 /var/www/public/yii/framework/web/CWebApplication.php(141): CWebApplication->{closure}('')
+#1 /var/www/public/yii/framework/base/CApplication.php(185): CWebApplication->processRequest()
+#2 /var/www/public/index.php(21): CApplication->run()
+#3 {main}
+REQUEST_URI=/
+---
+2019/03/08 12:45:38 [error] [exception.Exception] Exception: Found route: Array
+(
+    [0] => 
+)
+ in /var/www/public/index.php:15
+Stack trace:
+#0 /var/www/public/yii/framework/web/CWebApplication.php(141): CWebApplication->{closure}('')
+#1 /var/www/public/yii/framework/base/CApplication.php(185): CWebApplication->processRequest()
+#2 /var/www/public/index.php(21): CApplication->run()
+#3 {main}
+REQUEST_URI=/favicon.ico
+HTTP_REFERER=http://localhost:7060/
+---
+2019/03/08 12:46:19 [error] [exception.Exception] Exception: Found route: array (
+  0 => '',
+) in /var/www/public/index.php:15
+Stack trace:
+#0 /var/www/public/yii/framework/web/CWebApplication.php(141): CWebApplication->{closure}('')
+#1 /var/www/public/yii/framework/base/CApplication.php(185): CWebApplication->processRequest()
+#2 /var/www/public/index.php(21): CApplication->run()
+#3 {main}
+REQUEST_URI=/
+---
+2019/03/08 12:46:20 [error] [exception.Exception] Exception: Found route: array (
+  0 => '',
+) in /var/www/public/index.php:15
+Stack trace:
+#0 /var/www/public/yii/framework/web/CWebApplication.php(141): CWebApplication->{closure}('')
+#1 /var/www/public/yii/framework/base/CApplication.php(185): CWebApplication->processRequest()
+#2 /var/www/public/index.php(21): CApplication->run()
+#3 {main}
+REQUEST_URI=/favicon.ico
+HTTP_REFERER=http://localhost:7060/
+---
+2019/03/08 12:46:27 [error] [exception.Exception] Exception: Found route: array (
+  0 => '',
+) in /var/www/public/index.php:15
+Stack trace:
+#0 /var/www/public/yii/framework/web/CWebApplication.php(141): CWebApplication->{closure}('')
+#1 /var/www/public/yii/framework/base/CApplication.php(185): CWebApplication->processRequest()
+#2 /var/www/public/index.php(21): CApplication->run()
+#3 {main}
+REQUEST_URI=/index.php
+---
+2019/03/08 12:46:28 [error] [exception.Exception] Exception: Found route: array (
+  0 => '',
+) in /var/www/public/index.php:15
+Stack trace:
+#0 /var/www/public/yii/framework/web/CWebApplication.php(141): CWebApplication->{closure}('')
+#1 /var/www/public/yii/framework/base/CApplication.php(185): CWebApplication->processRequest()
+#2 /var/www/public/index.php(21): CApplication->run()
+#3 {main}
+REQUEST_URI=/favicon.ico
+HTTP_REFERER=http://localhost:7060/index.php
+---
+2019/03/08 12:46:35 [error] [exception.Exception] Exception: Found route: array (
+  0 => '',
+) in /var/www/public/index.php:15
+Stack trace:
+#0 /var/www/public/yii/framework/web/CWebApplication.php(141): CWebApplication->{closure}('')
+#1 /var/www/public/yii/framework/base/CApplication.php(185): CWebApplication->processRequest()
+#2 /var/www/public/index.php(21): CApplication->run()
+#3 {main}
+REQUEST_URI=/aaa/bbb
+---
+2019/03/08 12:46:35 [error] [exception.Exception] Exception: Found route: array (
+  0 => '',
+) in /var/www/public/index.php:15
+Stack trace:
+#0 /var/www/public/yii/framework/web/CWebApplication.php(141): CWebApplication->{closure}('')
+#1 /var/www/public/yii/framework/base/CApplication.php(185): CWebApplication->processRequest()
+#2 /var/www/public/index.php(21): CApplication->run()
+#3 {main}
+REQUEST_URI=/favicon.ico
+HTTP_REFERER=http://localhost:7060/aaa/bbb
+---

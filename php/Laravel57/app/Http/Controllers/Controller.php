@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\App;
 
 class Controller extends BaseController
 {
-    public function pdoAction()
+    public function pipelineAction()
     {
         $pipes = [
             new AddTen(),
@@ -27,7 +27,11 @@ class Controller extends BaseController
             ->then(function ($result) {
                 echo "Final result of (10 + 10) * 2 is $result\n";
             });
+        return new Response();
+    }
 
+    public function pdoAction()
+    {
         $pdo = new \PDO('mysql:host=mysql;dbname=test', 'test', 'test');
         $stmt = $pdo->prepare("SELECT * from information_schema.tables LIMIT 1");
         $stmt->execute();
