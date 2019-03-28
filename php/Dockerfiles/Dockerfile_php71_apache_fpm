@@ -7,7 +7,6 @@ RUN apt-get update \
         libmcrypt-dev \
         libmemcached-dev \
         mysql-client \
-        nginx \
         procps \
         supervisor \
         unzip \
@@ -37,6 +36,10 @@ RUN php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');" \
         && php -r "unlink('composer-setup.php');" \
         && composer self-update
 
+RUN a2enmod proxy_fcgi
+
+RUN mkdir -p /var/run/apache2
+
 ARG DD_TRACE_VERSION
 ARG WEB_APP_PATH
 
@@ -46,10 +49,10 @@ COPY ${WEB_APP_PATH} /var/www
 ADD https://github.com/DataDog/dd-trace-php/releases/download/${DD_TRACE_VERSION}/datadog-php-tracer_${DD_TRACE_VERSION}_amd64.deb datadog-php-tracer.deb
 RUN dpkg -i datadog-php-tracer.deb
 
-COPY Dockerfiles/php_nginx_default.conf /etc/nginx/sites-available/default
-COPY Dockerfiles/supervisord-nginx-fpm.conf /etc/supervisord.conf
+COPY Dockerfiles/apache2.conf /etc/apache2/apache2.conf
+COPY Dockerfiles/apache2-fpm-virtualhost.conf /etc/apache2/sites-available/000-default.conf
 COPY Dockerfiles/php-dd-ext.ini /usr/local/etc/php/conf.d/php-dd-ext.ini
-
+COPY Dockerfiles/supervisord-apache-fpm.conf /etc/supervisord.conf
 
 WORKDIR /var/www
 

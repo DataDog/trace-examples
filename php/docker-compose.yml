@@ -110,6 +110,7 @@ services:
       DD_TRACE_APP_NAME: laravel57_php72_apache_fpm
       DD_TRACE_DEBUG: "true"
 
+  # Configuration to be fixed. Invoke as: curl http://localhost:7071/index.php/curl-webservice
   laravel57_php71_apache_fpm:
     build:
       context: .
