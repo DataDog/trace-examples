@@ -11,6 +11,7 @@ services:
     environment:
       - DD_API_KEY=${DATADOG_API_KEY}
       - DD_APM_ENABLED=true
+      - DD_APM_ENV=trace_examples_php
 
   mysql:
     image: mysql:5.7
