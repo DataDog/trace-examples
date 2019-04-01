@@ -1,0 +1,14 @@
+version: '3'
+
+services:
+
+  agent:
+    image: datadog/agent:latest
+    volumes:
+    - /var/run/docker.sock:/var/run/docker.sock:ro
+    - /proc/:/host/proc/:ro
+    - /sys/fs/cgroup/:/host/sys/fs/cgroup:ro
+    environment:
+    - DD_API_KEY=${DATADOG_API_KEY}
+    - DD_APM_ENABLED=true
+    - DD_APM_ENV=trace_examples_java
