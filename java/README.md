@@ -8,7 +8,7 @@ Download the latest version of the agent:
 
 Build the app:
 
-    ./gradlew build :spring-app:build
+    ./gradlew :spring-app:build
 
 Run the app with the agent enabled:
 

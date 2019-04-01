@@ -10,4 +10,4 @@ class WebsiteHomePage(HttpLocust):
     task_set = HomePageBehavior
     min_wait = 100
     max_wait = 100
-    host = 'http://127.0.0.1:8080'
+    host = 'http://java:8080'
