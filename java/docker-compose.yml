@@ -28,19 +28,7 @@ services:
       - 8080:8080
     environment:
       DD_AGENT_HOST: agent
-    entrypoint: ./app_start.sh
-    command: "java -javaagent:dd-java-agent.jar -jar spring-app/build/libs/trace-examples-0.1.0.jar"
-
-  locust:
-    image: python:3.7
-    depends_on:
-      - java
-    volumes:
-      - ./:/var/app
-    working_dir: /var/app
-    command: bash
-#    command: pip install -r requirements.txt
-#    command: "pip install -r requirements.txt && locust -f locust-files/HomeControllerProfiling.py --no-web -c 100 -r 5"
+    command: "./gradlew :spring-app:bootRun"
 
 volumes:
   gradle-cache:

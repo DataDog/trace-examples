@@ -29,3 +29,16 @@ dependencies {
     testCompile("junit:junit")
 }
 
+bootRun {
+    // jvmArgs '-Ddd.jmxfetch.enabled=true'
+    // jvmArgs '-Dcom.sun.management.jmxremote'
+    // jvmArgs '-Dcom.sun.management.jmxremote.port=9013'
+    // jvmArgs '-Dcom.sun.management.jmxremote.local.only=false'
+    // jvmArgs '-Dcom.sun.management.jmxremote.ssl=false'
+    // jvmArgs '-Dcom.sun.management.jmxremote.authenticate=false'
+    jvmArgs "-javaagent:../dd-java-agent.jar"
+
+    // jvmArgs '-Ddatadog.slf4j.simpleLogger.defaultLogLevel=debug'
+    // jvmArgs '-Ddd.writer.type=LoggingWriter'
+}
+
