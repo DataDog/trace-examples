@@ -22,9 +22,6 @@ services:
       - 'DD_TAGS=env:dev'
       - 'DD_API_KEY=${DD_API_KEY}'
       - 'DD_APM_ENABLED=true'
-      - 'DD_LOGS_ENABLED=true'
-      - 'DD_LOGS_CONFIG_CONTAINER_COLLECT_ALL=true'
-      - 'DD_AC_EXCLUDE="name:datadog-agent"'
     ports:
       - 8125
       - 8126
