@@ -1,0 +1,34 @@
+version: '3'
+services:
+  app:
+    depends_on:
+      - agent
+      - db
+    build: .
+    command: ddtrace-run python manage.py runserver 0.0.0.0:8000
+    environment:
+      - 'DATADOG_TRACE_AGENT_HOSTNAME=agent'
+      - 'DD_LOGGING_RATE_LIMIT=0'
+    ports:
+      - '8000:8000'
+
+  db:
+    image: postgres
+
+  agent:
+    image: 'datadog/agent'
+    environment:
+      - 'DD_HOSTNAME=trace-example'
+      - 'DD_TAGS=env:dev'
+      - 'DD_API_KEY=${DD_API_KEY}'
+      - 'DD_APM_ENABLED=true'
+      - 'DD_LOGS_ENABLED=true'
+      - 'DD_LOGS_CONFIG_CONTAINER_COLLECT_ALL=true'
+      - 'DD_AC_EXCLUDE="name:datadog-agent"'
+    ports:
+      - 8125
+      - 8126
+    volumes:
+      - '/var/run/docker.sock:/var/run/docker.sock:ro'
+      - '/proc/:/host/proc/:ro'
+      - '/sys/fs/cgroup/:/host/sys/fs/cgroup:ro'
