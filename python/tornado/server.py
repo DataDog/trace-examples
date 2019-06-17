@@ -1,6 +1,6 @@
 # patch before importing tornado
-from ddtrace import Pin, patch, tracer
-patch(tornado=True)
+from ddtrace import Pin, patch_all, tracer
+patch_all(tornado=True, redis=True)
 
 import os
 import time
@@ -21,19 +21,12 @@ from concurrent.futures import ThreadPoolExecutor
 
 
 # env vars for deploying purpose
-DATADOG_TRACER = os.getenv('DATADOG_TRACER', 'localhost')
 PORT = int(os.getenv('APP_PORT', '8000'))
 BASE_DIR = os.path.dirname(os.path.realpath(__file__))
 STATIC_DIR = os.path.join(BASE_DIR, 'statics')
-
-# configure the tracer
-tracer.configure(hostname=DATADOG_TRACER)
-
-# patch redis with Pin
-patch(redis=True)
 url = os.getenv('REDIS_URL', 'redis://localhost:6379')
 client = redis.StrictRedis.from_url(url, db=0)
-Pin.override(client, service='tornado-redis')
+Pin.override(client, service='trace-examples-tornado-redis')
 
 
 # trace a synchronous function
@@ -141,8 +134,9 @@ def make_app(settings={}):
 if __name__ == "__main__":
     settings = {
         'datadog_trace': {
-            'default_service': 'tornado-website',
-        }
+            'default_service': 'trace-examples-tornado-web',
+            'distributed_tracing': True,
+        },
     }
     app = make_app(settings=settings)
     app.listen(PORT)

@@ -4,19 +4,14 @@ Simple application that creates some traces using Tornado. It uses multiple
 coroutines and synchronous functions with many custom and built-in handlers.
 It also serves static files and has access to a local Redis cache.
 
-## Compatibility stack
-
-* Python 2.7
-* Tornado 4.3
-
-## Backing services
-
-* Redis 3.2
-
 ## Getting started
 
-Launch all backing services using `docker-compose`, and then execute the
-application:
+Launch services using `docker-compose`:
 
-    docker-compose up -d
-    python server.py
+    env DD_API_KEY=... docker-compose up --build -d
+
+Requests to these urls will generate traces:
+
+    $ curl http://localhost:8000/count/
+    $ curl http://localhost:8000/broken/
+    $ curl http://localhost:8000/executor/

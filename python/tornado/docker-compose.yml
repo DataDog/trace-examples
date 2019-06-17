@@ -1,6 +1,37 @@
-version: "2"
-
+version: '3'
 services:
+  app:
+    depends_on:
+      - agent
+      - redis
+    build: .
+    environment:
+      - 'DATADOG_TRACE_AGENT_HOSTNAME=agent'
+      - 'DD_LOGGING_RATE_LIMIT=0'
+      - 'REDIS_URL=redis://redis:6379'
+    ports:
+      - '8000:8000'
+    stdin_open: true
+    tty: true
+
+  agent:
+    image: 'datadog/agent'
+    environment:
+      - 'DD_HOSTNAME=traces-examples'
+      - 'DD_TAGS=env:dev'
+      - 'DD_API_KEY=${DD_API_KEY}'
+      - 'DD_APM_ENABLED=true'
+      - 'DD_LOGS_ENABLED=true'
+      - 'DD_LOGS_CONFIG_CONTAINER_COLLECT_ALL=true'
+      - 'DD_AC_EXCLUDE="name:datadog-agent"'
+    ports:
+      - 8125
+      - 8126
+    volumes:
+      - '/var/run/docker.sock:/var/run/docker.sock:ro'
+      - '/proc/:/host/proc/:ro'
+      - '/sys/fs/cgroup/:/host/sys/fs/cgroup:ro'
+
   redis:
     image: redis:3.2
     ports:
