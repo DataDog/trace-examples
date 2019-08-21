@@ -4,12 +4,12 @@ namespace App\Http\Controllers;
 
 use App\Custom\AddTen;
 use App\Custom\MultiplyByTwo;
-use Illuminate\Http\Response;
 use Illuminate\Pipeline\Pipeline;
-use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Support\Facades\App;
+use Illuminate\Http\Response;
+use Illuminate\Routing\Controller;
 
-class Controller extends BaseController
+class PdoController extends Controller
 {
     public function pdoAction()
     {

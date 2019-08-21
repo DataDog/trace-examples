@@ -11,6 +11,7 @@ services:
     environment:
       - DD_API_KEY=${DATADOG_API_KEY}
       - DD_APM_ENABLED=true
+      - DD_APM_ENV=trace-examples-php
 
   mysql:
     image: mysql:5.7
@@ -59,6 +60,7 @@ services:
       - ./Laravel57:/var/www
     depends_on:
       - agent
+      - mysql
     ports:
       - 7057:80
     environment:
