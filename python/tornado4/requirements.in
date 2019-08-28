@@ -1,8 +1,7 @@
 # application
 futures
-tornado
+tornado==4.5.3
 redis
 
-# tracing (palazzem/tornado-support branch)
---find-links=https://s3.amazonaws.com/pypi.datadoghq.com/trace-dev/index.html
-ddtrace==0.8.0+master1789
+# tracing
+ddtrace

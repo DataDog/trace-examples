@@ -1,17 +1,17 @@
-# Tornado example
+# Tornado 6 example
 
-Simple application that creates some traces using Tornado. It uses multiple
-coroutines and synchronous functions with many custom and built-in handlers.
-It also serves static files and has access to a local Redis cache.
+Simple application that creates some traces using Tornado 6. It uses multiple
+coroutines and synchronous functions with many custom and built-in handlers. It
+also serves static files and has access to a local Redis cache.
 
 ## Compatibility stack
 
-* Python 2.7
-* Tornado 4.3
+* Python 3.7
+* Tornado 6.0
 
 ## Backing services
 
-* Redis 3.2
+* Redis 5
 
 ## Getting started
 
@@ -19,7 +19,7 @@ Launch all backing services using `docker-compose`, and then execute the
 application:
 
     docker-compose up -d
-    python server.py
+    env APP_PORT=8000 python server.py
 
 ## Test application
 
