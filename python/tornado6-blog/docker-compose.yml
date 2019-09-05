@@ -1,0 +1,46 @@
+version: "3"
+
+services:
+  db:
+    image: postgres:10.3
+    environment:
+      POSTGRES_USER: blog
+      POSTGRES_PASSWORD: blog
+      POSTGRES_DB: blog
+    volumes:
+      - ./schema.sql:/docker-entrypoint-initdb.d/schema.sql
+
+  app:
+    environment:
+      - 'DATADOG_TRACE_AGENT_HOSTNAME=agent'
+      - 'DD_LOGGING_RATE_LIMIT=0'
+      - 'DATADOG_TRACE_DEBUG=true'
+      - 'DATADOG_PATCH_MODULES=futures:true,tornado:true'
+      # - 'DATADOG_PATCH_MODULES=asyncio:false'
+      # uncomment to enable async debugging information
+      # - 'PYTHONASYNCIODEBUG=1'
+    build: .
+    ports:
+      - "8888:8888"
+    depends_on:
+      - agent
+      - db
+    volumes:
+      - ./.venv/:/opt/venv/
+    # uncomment to enable pdb debugging
+    # stdin_open: true
+    # tty: true
+
+  agent:
+    image: 'datadog/agent'
+    environment:
+      - 'DD_APM_ENV=dev'
+      - 'DD_API_KEY=${DD_API_KEY}'
+      - 'DD_APM_ENABLED=true'
+    ports:
+      - 8125
+      - 8126
+    volumes:
+      - '/var/run/docker.sock:/var/run/docker.sock:ro'
+      - '/proc/:/host/proc/:ro'
+      - '/sys/fs/cgroup/:/host/sys/fs/cgroup:ro'

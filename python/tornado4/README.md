@@ -20,3 +20,17 @@ application:
 
     docker-compose up -d
     python server.py
+
+## Test application
+
+Run one of the following commands and confirm traces on [https://app.datadoghq.com/apm/traces]:
+
+    curl -i localhost:8000/count/
+    curl -i localhost:8000/broken/
+    curl -i localhost:8000/executor/
+    curl -i localhost:8000/redirect/
+    curl -i localhost:8000/statics/
+    
+To confirm traces for concurrent requests:
+
+    ab -n 100 -c 4 localhost:8000/executor/
