@@ -1,0 +1,45 @@
+syntax = "proto3";
+
+package crud;
+
+// The CRUD service definition.
+service CRUD {
+  rpc Create (CreateRequest) returns (CreateResponse) {}
+  rpc Query (QueryRequest) returns (QueryResponse) {}
+  rpc Update (UpdateRequest) returns (UpdateResponse) {}
+  rpc Delete (DeleteRequest) returns (DeleteResponse) {}
+}
+
+message CreateRequest {
+  string name = 1;
+}
+
+message CreateResponse {
+  int32 id = 1;
+}
+
+message QueryRequest {
+  int32 id = 1;
+}
+
+message QueryResponse {
+  bool found = 1;
+  string name = 2;
+}
+
+message UpdateRequest {
+  int32 id = 1;
+  string name = 2;
+}
+
+message UpdateResponse {
+  bool updated = 1;
+}
+
+message DeleteRequest {
+  int32 id = 1;
+}
+
+message DeleteResponse {
+  bool deleted = 1;
+}

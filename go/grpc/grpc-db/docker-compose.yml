@@ -1,0 +1,55 @@
+version: "3.2"
+services:
+  datadog-agent:
+    environment:
+      - DD_API_KEY
+      - DD_APM_ENABLED=true
+    image: 'datadog/agent'
+    volumes:
+      - '/var/run/docker.sock:/var/run/docker.sock:ro'
+      - '/proc/:/host/proc/:ro'
+      - '/sys/fs/cgroup/:/host/sys/fs/cgroup:ro'
+
+  postgres:
+    image: postgres:11
+    environment:
+      - POSTGRES_USER=postgres 
+      - POSTGRES_PASSWORD=postgres 
+      - POSTGRES_DB=postgres 
+
+  grpc-db-client:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile.grpc-db-client
+    depends_on:
+      - datadog-agent
+      - grpc-dbsql-server
+      - grpc-gorm-server
+    environment:
+      - DD_AGENT_HOST=datadog-agent
+    # Test against database/sql grpc server
+    command: [ "-address", "grpc-dbsql-server:12345" ]
+    # Test against gorm grpc server 
+    # command: [ "-address", "grpc-gorm-server:12345" ]
+
+  grpc-dbsql-server:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile.grpc-dbsql-server
+    depends_on:
+      - datadog-agent
+      - postgres
+    environment:
+      - DD_AGENT_HOST=datadog-agent
+      - POSTGRES_HOST=postgres
+
+  grpc-gorm-server:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile.grpc-gorm-server
+    depends_on:
+      - datadog-agent
+      - postgres
+    environment:
+      - DD_AGENT_HOST=datadog-agent
+      - POSTGRES_HOST=postgres
