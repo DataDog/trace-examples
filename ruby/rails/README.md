@@ -7,7 +7,7 @@ tracing compatibility issues with Rails.
 
 ## Compatibility stack
 
-* Ruby 2.5.1
+* Ruby 2.5.5
 * Rails 5.2.1
 * MySQL adapter (mysql2)
 * Redis 4.0.1

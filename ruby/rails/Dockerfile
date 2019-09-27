@@ -1,4 +1,4 @@
-FROM ruby:2.5.1
+FROM ruby:2.5.5
 
 # install build-tools
 RUN apt-get update -qq \
@@ -12,6 +12,8 @@ RUN mkdir /app
 WORKDIR /app
 ADD Gemfile /app
 ADD Gemfile.lock /app
+RUN gem update bundler
 RUN bundle install
 
-CMD ["bundle", "exec", "unicorn", "-c", "config/unicorn.rb", "-l", "3000"]
+#CMD ["bundle", "exec", "rails", "db:setup" ]
+CMD ["bundle", "exec", "puma", "-p", "3000"]

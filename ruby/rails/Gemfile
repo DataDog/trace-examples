@@ -1,16 +1,14 @@
 source 'https://rubygems.org'
-ruby "2.5.1"
+ruby "2.5.5"
 
 # tracing
 gem 'ddtrace'
 
 # rails
-gem 'rails'
 gem 'grape'
 gem 'redis-rails'
 
 # database
-gem 'mysql2'
 
 # queues
 gem 'delayed_job_active_record'
@@ -32,7 +30,74 @@ end
 gem 'jquery-rails'
 
 # Use unicorn as the app server
-gem 'unicorn'
+#gem 'unicorn'
 
 # Use passenger as app server
 # gem 'passenger', require: "phusion_passenger/rack_handler"
+
+
+source 'https://rubygems.org' do
+  # Framework dependent gems
+  gem 'rails', '5.2.2'
+  gem 'mysql2'
+  gem 'puma'
+  #gem 'ddtrace', '0.26.0'
+
+  # Gems which give aide to higher performance
+  gem 'hiredis', '~> 0.6', platform: :ruby
+  gem 'multi_json'
+  gem 'oj', '3.3', platform: :ruby
+
+  gem 'active_model_serializers', '0.9.3'
+  gem 'activerecord-import' # Speeds up mass imports
+  gem 'aws-sdk', '< 2.0'
+  gem 'bcrypt-ruby', platform: :ruby
+  gem 'connection_pool'
+  gem 'devise'
+  gem 'faker', require: false # Make up fake data to put in models for load testing
+  gem 'geoip'
+  gem 'hawk-auth'
+  gem 'httparty'
+  gem 'ipaddress'
+  gem 'newrelic_rpm', platform: :ruby
+  gem 'rabl', platform: :ruby
+  gem 'rack-cors'
+  gem 'rake'
+  gem 'redis'
+  gem 'resque'
+  gem 'resque-pool'
+  gem 'resque-scheduler'
+  gem 'tzinfo-data', platforms: [:mingw, :mswin, :jruby]
+  gem 'validates_timeliness', '~> 3.0.8' # Date comparisons
+  gem 'versionist'
+  gem 'warden'
+
+  group :development do
+    gem 'awesome_print'
+    gem 'annotate'
+    gem 'bullet'
+  end
+
+  group :test do
+    gem 'rspec'
+    gem 'rspec-rails'
+    gem 'rspec-collection_matchers'
+    gem 'database_cleaner'
+    gem 'factory_girl_rails', '4.5.0'
+    gem 'shoulda-matchers', '4.0.1'
+    gem 'timecop'
+    gem 'ci_reporter_rspec'
+    gem 'simplecov', require: false # Will install simplecov-html as a dependency
+    gem 'webmock'
+  end
+
+  group :test, :development do
+    gem 'pry-rails', platform: :ruby
+    gem 'pry-rescue', platform: :ruby
+    gem 'pry-stack_explorer', platform: :ruby
+    gem 'pry-byebug', platform: :ruby
+    gem 'mock_redis', '0.19.0'
+    gem 'parallel_tests'
+  end
+end
+
