@@ -30,7 +30,7 @@ information about the agent. Make sure you install the *trace* agent!
 In a separate shell start the `rq` worker:
 
 ```sh
-$ rq worker
+$ ddtrace-run rq worker
 ```
 
 
@@ -41,12 +41,5 @@ $ rq worker
 Run with:
 
 ```sh
-$ DATADOG_TRACE_DEBUG=true ddtrace-run python producer.py
+$ DATADOG_TRACE_DEBUG=true ddtrace-run python app.py
 ```
-
-and in a new shell/env:
-
-```sh
-$ DATADOG_TRACE_DEBUG=true ddtrace-run python consumer.py
-```
-
