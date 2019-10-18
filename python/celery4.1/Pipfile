@@ -4,7 +4,7 @@ verify_ssl = true
 name = "pypi"
 
 [packages]
-ddtrace = "*"
+ddtrace = "==0.26.0"
 celery = "==4.1"
 redis = "==2.10.6"
 kombu = "==4.1.0"
