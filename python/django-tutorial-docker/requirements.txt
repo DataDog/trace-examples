@@ -1,0 +1,6 @@
+ddtrace==0.24.0
+Django==2.2
+msgpack-python==0.5.6
+psutil==5.6.1
+pytz==2019.1
+sqlparse==0.3.0

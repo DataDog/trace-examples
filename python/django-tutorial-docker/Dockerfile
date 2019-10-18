@@ -1,11 +1,16 @@
-FROM python:3.6
+FROM python:3.7
+
+ENV VIRTUAL_ENV=/opt/venv
+RUN python -m venv $VIRTUAL_ENV
+ENV PATH="$VIRTUAL_ENV/bin:$PATH"
 
 RUN mkdir /code
 WORKDIR /code
-COPY Pipfile* /code/
 
-RUN pip install pipenv
-RUN pipenv install --system --deploy
+COPY requirements.txt .
+RUN pip install --no-cache-dir -r requirements.txt
 
 ADD mysite /code/mysite
 WORKDIR /code/mysite
+
+EXPOSE 8888
