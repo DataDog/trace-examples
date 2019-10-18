@@ -1,0 +1,15 @@
+[[source]]
+url = "https://pypi.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[packages]
+ddtrace = "*"
+celery = "==4.1"
+redis = "==2.10.6"
+kombu = "==4.1.0"
+
+[dev-packages]
+
+[requires]
+python_version = "3.6"
