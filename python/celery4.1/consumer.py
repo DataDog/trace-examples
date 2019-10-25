@@ -1,8 +1,11 @@
+from ddtrace import patch
 import time
 import random
 
 from celery import Celery, shared_task
 from ddtrace import tracer
+
+patch(celery=True)
 
 
 @shared_task

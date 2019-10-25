@@ -4,10 +4,26 @@ verify_ssl = true
 name = "pypi"
 
 [packages]
-ddtrace = "==0.26.0"
-celery = "==4.1"
+ddtrace = {editable = true,path = "/Users/kyle.verhoog/dev/dd-trace-py"}
+celery = "==4.1.1"
 redis = "==2.10.6"
-kombu = "==4.1.0"
+django = "==2.2.5"
+django-allauth = "==0.36.0"
+django-cors-headers = "==2.3.0"
+kombu = "==4.2.2.post1"
+django-modelsettings = "==0.5.1"
+django-dotenv = "==1.4.2"
+django-filter = "==1.1.0"
+django-fsm = "==2.6.0"
+django-health-check = "==3.6.1"
+django-rest-swagger = "==2.1.2"
+django-sendgrid-v5 = "==0.6.893"
+django-simple-history = "==2.7.2"
+django-storages = "==1.6.6"
+django-waffle = "==0.14.0"
+django-widget-tweaks = "==1.4.1"
+djangorestframework = "==3.8.2"
+djangorestframework-jwt = "==1.11.0"
 
 [dev-packages]
 

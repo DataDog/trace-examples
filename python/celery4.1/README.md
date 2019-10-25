@@ -25,3 +25,8 @@ and in a new shell/env:
 $ ddtrace-run python producer.py
 ```
 
+test
+test
+test
+DATADOG_TRACE_DEBUG=true ddtrace-run python manage.py runserver
+DATADOG_TRACE_DEBUG=true ddtrace-run celery -A tutorial worker --loglevel=info
