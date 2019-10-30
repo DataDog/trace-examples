@@ -35,7 +35,7 @@ services:
     labels:
       com.datadoghq.ad.logs: '[{"source": "docker", "service": "user"}]'
   agent:
-    image: datadog/agent:6.8.3
+    image: datadog/agent:6.14.1
     environment:
       - DD_ENV
       - DD_TAGS="env:${DD_ENV}"
