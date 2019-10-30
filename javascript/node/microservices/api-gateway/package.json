@@ -5,7 +5,8 @@
   "private": true,
   "dependencies": {
     "axios": "^0.18.0",
-    "dd-trace": "^0.8.0",
+    "cors": "^2.8.5",
+    "dd-trace": "^0.15.5",
     "express": "^4.16.2",
     "express-winston": "^3.0.1",
     "winston": "^3.2.1"

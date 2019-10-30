@@ -1,12 +1,14 @@
 'use strict'
 
 const axios = require('axios')
+const cors = require('cors')
 const express = require('express')
 const expressWinston = require('express-winston')
 const logger = require('./logger')
 
 const app = express()
 
+app.use(cors())
 app.use(expressWinston.logger({
   winstonInstance: logger
 }))
