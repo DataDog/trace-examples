@@ -3,7 +3,7 @@ services:
   api-gateway:
     build: api-gateway
     environment:
-      - DD_ENV=node-apm-example
+      - DD_ENV
       - DD_TRACE_DEBUG
       - DD_TRACE_ENABLED
       - DD_LOGS_INJECTION=true
@@ -17,7 +17,7 @@ services:
   auth:
     build: auth
     environment:
-      - DD_ENV=node-apm-example
+      - DD_ENV
       - DD_TRACE_DEBUG
       - DD_TRACE_ENABLED
       - DD_LOGS_INJECTION=true
@@ -27,7 +27,7 @@ services:
   user:
     build: user
     environment:
-      - DD_ENV=node-apm-example
+      - DD_ENV
       - DD_TRACE_DEBUG
       - DD_TRACE_ENABLED
       - DD_LOGS_INJECTION=true
@@ -37,8 +37,8 @@ services:
   agent:
     image: datadog/agent:6.8.3
     environment:
-      - DD_ENV=node-apm-example
-      - DD_TAGS='env:node-apm-example'
+      - DD_ENV
+      - DD_TAGS="env:${DD_ENV}"
       - DD_PROCESS_AGENT_ENABLED=true
       - DD_DOGSTATSD_NON_LOCAL_TRAFFIC=true
       - DD_APM_NON_LOCAL_TRAFFIC=true
@@ -47,6 +47,8 @@ services:
       - DD_BIND_HOST=0.0.0.0
       - DD_LOGS_ENABLED=true
       - DD_API_KEY
+      - DD_DD_URL
+      - DD_APM_DD_URL
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock:ro
       - /proc/:/host/proc/:ro

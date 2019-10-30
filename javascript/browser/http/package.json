@@ -1,0 +1,13 @@
+{
+  "name": "web",
+  "version": "1.0.0",
+  "main": "server.js",
+  "private": true,
+  "scripts": {
+    "start": "live-server app --port=3000 --mount=/dd-trace:./node_modules/dd-trace/dist --mount=/env:./.env"
+  },
+  "dependencies": {
+    "dd-trace": "^0.15.5",
+    "live-server": "^1.2.1"
+  }
+}
