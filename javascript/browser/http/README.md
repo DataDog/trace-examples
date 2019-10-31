@@ -6,7 +6,7 @@ To run the prototype, checkout the repo, create a .env file with `DD_CLIENT_TOKE
 
 ```bash
 npm install
-npm run browser
+npm start
 ```
 
 Requests are sent to `http://localhost:8080/users` and assume that the [microservices](/javascript/node/microservices) example is running.
