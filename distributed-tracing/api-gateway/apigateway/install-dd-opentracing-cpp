@@ -1,0 +1,13 @@
+#!/bin/bash
+if ! release_data=$(curl -fL https://api.github.com/repos/DataDog/dd-opentracing-cpp/releases/latest); then
+	echo "error retrieving release info for dd-opentracing-cpp"
+	exit 1
+fi
+if ! release_url=$(jq -r '.assets[] | select(.name == "linux-amd64-libdd_opentracing_plugin.so.gz") | .browser_download_url' <<< "$release_data"); then
+	echo "error parsing release info for dd-opentracing-cpp"
+	exit 1
+fi
+if ! curl -fL "$release_url" | gunzip -c > /usr/local/lib/libdd_opentracing_plugin.so; then
+	echo "error installing dd-opentracing-cpp release from $release_url"
+	exit 1
+fi

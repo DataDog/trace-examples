@@ -1,0 +1,59 @@
+version: "3.2"
+services:
+  datadog-agent:
+    environment:
+      - DD_API_KEY
+      - DD_APM_ENABLED=true
+    image: 'datadog/agent'
+    volumes:
+      - '/var/run/docker.sock:/var/run/docker.sock:ro'
+      - '/proc/:/host/proc/:ro'
+      - '/sys/fs/cgroup/:/host/sys/fs/cgroup:ro'
+
+  # frontend service
+  frontend:
+    restart: always
+    build:
+      context: frontend-go
+      dockerfile: Dockerfile
+    volumes:
+      - './frontend-go/index.html.tmpl:/index.html.tmpl:ro'
+    environment:
+      - DD_AGENT_HOST=datadog-agent
+    ports:
+      - "8999:80"
+    depends_on:
+      - datadog-agent
+      - api
+
+  # api-gateway
+  api:
+    restart: always
+    build:
+      context: apigateway
+      dockerfile: Dockerfile
+    volumes:
+      - './apigateway/nginx.conf:/etc/nginx/nginx.conf:ro'
+      - './apigateway/dd-config.json:/etc/dd-config.json:ro'
+    depends_on:
+      - datadog-agent
+      - quotes
+    
+  # quotes service
+  quotes:
+    restart: always
+    build:
+      context: quotes-go
+      dockerfile: Dockerfile
+    environment:
+      - DD_AGENT_HOST=datadog-agent
+    depends_on:
+      - datadog-agent
+      - quotes-db
+
+  # quotes database
+  quotes-db:
+    restart: always
+    build:
+      context: quotes-db
+      dockerfile: Dockerfile-postgres
