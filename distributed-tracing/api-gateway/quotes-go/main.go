@@ -1,11 +1,8 @@
 package main
 
 import (
-	"fmt"
 	"log"
-	"net"
 	"net/http"
-	"os"
 	"time"
 
 	sqltrace "gopkg.in/DataDog/dd-trace-go.v1/contrib/database/sql"
@@ -18,13 +15,8 @@ import (
 )
 
 func main() {
-	// Get tracing config from environment variables.
-	agentHost := getEnvWithDefault("DD_AGENT_HOST", "localhost")
-	agentPort := getEnvWithDefault("DD_AGENT_PORT", "8126")
-	agentAddr := net.JoinHostPort("%s:%s", agentHost, agentPort)
-
-	// Configure the tracer
-	tracer.Start(tracer.WithAgentAddr(agentAddr), tracer.WithServiceName("quotes"))
+	// Initialize the tracer
+	tracer.Start()
 	defer tracer.Stop()
 
 	// Configure sql tracing
@@ -56,10 +48,10 @@ func main() {
 	// Configure http service
 	mux := httptrace.NewServeMux(httptrace.WithServiceName("quotes"))
 	if connected {
-		log.Println("using random quotes");
+		log.Println("using random quotes")
 		mux.HandleFunc("/", randomQuote(db))
 	} else {
-		log.Println("using static quotes");
+		log.Println("using static quotes")
 		mux.HandleFunc("/", staticQuotes)
 	}
 
@@ -94,13 +86,4 @@ func staticQuotes(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "text/plain")
 	w.WriteHeader(http.StatusOK)
 	w.Write([]byte(quote))
-}
-
-
-func getEnvWithDefault(name string, defaultVal string) string {
-	val := os.Getenv(name)
-	if val == "" {
-		val = defaultVal
-	}
-	return val
 }
