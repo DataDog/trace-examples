@@ -6,22 +6,15 @@ import (
 	"io"
 	"io/ioutil"
 	"log"
-	"net"
 	"net/http"
-	"os"
 
 	httptrace "gopkg.in/DataDog/dd-trace-go.v1/contrib/net/http"
 	"gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer"
 )
 
 func main() {
-	// Get tracing config from environment variables.
-	agentHost := getEnvWithDefault("DD_AGENT_HOST", "localhost")
-	agentPort := getEnvWithDefault("DD_AGENT_PORT", "8126")
-	agentAddr := net.JoinHostPort(agentHost, agentPort)
-
-	// Configure the tracer
-	tracer.Start(tracer.WithAgentAddr(agentAddr), tracer.WithServiceName("frontend"))
+	// Initialize the tracer
+	tracer.Start()
 	defer tracer.Stop()
 
 	// Configure http client for api calls
@@ -38,7 +31,7 @@ func main() {
 }
 
 type quoteGenerator struct {
-	client *http.Client
+	client       *http.Client
 	bodyTemplate *template.Template
 }
 
@@ -82,12 +75,4 @@ func (q *quoteGenerator) fetchQuote(ctx context.Context) (string, error) {
 		return "", err
 	}
 	return string(b), nil
-}
-
-func getEnvWithDefault(name string, defaultVal string) string {
-	val := os.Getenv(name)
-	if val == "" {
-		val = defaultVal
-	}
-	return val
 }
