@@ -1,3 +1,0 @@
-ddtrace
-Django
-psycopg2

@@ -1,0 +1,35 @@
+version: '3'
+services:
+  api:
+    depends_on:
+      - agent
+    build: './django-realworld-example-app'
+    environment:
+      - 'DATADOG_TRACE_AGENT_HOSTNAME=agent'
+      - 'DATADOG_TRACE_DEBUG=true'
+      - 'DD_LOGGING_RATE_LIMIT=0'
+      - 'DD_SERVICE_NAME=django-realworld'
+    ports:
+      - '3000:3000'
+
+  realworld:
+    depends_on:
+      - api
+    build: './realworld'
+    environment:
+      - 'APIURL=http://api:3000/api'
+
+  agent:
+    image: 'datadog/agent'
+    environment:
+      - 'DD_HOSTNAME=trace-example'
+      - 'DD_TAGS=env:dev'
+      - 'DD_API_KEY=${DD_API_KEY}'
+      - 'DD_APM_ENABLED=true'
+    ports:
+      - 8125
+      - 8126
+    volumes:
+      - '/var/run/docker.sock:/var/run/docker.sock:ro'
+      - '/proc/:/host/proc/:ro'
+      - '/sys/fs/cgroup/:/host/sys/fs/cgroup:ro'
