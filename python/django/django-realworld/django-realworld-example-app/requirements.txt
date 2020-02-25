@@ -4,4 +4,4 @@ django-extensions==1.7.1
 djangorestframework==3.4.4
 PyJWT==1.4.2
 six==1.10.0
-git+https://github.com/DataDog/dd-trace-py.git@40af97022f200baadd29388c1078ab089257891f#egg=ddtrace
+ddtrace>=0.34.0

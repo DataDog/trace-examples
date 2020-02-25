@@ -8,7 +8,7 @@ Example web application based on:
 - https://docs.djangoproject.com/en/2.2/intro/tutorial04/
 - https://docs.djangoproject.com/en/2.2/intro/tutorial07/
 
-Datadog APM is enabled following [the documentation](http://pypi.datadoghq.com/trace/docs/web_integrations.html#django):
+For `ddtrace<=0.33.0` the following modifications were necessary:
 
 ``` python
 # mysite/mysite/settings.py
@@ -26,6 +26,11 @@ DATADOG_TRACE = {
     'DEBUG': True,
 }
 ```
+
+Since `ddtrace>=0.34.0` these changes to `settings.py` are no longer necessary.
+Existing configuration will be mapped automatically to the new configuration
+API. Full details are provided in [migration
+documentation](http://pypi.datadoghq.com/trace/docs/web_integrations.html#migration-from-ddtrace-0-33-0)
 
 ## Setup
 
