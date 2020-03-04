@@ -1,0 +1,27 @@
+version: '3'
+services:
+  web:
+    depends_on:
+      - agent
+    build: '.'
+    environment:
+      - 'DATADOG_TRACE_AGENT_HOSTNAME=agent'
+      - 'DATADOG_TRACE_DEBUG=true'
+      - 'DD_LOGGING_RATE_LIMIT=0'
+      - 'DD_SERVICE_NAME=uwsgi-example'
+    ports:
+      - '8080:8080'
+  agent:
+    image: 'datadog/agent'
+    environment:
+      - 'DD_HOSTNAME=trace-example'
+      - 'DD_TAGS=env:dev'
+      - 'DD_API_KEY=${DD_API_KEY}'
+      - 'DD_APM_ENABLED=true'
+    ports:
+      - 8125
+      - 8126
+    volumes:
+      - '/var/run/docker.sock:/var/run/docker.sock:ro'
+      - '/proc/:/host/proc/:ro'
+      - '/sys/fs/cgroup/:/host/sys/fs/cgroup:ro'
