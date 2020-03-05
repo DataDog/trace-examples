@@ -18,6 +18,7 @@ services:
       - 'DD_TAGS=env:dev'
       - 'DD_API_KEY=${DD_API_KEY}'
       - 'DD_APM_ENABLED=true'
+      - 'DD_LOG_LEVEL=info'
     ports:
       - 8125
       - 8126

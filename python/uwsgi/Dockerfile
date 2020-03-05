@@ -6,4 +6,4 @@ RUN pip install uwsgi
 COPY . /code
 WORKDIR /code
 
-CMD uwsgi --ini uwsgi.ini
+CMD ddtrace-run uwsgi --ini uwsgi.ini
