@@ -13,9 +13,13 @@ import (
 
 	calcapi "github.com/DataDog/trace-examples/go/goa-basic"
 	calc "github.com/DataDog/trace-examples/go/goa-basic/gen/calc"
+	"gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer"
 )
 
 func main() {
+	tracer.Start(tracer.WithServiceName("goa-basic"))
+	defer tracer.Stop()
+
 	// Define command line flags, add any other flag required to configure the
 	// service.
 	var (

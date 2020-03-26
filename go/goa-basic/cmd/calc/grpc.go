@@ -15,6 +15,7 @@ import (
 	"goa.design/goa/v3/middleware"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/reflection"
+	grpctrace "gopkg.in/DataDog/dd-trace-go.v1/contrib/google.golang.org/grpc"
 )
 
 // handleGRPCServer starts configures and starts a gRPC server on the given
@@ -43,6 +44,7 @@ func handleGRPCServer(ctx context.Context, u *url.URL, calcEndpoints *calc.Endpo
 	// Initialize gRPC server with the middleware.
 	srv := grpc.NewServer(
 		grpcmiddleware.WithUnaryServerChain(
+			grpctrace.UnaryServerInterceptor(grpctrace.WithServiceName("basic-grpc")),
 			grpcmdlwr.UnaryRequestID(),
 			grpcmdlwr.UnaryServerLog(adapter),
 		),

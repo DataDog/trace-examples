@@ -14,6 +14,7 @@ import (
 	goahttp "goa.design/goa/v3/http"
 	httpmdlwr "goa.design/goa/v3/http/middleware"
 	"goa.design/goa/v3/middleware"
+	httptrace "gopkg.in/DataDog/dd-trace-go.v1/contrib/net/http"
 )
 
 // handleHTTPServer starts configures and starts a HTTP server on the given
@@ -70,6 +71,7 @@ func handleHTTPServer(ctx context.Context, u *url.URL, calcEndpoints *calc.Endpo
 	{
 		handler = httpmdlwr.Log(adapter)(handler)
 		handler = httpmdlwr.RequestID()(handler)
+		handler = httptrace.WrapHandler(handler, "basic-http", "basic-http")
 	}
 
 	// Start HTTP server using default configuration, change the code to

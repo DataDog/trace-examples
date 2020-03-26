@@ -10,9 +10,13 @@ import (
 	"strings"
 
 	goa "goa.design/goa/v3/pkg"
+	"gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer"
 )
 
 func main() {
+	tracer.Start(tracer.WithServiceName("goa-basic"))
+	defer tracer.Stop()
+
 	var (
 		hostF = flag.String("host", "development", "Server host (valid values: development, production)")
 		addrF = flag.String("url", "", "URL to service host")
