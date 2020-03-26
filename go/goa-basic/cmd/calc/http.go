@@ -9,8 +9,8 @@ import (
 	"sync"
 	"time"
 
-	calc "goa.design/examples/basic/gen/calc"
-	calcsvr "goa.design/examples/basic/gen/http/calc/server"
+	calc "github.com/DataDog/trace-examples/go/goa-basic/gen/calc"
+	calcsvr "github.com/DataDog/trace-examples/go/goa-basic/gen/http/calc/server"
 	goahttp "goa.design/goa/v3/http"
 	httpmdlwr "goa.design/goa/v3/http/middleware"
 	"goa.design/goa/v3/middleware"

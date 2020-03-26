@@ -3,8 +3,8 @@
 // calc gRPC client CLI support package
 //
 // Command:
-// $ goa gen goa.design/examples/basic/design -o
-// $(GOPATH)/src/goa.design/examples/basic
+// $ goa gen github.com/DataDog/trace-examples/go/goa-basic/design -o
+// $(GOPATH)/src/github.com/DataDog/trace-examples/go/goa-basic
 
 package cli
 
@@ -13,7 +13,7 @@ import (
 	"fmt"
 	"os"
 
-	calcc "goa.design/examples/basic/gen/grpc/calc/client"
+	calcc "github.com/DataDog/trace-examples/go/goa-basic/gen/grpc/calc/client"
 	goa "goa.design/goa/v3/pkg"
 	grpc "google.golang.org/grpc"
 )

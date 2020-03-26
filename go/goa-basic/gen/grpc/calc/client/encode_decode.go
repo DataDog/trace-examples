@@ -3,16 +3,16 @@
 // calc gRPC client encoders and decoders
 //
 // Command:
-// $ goa gen goa.design/examples/basic/design -o
-// $(GOPATH)/src/goa.design/examples/basic
+// $ goa gen github.com/DataDog/trace-examples/go/goa-basic/design -o
+// $(GOPATH)/src/github.com/DataDog/trace-examples/go/goa-basic
 
 package client
 
 import (
 	"context"
 
-	calc "goa.design/examples/basic/gen/calc"
-	calcpb "goa.design/examples/basic/gen/grpc/calc/pb"
+	calc "github.com/DataDog/trace-examples/go/goa-basic/gen/calc"
+	calcpb "github.com/DataDog/trace-examples/go/goa-basic/gen/grpc/calc/pb"
 	goagrpc "goa.design/goa/v3/grpc"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/metadata"

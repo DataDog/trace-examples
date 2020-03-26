@@ -95,9 +95,7 @@ go.mongodb.org/mongo-driver v1.1.1/go.mod h1:u7ryQJ+DOzQmeO7zB6MHyr8jkEQvC8vH7qL
 go.uber.org/atomic v1.4.0/go.mod h1:gD2HeocX3+yG+ygLZcrzQJaqmWj9AIm7n08wl/qW/PE=
 go.uber.org/multierr v1.1.0/go.mod h1:wR5kodmAFQ0UK8QlbwjlSNy0Z68gJhDJUG5sjR94q/0=
 go.uber.org/zap v1.10.0/go.mod h1:vwi/ZaCAaUcBkycHslxD9B2zi4UTXhF60s6SWpuDF0Q=
-goa.design/examples v2.1.1+incompatible h1:Fau1JQz26MwUXDWbCUoz45/QpGletiiYpLedqks9+l4=
 goa.design/examples v2.1.1+incompatible/go.mod h1:o2YP23zwTq4SA6Z81l8yZS2XeJGzxOJLbREhSRgkXDY=
-goa.design/goa v1.4.3 h1:thTigmIMitT8+IdoqYpASoSbmvhfkp8YbtOk391fI7g=
 goa.design/goa v2.1.1+incompatible h1:qCKBx82o+GgqOXyFXmt7Nh98Ogl8YqwJ7fvOruq8idU=
 goa.design/goa v2.1.1+incompatible/go.mod h1:NnzBwdNktihbNek+pPiFMQP9PPFsUt8MMPPyo9opDSo=
 goa.design/goa/v3 v3.1.1 h1:VrRx+dSq83Y0f7V3blhSwWIM3Sx5wd1kqe+/LLHSFOg=

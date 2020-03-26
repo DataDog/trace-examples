@@ -3,8 +3,8 @@
 // calc HTTP server
 //
 // Command:
-// $ goa gen goa.design/examples/basic/design -o
-// $(GOPATH)/src/goa.design/examples/basic
+// $ goa gen github.com/DataDog/trace-examples/go/goa-basic/design -o
+// $(GOPATH)/src/github.com/DataDog/trace-examples/go/goa-basic
 
 package server
 
@@ -12,7 +12,7 @@ import (
 	"context"
 	"net/http"
 
-	calc "goa.design/examples/basic/gen/calc"
+	calc "github.com/DataDog/trace-examples/go/goa-basic/gen/calc"
 	goahttp "goa.design/goa/v3/http"
 	goa "goa.design/goa/v3/pkg"
 )

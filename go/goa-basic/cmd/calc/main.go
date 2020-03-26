@@ -11,8 +11,8 @@ import (
 	"strings"
 	"sync"
 
-	calcapi "goa.design/examples/basic"
-	calc "goa.design/examples/basic/gen/calc"
+	calcapi "github.com/DataDog/trace-examples/go/goa-basic"
+	calc "github.com/DataDog/trace-examples/go/goa-basic/gen/calc"
 )
 
 func main() {

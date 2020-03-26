@@ -3,8 +3,8 @@
 // calc gRPC client CLI support package
 //
 // Command:
-// $ goa gen goa.design/examples/basic/design -o
-// $(GOPATH)/src/goa.design/examples/basic
+// $ goa gen github.com/DataDog/trace-examples/go/goa-basic/design -o
+// $(GOPATH)/src/github.com/DataDog/trace-examples/go/goa-basic
 
 package client
 
@@ -12,8 +12,8 @@ import (
 	"encoding/json"
 	"fmt"
 
-	calc "goa.design/examples/basic/gen/calc"
-	calcpb "goa.design/examples/basic/gen/grpc/calc/pb"
+	calc "github.com/DataDog/trace-examples/go/goa-basic/gen/calc"
+	calcpb "github.com/DataDog/trace-examples/go/goa-basic/gen/grpc/calc/pb"
 )
 
 // BuildAddPayload builds the payload for the calc add endpoint from CLI flags.

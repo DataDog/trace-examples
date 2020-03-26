@@ -3,14 +3,14 @@
 // calc gRPC server types
 //
 // Command:
-// $ goa gen goa.design/examples/basic/design -o
-// $(GOPATH)/src/goa.design/examples/basic
+// $ goa gen github.com/DataDog/trace-examples/go/goa-basic/design -o
+// $(GOPATH)/src/github.com/DataDog/trace-examples/go/goa-basic
 
 package server
 
 import (
-	calc "goa.design/examples/basic/gen/calc"
-	calcpb "goa.design/examples/basic/gen/grpc/calc/pb"
+	calc "github.com/DataDog/trace-examples/go/goa-basic/gen/calc"
+	calcpb "github.com/DataDog/trace-examples/go/goa-basic/gen/grpc/calc/pb"
 )
 
 // NewAddPayload builds the payload of the "add" endpoint of the "calc" service

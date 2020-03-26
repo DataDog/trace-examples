@@ -3,15 +3,15 @@
 // calc gRPC client
 //
 // Command:
-// $ goa gen goa.design/examples/basic/design -o
-// $(GOPATH)/src/goa.design/examples/basic
+// $ goa gen github.com/DataDog/trace-examples/go/goa-basic/design -o
+// $(GOPATH)/src/github.com/DataDog/trace-examples/go/goa-basic
 
 package client
 
 import (
 	"context"
 
-	calcpb "goa.design/examples/basic/gen/grpc/calc/pb"
+	calcpb "github.com/DataDog/trace-examples/go/goa-basic/gen/grpc/calc/pb"
 	goagrpc "goa.design/goa/v3/grpc"
 	goa "goa.design/goa/v3/pkg"
 	"google.golang.org/grpc"

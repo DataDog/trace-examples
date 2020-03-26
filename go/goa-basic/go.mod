@@ -1,9 +1,10 @@
-module github.com/trace-examples/go/goa-basic
+module github.com/DataDog/trace-examples/go/goa-basic
 
 go 1.14
 
 require (
 	github.com/dimfeld/httptreemux v5.0.1+incompatible // indirect
+	github.com/golang/protobuf v1.3.4
 	github.com/grpc-ecosystem/go-grpc-middleware v1.2.0
 	goa.design/examples v2.1.1+incompatible
 	goa.design/goa v2.1.1+incompatible // indirect

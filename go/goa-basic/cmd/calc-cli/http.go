@@ -4,7 +4,7 @@ import (
 	"net/http"
 	"time"
 
-	cli "goa.design/examples/basic/gen/http/cli/calc"
+	cli "github.com/DataDog/trace-examples/go/goa-basic/gen/http/cli/calc"
 	goahttp "goa.design/goa/v3/http"
 	goa "goa.design/goa/v3/pkg"
 )

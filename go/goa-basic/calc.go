@@ -4,7 +4,7 @@ import (
 	"context"
 	"log"
 
-	calcsvc "goa.design/examples/basic/gen/calc"
+	calcsvc "github.com/DataDog/trace-examples/go/goa-basic/gen/calc"
 )
 
 // calc service example implementation.

@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"os"
 
-	cli "goa.design/examples/basic/gen/grpc/cli/calc"
+	cli "github.com/DataDog/trace-examples/go/goa-basic/gen/grpc/cli/calc"
 	goa "goa.design/goa/v3/pkg"
 	"google.golang.org/grpc"
 )
