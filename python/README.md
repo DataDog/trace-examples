@@ -18,7 +18,7 @@ docker-compose up -d agent
 
 The django sample app is a super simple app as per the django getting started tutorial.
 
-While you can certainly run the abb through the `manage.py` script, you can also use a Apache2+WSGI container which
+While you can certainly run the app through the `manage.py` script, you can also use a Apache2+WSGI container which
 replicated a common deployment scenario for our apps.
 
 ```
