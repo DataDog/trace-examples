@@ -1,0 +1,13 @@
+kafka:
+  bootstrap-servers: localhost:9092
+
+logging:
+  level:
+    root: info
+    org.springframework.web: INFO
+  path: logs
+  file: ${logging.path}/springkafkaot33.log
+  pattern:
+    file: "%d{yyyy-MM-dd HH:mm:ss} %magenta([%thread]) %highlight(%-5level) %yellow(%logger{36}) %X{dd.trace_id:-0} %X{dd.span_id:-0} - %msg%n"
+    console: "%d{yyyy-MM-dd HH:mm:ss} %magenta([%thread]) %highlight(%-5level) %yellow(%logger{36}) %X{dd.trace_id:-0} %X{dd.span_id:-0} - %msg%n"
+
