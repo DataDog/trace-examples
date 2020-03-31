@@ -1,0 +1,11 @@
+amqp==2.5.2
+billiard==3.6.3.0
+celery==4.4.2
+-e git://github.com/thieman/dd-trace-py.git@69d6cfe419468e8a22710068cb74d55694f1d311#egg=ddtrace
+importlib-metadata==1.6.0
+kombu==4.6.8
+msgpack==1.0.0
+pytz==2019.3
+redis==3.4.1
+vine==1.3.0
+zipp==3.1.0
