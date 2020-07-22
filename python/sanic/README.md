@@ -16,6 +16,8 @@ If you already have datadog agent running, you could run: ```ddtrace-run python 
 
 ### Execution Option 2:
 
+Note: before running ```docker-compose```, update the ```env_file``` (e.g: ```.bashrc```, ```.bash_profile```) which contains ```Datadog API key``` or specify API key as environment variable.
+
 ```
 docker-compose build --no-cache
 docker-compose up
