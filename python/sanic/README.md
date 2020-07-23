@@ -29,6 +29,6 @@ Then open your browser to http://0.0.0.0:<your_port>/
 
 - Basic request and response traces would look like:
 
-![](https://p-qkfgo2.t2.n0.cdn.getcloudapp.com/items/6qu260YR/Image%202020-07-22%20at%2012.25.34%20PM.png?v=88a7c0746edd328bfc44f7313e4b6c72)
+![](./images/image1.png)
 
-![](https://p-qkfgo2.t2.n0.cdn.getcloudapp.com/items/wbuW2Jz8/Image%202020-07-22%20at%2012.27.04%20PM.png?v=db356cda678401d10c4cd526e248fe5c)
+![](./images/image2.png)
