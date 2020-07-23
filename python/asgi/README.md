@@ -21,4 +21,4 @@ Then open your browser to http://127.0.0.1:8000
 
 - Basic request and response traces would look like:
 
-![](https://p-qkfgo2.t2.n0.cdn.getcloudapp.com/items/5zuX0mo4/Image%202020-07-23%20at%2011.17.04%20AM.png?v=663d2150ea4625d5793466669217186e)
+![](./images/image1.png)
