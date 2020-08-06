@@ -1,8 +1,4 @@
 import time
-import random
-
-from celery import shared_task
-from ddtrace import tracer
 
 from consumer import add
 

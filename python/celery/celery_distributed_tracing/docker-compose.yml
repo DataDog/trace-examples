@@ -1,0 +1,52 @@
+version: '3'
+
+services:
+  redis:
+    image: redis:5.0.6-alpine
+
+  producer:
+    build:
+        context: ./
+        dockerfile: ./Dockerfile
+    depends_on:
+        - redis
+    volumes:
+        - .:/code
+    environment:
+        - DATADOG_TRACE_AGENT_HOSTNAME=datadog
+        - DD_CELERY_DISTRIBUTED_TRACING_ENABLED=true
+        - DATADOG_TRACE_DEBUG=true
+        - DD_SERVICE=producer
+        - DD_ENV=celery-example
+    command: ddtrace-run python producer.py
+
+  consumer:
+    build:
+        context: ./
+        dockerfile: ./Dockerfile
+    depends_on:
+        - redis
+    volumes:
+        - .:/code
+    environment:
+        - DATADOG_TRACE_AGENT_HOSTNAME=datadog
+        - DD_CELERY_DISTRIBUTED_TRACING_ENABLED=true
+        - DATADOG_TRACE_DEBUG=true
+        - DD_SERVICE=consumer
+        - DD_ENV=celery-example
+    command: ddtrace-run celery -A consumer worker --loglevel=info
+
+  datadog:
+    image: datadog/agent:latest
+    environment:
+      - DD_HOSTNAME=trace-example
+      - DD_API_KEY=${DD_API_KEY}
+      - DD_APM_ENABLED=true
+      - DD_BIND_HOST=0.0.0.0
+    ports:
+      - 8125
+      - 8126
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    #   - /proc/:/host/proc/:ro
+    #   - /sys/fs/cgroup:/host/sys/fs/cgroup:r
