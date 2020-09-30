@@ -26,3 +26,13 @@ services:
       - DD_TRACE_ANALYTICS_ENABLED=true
     depends_on:
       - datadog-agent
+
+  mysql:
+    image: mysql:5.7
+    environment:
+      - MYSQL_ROOT_PASSWORD=admin
+      - MYSQL_PASSWORD=test
+      - MYSQL_USER=test
+      - MYSQL_DATABASE=test
+    ports:
+      - "127.0.0.1:3306:3306"
