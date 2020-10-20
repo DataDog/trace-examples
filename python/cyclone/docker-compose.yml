@@ -18,15 +18,18 @@ services:
   web:
     build: .
     volumes:
-      - ./app
+      - .:/app
     ports:
-      - "8888:8888"
+      - 127.0.0.1:8888:8888/tcp
+    env_file:
+      .env
     environment:
       - DD_AGENT_HOST=datadog-agent
-      - DD_TRACE_ANALYTICS_ENABLED=true
+      - PORT=8888
     depends_on:
       - datadog-agent
-
+      - mysql
+      - redis
   mysql:
     image: mysql:5.7
     environment:
@@ -36,3 +39,7 @@ services:
       - MYSQL_DATABASE=test
     ports:
       - "127.0.0.1:3306:3306"
+  redis:
+    image: redis:4.0-alpine
+    ports:
+      - "127.0.0.1:6379:6379"
