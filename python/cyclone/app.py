@@ -26,12 +26,13 @@ MYSQL_CONFIG = {
 }
 
 REDIS_CONFIG = {
-    'port': int(os.getenv('TEST_REDIS_PORT', 6379)),
+    "port": int(os.getenv("TEST_REDIS_PORT", 6379)),
 }
 
+
 def my_request():
-    conn = six.moves.http_client.HTTPConnection('127.0.0.1:8889')
-    conn.request('GET', '/')
+    conn = six.moves.http_client.HTTPConnection("127.0.0.1:8889")
+    conn.request("GET", "/")
     res = conn.getresponse()
     conn.close()
     return res.read()
@@ -56,6 +57,7 @@ class MainHandler(cyclone.web.RequestHandler):
     def get(self):
         self.write("Hello, world")
 
+
 class RedisMixin(object):
     rc = None
 
@@ -63,6 +65,7 @@ class RedisMixin(object):
     def setup(self):
         # read settings from a conf file or something...
         RedisMixin.rc = redis.lazyConnection(port=REDIS_CONFIG["port"])
+
 
 class RedisHandler(cyclone.web.RequestHandler, RedisMixin):
     @defer.inlineCallbacks
@@ -98,13 +101,14 @@ class SafeMySQLdbConnection(adbapi.Connection):
             It largely defers to the provided `cursorclass` except for execute
             and executemany calls, which we augment to support SafeSQL objects.
             """
+
             def execute(self, query, args=None):
                 # if isinstance(query, SafeSQL):
                 #    query = query._SafeSQL__unsafe_query
                 return super(SafeSQLCursor, self).execute(query, args)
 
             def executemany(self, query, args):
-                #if isinstance(query, SafeSQL):
+                # if isinstance(query, SafeSQL):
                 #    query = query._SafeSQL__unsafe_query
                 return super(SafeSQLCursor, self).executemany(query, args)
 
@@ -113,7 +117,7 @@ class SafeMySQLdbConnection(adbapi.Connection):
 
 
 class ReconnectingConnectionPool(adbapi.ConnectionPool, object):
-     connectionFactory = SafeMySQLdbConnection
+    connectionFactory = SafeMySQLdbConnection
 
 
 class MySQLMixin(object):
@@ -146,7 +150,7 @@ class RPCHandler(cyclone.web.RequestHandler):
     @cyclone.web.asynchronous
     def get(self):
         conn = six.moves.http_client.HTTPConnection("localhost", 8889)
-        conn.request('GET', '/redis')
+        conn.request("GET", "/redis")
         res = conn.getresponse()
         conn.close()
         d2 = getPage("http://localhost:8889/redis")
@@ -238,11 +242,13 @@ class AgentHandler(cyclone.web.RequestHandler):
     @cyclone.web.asynchronous
     def get(self):
         d = agent.request(
-                b'GET',
-                b'http://localhost:8889/',
-                Headers({'User-Agent': ['Twisted Web Client Example']}),
-                None)
+            b"GET",
+            b"http://localhost:8889/",
+            Headers({"User-Agent": ["Twisted Web Client Example"]}),
+            None,
+        )
         d.addCallbacks(self.done)
+
 
 class PostModule(cyclone.web.UIModule):
     def render(self, title, body):
