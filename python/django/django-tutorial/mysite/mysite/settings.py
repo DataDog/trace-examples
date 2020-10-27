@@ -38,18 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    # Enable ddtrace instrumentation
-    'ddtrace.contrib.django',
 ]
-
-# Settings for ddtrace
-DATADOG_TRACE = {
-    'DEFAULT_SERVICE': 'django-tutorial-docker',
-    'TAGS': {'env': 'dev'},
-    'AGENT_HOSTNAME': 'agent',
-    'ENABLED': True,
-    'DEBUG': True,
-}
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',

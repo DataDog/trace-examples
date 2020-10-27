@@ -8,18 +8,18 @@ services:
     command: ddtrace-run python manage.py runserver 0.0.0.0:8000
     environment:
       - 'DATADOG_TRACE_AGENT_HOSTNAME=agent'
-      - 'DD_LOGGING_RATE_LIMIT=0'
+      - 'DATADOG_TRACE_DEBUG=true'
     ports:
       - '8000:8000'
 
   db:
     image: postgres
+    environment:
+      - 'POSTGRES_HOST_AUTH_METHOD=trust'
 
   agent:
     image: 'datadog/agent'
     environment:
-      - 'DD_HOSTNAME=trace-example'
-      - 'DD_TAGS=env:dev'
       - 'DD_API_KEY=${DD_API_KEY}'
       - 'DD_APM_ENABLED=true'
     ports:
