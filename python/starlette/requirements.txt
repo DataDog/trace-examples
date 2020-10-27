@@ -1,4 +1,8 @@
 aiofiles
 jinja2
 starlette
-uvicorns
+uvicorn
+sqlalchemy
+databases
+aiosqlite
+sqlite3
