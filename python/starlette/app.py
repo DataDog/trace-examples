@@ -20,6 +20,7 @@ templates = Jinja2Templates(directory='templates')
 
 def create_test_database(DATABASE_URL):
     engine = sqlalchemy.create_engine(DATABASE_URL)
+    engine.execute("DROP TABLE IF EXISTS notes;")
     metadata = sqlalchemy.MetaData()
     notes = sqlalchemy.Table(
         "notes",
@@ -88,16 +89,20 @@ async def list_notes(request):
                 d = {**d, **{column:value}}
             a.append(d)
     response = str(a)
-    return PlainTextResponse(response)
+    template = "200.html"
+    context = {"request": request}
+    return templates.TemplateResponse(template, context, status_code=200)
 
 
 async def add_note(request):
+    request_json = await request.json()
     with engine.connect() as connection:
         with connection.begin():
             r = connection.execute(notes_table.select())
-            connection.execute(notes_table.insert(), request)
-    response = "Success"
-    return PlainTextResponse(response)
+            connection.execute(notes_table.insert(), request_json)
+    template = "200.html"
+    context = {"request": request}
+    return templates.TemplateResponse(template, context, status_code=200)
 
 
 routes = [

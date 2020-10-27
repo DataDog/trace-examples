@@ -7,6 +7,7 @@ cd python/starlette
 python3 -m venv venv
 source venv/bin/activate
 pip install -r requirements.txt
+pip install -e [/FULL PATH TO DD-TRACE-PY FOLDER]
 python app.py
 ```
 
