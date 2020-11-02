@@ -6,7 +6,7 @@ For additional Python APM configuration options, refer to the API docs [here](ht
 
 #### Setup
 
-**Step 1)** Set up a `.env` file inside this directory (`./pynamodb`), so that the file is (`./pynamodb/.env`). Inside the file, add:
+**Step 1)** Set up a `.env` file (`./.env`) in this directory. Inside the file, add:
 
 ```
 AWS_ACCESS_KEY_ID=<EXAMPLE KEY>
