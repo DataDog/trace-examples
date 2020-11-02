@@ -14,7 +14,7 @@ AWS_SECRET_ACCESS_KEY=<EXAMPLE KEY>
 DD_API_KEY=<DATADOG API KEY>
 ```
 
-Note: Since this is a local test database instance, you can leave it as `<EXAMPLE KEY>` and this will send traces to Datadog as long as the `<DATADOG API KEY>` is filled out.
+Note: Since this is a local test database instance, you can leave it as `<EXAMPLE KEY>` and this will send traces to Datadog as long as the `<DATADOG API KEY>` is provided.
 
 **Step 2)** Then launch your Docker containers, inspired by the [testing here](https://github.com/DataDog/dd-trace-py#testing):
 
