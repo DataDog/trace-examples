@@ -6,9 +6,7 @@ For additional Python APM configuration options, refer to the API docs [here](ht
 
 #### Setup
 
-1. Set up the .env inside this directory (`./pynamodb`), so that the file is (`./pynamodb/.env`):
-
-To use, create a .env in this folder that contains:
+**Step 1)** Set up a `.env` file inside this directory (`./pynamodb`), so that the file is (`./pynamodb/.env`). Inside the file, add:
 
 ```
 AWS_ACCESS_KEY_ID=<EXAMPLE KEY>
@@ -16,22 +14,22 @@ AWS_SECRET_ACCESS_KEY=<EXAMPLE KEY>
 DD_API_KEY=<DATADOG API KEY>
 ```
 
-Note: Since this is a local test database instance, you can leave it as "<EXAMPLE KEY>" and this will send traces to Datadog as long as the `<DATADOG API KEY>` is filled out.
+Note: Since this is a local test database instance, you can leave it as `<EXAMPLE KEY>` and this will send traces to Datadog as long as the `<DATADOG API KEY>` is filled out.
 
-2. Then launch your Docker containers, inspired by the [testing here](https://github.com/DataDog/dd-trace-py#testing):
+**Step 2)** Then launch your Docker containers, inspired by the [testing here](https://github.com/DataDog/dd-trace-py#testing):
 
 ```
 docker-compose up -d
 
-docker-compose run --rm pydynamo-script
+docker-compose run --rm pynamodb-script
 ```
 
-3. Now that you're in the `pydynamo-script` container, you can run the `index.py` script with any of these commands:
+**Step 3)** Now that you're in the `pynamodb-script` container, you can run the `index.py` script with any of these commands:
 
 - Standalone: `python3 index.py`
 - With Datadog Python APM tracer ([configuration options](https://docs.datadoghq.com/tracing/setup/python/#environment-variable) apply): `ddtrace-run python3 index.py`
 
-4. When you're done, you can spin down the containers with:
+**Step 4)** When you're done, you can spin down the containers with:
 
 ```
 docker-compose down
