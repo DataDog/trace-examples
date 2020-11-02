@@ -7,7 +7,7 @@ services:
       - /proc/:/host/proc/:ro
       - /sys/fs/cgroup/:/host/sys/fs/cgroup:ro
     ports:
-      - 127.0.0.1:8126:8126/tcp
+      - 8126:8126/tcp
     environment:
       - DD_APM_ENABLED=true
       - DD_APM_NON_LOCAL_TRAFFIC=true
@@ -23,6 +23,7 @@ services:
       - AWS_ACCESS_KEY_ID=${AWS_ACCESS_KEY_ID}
       - AWS_SECRET_ACCESS_KEY=${AWS_SECRET_ACCESS_KEY}
       - DD_AGENT_HOST=datadog-agent
+      - DATADOG_TRACE_DEBUG=true
     depends_on:
       - dynamodb
       - datadog-agent
