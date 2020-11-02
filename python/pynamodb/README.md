@@ -1,4 +1,4 @@
-### PynamoDB Sample Script
+### PynamoDB Example Script
 
 Based on the PynamoDB tutorial [here](https://pynamodb.readthedocs.io/en/latest/tutorial.html), with the boto configuration example based on [here](https://boto.readthedocs.io/en/latest/boto_config_tut.html). When it spins up, a simple python script that makes various PynamoDB calls runs. This also assumes that you have Docker running, because it uses the [DynamoDB Local Docker Image](https://hub.docker.com/r/amazon/dynamodb-local). Note that this sample app is for **testing/dev** purposes on a local instance of DynamoDB.
 
@@ -18,7 +18,7 @@ DD_API_KEY=<DATADOG API KEY>
 
 Note: Since this is a local test database instance, you can leave it as "<EXAMPLE KEY>" and this will send traces to Datadog as long as the `<DATADOG API KEY>` is filled out.
 
-2. Then launch your Docker containers, inspired by the [testing here](https://github.com/DataDog/dd-trace-py#testing)
+2. Then launch your Docker containers, inspired by the [testing here](https://github.com/DataDog/dd-trace-py#testing):
 
 ```
 docker-compose up -d
@@ -48,4 +48,4 @@ docker-compose down
 
 #### Example Trace
 
-![Example](./example_get_item.png)
+![Example](./images/example_get_item.png)
