@@ -10,7 +10,7 @@ To install the Python dependencies into virtual environment:
 
 ```sh
 $ pipenv install
-$ pipenv sh
+$ pipenv shell
 ```
 
 Run with:
@@ -25,3 +25,12 @@ and in a new shell/env:
 $ ddtrace-run python producer.py
 ```
 
+## Package Installs
+To install `pipenv` and `pyenv` using for Mac ([https://formulae.brew.sh/formula/pipenv/](https://formulae.brew.sh/formula/pipenv/)):
+
+```sh
+brew install pipenv 
+brew install pyenv 
+```
+
+Linux commands can be found: [https://pypi.org/project/pipenv/](https://pypi.org/project/pipenv/)
