@@ -5,10 +5,9 @@ services:
       - agent
       - db
     build: .
-    command: ddtrace-run python manage.py runserver 0.0.0.0:8000
+    command: ddtrace-run uwsgi --ini /code/uwsgi.ini
     environment:
       - 'DATADOG_TRACE_AGENT_HOSTNAME=agent'
-      - 'DD_LOGGING_RATE_LIMIT=0'
     ports:
       - '8000:8000'
 
