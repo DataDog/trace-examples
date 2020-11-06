@@ -26,11 +26,11 @@ $ ddtrace-run python producer.py
 ```
 
 ## Package Installs
-To install `pipenv` and `pyenv` using for Mac ([https://formulae.brew.sh/formula/pipenv/](https://formulae.brew.sh/formula/pipenv/)):
+To install `pipenv` and `pyenv` for Mac ([https://formulae.brew.sh/formula/pipenv/](https://formulae.brew.sh/formula/pipenv/)):
 
 ```sh
 brew install pipenv 
 brew install pyenv 
 ```
 
-Linux commands can be found: [https://pypi.org/project/pipenv/](https://pypi.org/project/pipenv/)
+Linux commands can be found here: [https://pypi.org/project/pipenv/](https://pypi.org/project/pipenv/)
