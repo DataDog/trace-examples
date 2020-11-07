@@ -3,4 +3,4 @@ services:
   redis:
     image: redis:5.0.6-alpine
     ports:
-      - "127.0.0.1:6379:6379"
+      - "127.0.0.1:6380:6379"
