@@ -13,7 +13,7 @@ The best way to get started is to clone this repo and run:
 
 ## Execution:
 
-If you already have datadog agent running, you could run: ```ddtrace-run ddtrace-run uvicorn app:app```.
+If you already have datadog agent running, you could run: ```ddtrace-run uvicorn app:app```.
 
 Then open your browser to http://127.0.0.1:8000/docs
 
