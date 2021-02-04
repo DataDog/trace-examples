@@ -1,0 +1,27 @@
+receivers:
+  otlp:
+    protocols:
+      grpc:
+      http:
+
+processors:
+  batch:
+    timeout: 10s
+
+exporters:
+  datadog/api:
+    hostname: customhostname
+    version: v1
+
+    # tags:
+    #   - example:tag
+
+    api:
+      key: <YOUR_API_KEY>
+
+service:
+  pipelines:
+    traces:
+      receivers: [otlp]
+      processors: [batch]
+      exporters: [datadog/api]
