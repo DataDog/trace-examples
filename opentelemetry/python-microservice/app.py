@@ -26,6 +26,7 @@ from opentelemetry.sdk.resources import Resource
 from opentelemetry.instrumentation.flask import FlaskInstrumentor
 from opentelemetry.instrumentation.requests import RequestsInstrumentor
 
+# resource attributes can also be set via ENV VAR OTEL_RESOURCE
 resource = Resource(attributes={
     "service.name": "sandbox_test_python",
     "deployment.environment": "otel_sandbox"
@@ -50,4 +51,4 @@ app = flask.Flask(__name__)
 @app.route("/")
 def hello():
     requests.get("http://node-microservice:4000/api")
-    return "hello"
+    return "hello, view your traces at app.datadoghq.com"
