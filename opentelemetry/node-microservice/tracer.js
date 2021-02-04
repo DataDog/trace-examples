@@ -7,6 +7,9 @@ const { BatchSpanProcessor, ConsoleSpanExporter, SimpleSpanProcessor } = require
 const { CollectorTraceExporter } = require('@opentelemetry/exporter-collector');
 
 module.exports = (serviceName) => {
+
+  // #### Example of how to configure specific plugins ####
+
   // const provider = new NodeTracerProvider(
   //   {
   //     plugins: {
@@ -14,7 +17,7 @@ module.exports = (serviceName) => {
   //         enabled: false,
   //         path: '@opentelemetry/plugin-http',
   //         // applyCustomAttributesOnSpan: (span, request, response) => {
-  //         //   span.setAttribute('x-ratelimit-remaining', response.headers['x-ratelimit-remaining']);
+  //         //   span.setAttribute('x-ratelimit-remaining', Math.floor(Math.random() * 100) );
   //         // }
   //       },
   //       express: {
@@ -29,6 +32,7 @@ module.exports = (serviceName) => {
   //   }
   // );
 
+  // enables all plugins
   const provider = new NodeTracerProvider();
 
   const exporter = new CollectorTraceExporter({

@@ -33,4 +33,3 @@ To make individual requests to the sandbox:
   ```
 
 2. visit the url returned by the command above in your browser or via `curl`:
-
