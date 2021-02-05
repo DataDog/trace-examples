@@ -1,6 +1,6 @@
 ## OpenTelemetry Datadog Sandbox
 
-This Repository allows users to deploy a sandbox distributed tracing application instrumented with OpenTelemetry SDKs, which emit traces to OpenTelemetry Collectors, and export Telemetry data to Datadog via the Datadog Exporter.
+This Repository allows users to deploy a sandbox distributed tracing application instrumented with OpenTelemetry SDKs, which emit traces to OpenTelemetry Collectors, and export Telemetry data to Datadog via the Datadog Exporter. It also demonstrates how to manually inject datadog formatted trace and span ids in an Application instrumented with OpenTelemetry SDKs.
 
 To learn more about OpenTelemetry, please review the [Datadog Documentation](https://docs.datadoghq.com/tracing/setup_overview/open_standards/#opentelemetry-collector-datadog-exporter)
 
@@ -22,7 +22,7 @@ To use it you need to [install `minikube`](https://minikube.sigs.k8s.io/docs/sta
 
 1. Replace <YOUR_API_KEY> with your API key in `k8s-collector.yml` manifest.
 2. `$ sh ./build.sh`
-3. `$ sh ./run.sh`
+3. `$ sh ./run.sh start`
 
 To make individual requests to the sandbox:
 
