@@ -8,6 +8,9 @@ import requests
 import os
 import time
 import logging
+import structlog
+
+from .ddlogging import injection
 
 from opentelemetry import trace
 from opentelemetry.exporter.otlp.trace_exporter import OTLPSpanExporter
@@ -43,6 +46,16 @@ span_processor = BatchExportSpanProcessor(otlp_exporter)
 tracer_provider.add_span_processor(span_processor)
 trace.set_tracer_provider(tracer_provider)
 
+
+# Add custom formatting to inject datadog formatted trace ids into logs
+structlog.configure(
+    processors=[
+        injection.CustomDatadogLogProcessor(),
+        structlog.dev.ConsoleRenderer(pad_event=15)
+    ],
+)
+log = structlog.getLogger()
+
 RequestsInstrumentor().instrument()
 FlaskInstrumentor().instrument()
 
@@ -50,5 +63,10 @@ app = flask.Flask(__name__)
 
 @app.route("/")
 def hello():
-    requests.get("http://node-microservice:4000/api")
+    try:
+        requests.get("http://node-microservice:4000/api")
+    except requests.exceptions.RequestException as e:
+        log.error('exception making request')
+
+    log.info("Example log in the context of the server span")
     return "hello, view your traces at app.datadoghq.com"

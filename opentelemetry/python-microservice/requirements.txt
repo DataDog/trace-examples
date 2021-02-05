@@ -22,6 +22,7 @@ opentelemetry-sdk==0.17b0
 protobuf==3.13.0
 requests==2.24.0
 six==1.15.0
+structlog==20.2.0
 thrift==0.13.0
 urllib3==1.25.10
 Werkzeug==1.0.1
