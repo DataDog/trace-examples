@@ -499,7 +499,7 @@ spec:
         - name: OTEL_EXPORTER_OTLP_ENDPOINT
           value: "$(HOST_IP):55680"
         - name: OTEL_RESOURCE_ATTRIBUTES
-          value: "deployment.enviroment=otel_sandbox,version=v1"
+          value: deployment.environment=otel_sandbox,version=v1
 ---
 # Define a service for the node-microservice
 apiVersion: v1
@@ -563,7 +563,7 @@ spec:
         - name: OTEL_EXPORTER_OTLP_HTTP_ENDPOINT
           value: "$(HOST_IP):55681"
         - name: OTEL_RESOURCE_ATTRIBUTES
-          value: "deployment.enviroment=otel_sandbox,version=v1"
+          value: deployment.environment=otel_sandbox,version=v1
 ---
 # Define a service for the ruby-microservice
 apiVersion: v1
@@ -627,7 +627,7 @@ spec:
         - name: OTEL_EXPORTER_JAEGER_ENDPOINT
           value: "http://$(HOST_IP):14268/api/traces"
         - name: OTEL_RESOURCE_ATTRIBUTES
-          value: "deployment.enviroment=otel_sandbox,version=v1"
+          value: deployment.environment=otel_sandbox,version=v1
         - name: OTEL_TRACES_EXPORTER
           value: jaeger
 ---

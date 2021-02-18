@@ -19,7 +19,7 @@ services:
     environment:
       # The spec says this should include http or https but python appears to have implemented differently
       - OTEL_EXPORTER_OTLP_ENDPOINT=otel-collector:55680
-      - OTEL_RESOURCE_ATTRIBUTES="deployment.enviroment=otel_sandbox,version=v1"
+      - OTEL_RESOURCE_ATTRIBUTES=deployment.environment=otel_sandbox,version=v1
     depends_on:
       - otel-collector
       - node-microservice
@@ -39,7 +39,7 @@ services:
     environment:
       # opentelemetry-js only has json over http at this time 
       - OTEL_EXPORTER_OTLP_HTTP_ENDPOINT=otel-collector:55681
-      - OTEL_RESOURCE_ATTRIBUTES="deployment.enviroment=otel_sandbox,version=v1"
+      - OTEL_RESOURCE_ATTRIBUTES=deployment.environment=otel_sandbox,version=v1
     depends_on:
       - otel-collector
       - ruby-microservice
@@ -58,7 +58,7 @@ services:
     environment:
       # was having trouble with the otlp export but jaeger also exists in core by default
       - OTEL_EXPORTER_JAEGER_ENDPOINT=http://otel-collector:14268/api/traces
-      - OTEL_RESOURCE_ATTRIBUTES="deployment.enviroment=otel_sandbox,version=v1"
+      - OTEL_RESOURCE_ATTRIBUTES=deployment.environment=otel_sandbox,version=v1
       - OTEL_TRACES_EXPORTER=jaeger
     depends_on:
       - otel-collector
