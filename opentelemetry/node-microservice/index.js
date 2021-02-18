@@ -1,7 +1,8 @@
 'use strict';
 
 // eslint-disable-next-line
-require('./tracer')('sandbox_test_node');
+const otel = require('./tracer')('sandbox_test');
+const logger = require('./logger');
 
 const port = 4000;
 const owner = 'open-telemetry';
@@ -15,14 +16,14 @@ let db;
 
 MongoClient.connect("mongodb://mongo:27017/mydb", function(err, database) {
   if(err) {
-    console.log("error creating connection to mongodb server")
+    logger.info("error creating connection to mongodb server")
   } else {
     db = database.db("mydb");
     db.createCollection("users", function(err, res) {
       if (err) {
-        console.log('Error creating collection, code:', err.code);
+        logger.info('Error creating collection, code:', err.code);
       } else {
-        console.log("1 collection created");
+        logger.info("1 collection created");
       }
     });    
   }
@@ -31,58 +32,62 @@ MongoClient.connect("mongodb://mongo:27017/mydb", function(err, database) {
 const app = express();
 
 const getOtelStats = function (req, res) {
-  console.log('getting request')
+  logger.info('recd a req')
   // make api request to add response headers
-  
   const obj = { name: "John", age: "20" };
 
-  if (db === undefined) {
-    MongoClient.connect("mongodb://mongo:27017/mydb", function(err, database) {
-      if(err) {
-        console.log("error creating connection to mongodb server",  err)
-        res.send('ok')
-      } else {
-        db = database.db("mydb");
-        db.createCollection("users", function(err, response) {
-          if (err) {
-            console.log('Error creating collection, code:', err.code);
+  axios.get("http://ruby-microservice:3000/next_launch").then( () => {
+    if (db === undefined) {
+        MongoClient.connect("mongodb://mongo:27017/mydb", function(err, database) {
+          if(err) {
+            logger.info("error creating connection to mongodb server",  err)
             res.send('ok')
           } else {
-            console.log("a collection created");
-            res.send('ok')
+            db = database.db("mydb");
+            db.createCollection("users", function(err, response) {
+              if (err) {
+                logger.info('Error creating collection, code:', err.code);
+                res.send('ok')
+              } else {
+                logger.info("a collection created");
+                res.send('ok')
+              }
+            });    
           }
         });    
+      } else {
+        // Connect to the db, randomly insert or find record
+        if (Math.random() < 0.5) {
+          db.collection("users").insertOne(obj, function(err, response) {
+            if (err) {
+              logger.info('Error code:', err.code);
+              res.send('ok')
+            } else {
+              logger.info("some document inserted");
+              res.send('ok')
+            }
+          })
+        } else {
+          db.collection("users").find({}, function(err, response) {
+            if (err) {
+              logger.info('Error code:', err.code);
+              res.send('ok')
+            } else {
+              logger.info("document served");
+              res.send('ok')
+            }
+          })
+        }
       }
-    });    
-  } else {
-    // Connect to the db, randomly insert or find record
-    if (Math.random() < 0.5) {
-      db.collection("users").insertOne(obj, function(err, response) {
-        if (err) {
-          console.log('Error code:', err.code);
-          res.send('ok')
-        } else {
-          console.log("some document inserted");
-          res.send('ok')
-        }
-      })
-    } else {
-      db.collection("users").find({}, function(err, response) {
-        if (err) {
-          console.log('Error code:', err.code);
-          res.send('ok')
-        } else {
-          console.log("document served");
-          res.send('ok')
-        }
-      })
-    }
-  }
+  }).catch( () => {
+    logger.info('Error making request')
+    res.send('ok')
+  })
 }
 
 app.get('/api', getOtelStats);
 
 // Launch app to listen to specified port
 app.listen(port, function () {
-    console.log("Running on port " + port);
+    logger.info("Running on port " + port);
 });

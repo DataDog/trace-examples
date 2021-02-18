@@ -9,11 +9,12 @@
     "@opentelemetry/api": "^0.15.0",
     "@opentelemetry/exporter-collector": "^0.15.0",
     "@opentelemetry/node": "^0.15.0",
-    "@opentelemetry/plugins-node-core-and-contrib": "^0.13.0",
+    "@opentelemetry/plugins-node-core-and-contrib": "^0.13.1",
     "@opentelemetry/tracing": "^0.15.0",
     "axios": "^0.21.0",
     "express": "^4.17.1",
     "mongodb": "^3.6.4",
-    "signalfx-tracing": "^0.10.0"
+    "signalfx-tracing": "^0.10.0",
+    "winston": "^3.3.3"
   }
 }

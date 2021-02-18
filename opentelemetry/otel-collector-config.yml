@@ -1,8 +1,13 @@
+extensions:
 receivers:
   otlp:
     protocols:
       grpc:
       http:
+  jaeger:
+    protocols:
+      thrift_http:
+  zipkin:
 
 processors:
   batch:
@@ -18,10 +23,12 @@ exporters:
 
     api:
       key: <YOUR_API_KEY>
+  logging:
+    logLevel: info
 
 service:
   pipelines:
     traces:
-      receivers: [otlp]
+      receivers: [otlp, zipkin, jaeger]
       processors: [batch]
       exporters: [datadog/api]

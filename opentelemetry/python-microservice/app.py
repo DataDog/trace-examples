@@ -19,10 +19,11 @@ from opentelemetry.sdk.trace import TracerProvider
 from opentelemetry.sdk.trace.export import BatchExportSpanProcessor
 from opentelemetry.sdk.resources import Resource
 
+
 # Set B3 Propagation for connecting to dd-trace-<lang> instrumented app
 # Then enabled B3 Propagation on the dd-trace-<lang> app
-# from opentelemetry import propagators
-# from opentelemetry.propagators.b3 import B3Format
+from opentelemetry import propagators
+from opentelemetry.propagators.b3 import B3Format
 
 # propagators.set_global_textmap(B3Format())
 
@@ -31,8 +32,7 @@ from opentelemetry.instrumentation.requests import RequestsInstrumentor
 
 # resource attributes can also be set via ENV VAR OTEL_RESOURCE
 resource = Resource(attributes={
-    "service.name": "sandbox_test_python",
-    "deployment.environment": "otel_sandbox"
+    "service.name": "sandbox_test_python"
 })
 
 otlp_exporter = OTLPSpanExporter(insecure=True)
@@ -51,7 +51,7 @@ trace.set_tracer_provider(tracer_provider)
 structlog.configure(
     processors=[
         injection.CustomDatadogLogProcessor(),
-        structlog.dev.ConsoleRenderer(pad_event=15)
+        structlog.processors.JSONRenderer(sort_keys=True)
     ],
 )
 log = structlog.getLogger()
