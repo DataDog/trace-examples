@@ -1,0 +1,34 @@
+extensions:
+receivers:
+  otlp:
+    protocols:
+      grpc:
+      http:
+  jaeger:
+    protocols:
+      thrift_http:
+  zipkin:
+
+processors:
+  batch:
+    timeout: 10s
+
+exporters:
+  datadog/api:
+    hostname: customhostname
+    version: v1
+
+    # tags:
+    #   - example:tag
+
+    api:
+      key: <YOUR_API_KEY>
+  logging:
+    logLevel: info
+
+service:
+  pipelines:
+    traces:
+      receivers: [otlp, zipkin, jaeger]
+      processors: [batch]
+      exporters: [datadog/api]

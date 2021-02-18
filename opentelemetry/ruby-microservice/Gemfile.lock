@@ -1,0 +1,136 @@
+GEM
+  remote: https://rubygems.org/
+  specs:
+    faraday (0.17.4)
+      multipart-post (>= 1.2, < 3)
+    faraday_middleware (0.14.0)
+      faraday (>= 0.7.4, < 1.0)
+    google-protobuf (3.14.0)
+    hashie (3.6.0)
+    multi_json (1.15.0)
+    multipart-post (2.1.1)
+    mustermann (1.1.1)
+      ruby2_keywords (~> 0.0.1)
+    opentelemetry-api (0.14.0)
+    opentelemetry-common (0.14.0)
+      opentelemetry-api (~> 0.14.0)
+    opentelemetry-exporter-jaeger (0.14.0)
+      opentelemetry-api (~> 0.14.0)
+      opentelemetry-common (~> 0.14.0)
+      thrift
+    opentelemetry-exporter-otlp (0.14.0)
+      google-protobuf (~> 3.7)
+      opentelemetry-api (~> 0.14.0)
+      opentelemetry-common (~> 0.14.0)
+    opentelemetry-instrumentation-active_model_serializers (0.14.0)
+      opentelemetry-api (~> 0.14.0)
+    opentelemetry-instrumentation-all (0.14.0)
+      opentelemetry-instrumentation-active_model_serializers (~> 0.14.0)
+      opentelemetry-instrumentation-concurrent_ruby (~> 0.14.0)
+      opentelemetry-instrumentation-dalli (~> 0.14.0)
+      opentelemetry-instrumentation-delayed_job (~> 0.14.0)
+      opentelemetry-instrumentation-ethon (~> 0.14.0)
+      opentelemetry-instrumentation-excon (~> 0.14.0)
+      opentelemetry-instrumentation-faraday (~> 0.14.0)
+      opentelemetry-instrumentation-graphql (~> 0.14.0)
+      opentelemetry-instrumentation-mongo (~> 0.14.0)
+      opentelemetry-instrumentation-mysql2 (~> 0.14.0)
+      opentelemetry-instrumentation-net_http (~> 0.14.0)
+      opentelemetry-instrumentation-rack (~> 0.14.0)
+      opentelemetry-instrumentation-rails (~> 0.14.0)
+      opentelemetry-instrumentation-redis (~> 0.14.0)
+      opentelemetry-instrumentation-restclient (~> 0.14.0)
+      opentelemetry-instrumentation-ruby_kafka (~> 0.14.0)
+      opentelemetry-instrumentation-sidekiq (~> 0.14.0)
+      opentelemetry-instrumentation-sinatra (~> 0.14.0)
+    opentelemetry-instrumentation-concurrent_ruby (0.14.0)
+      opentelemetry-api (~> 0.14.0)
+    opentelemetry-instrumentation-dalli (0.14.0)
+      opentelemetry-api (~> 0.14.0)
+      opentelemetry-common (~> 0.14.0)
+    opentelemetry-instrumentation-delayed_job (0.14.0)
+      opentelemetry-api (~> 0.14.0)
+    opentelemetry-instrumentation-ethon (0.14.0)
+      opentelemetry-api (~> 0.14.0)
+    opentelemetry-instrumentation-excon (0.14.0)
+      opentelemetry-api (~> 0.14.0)
+    opentelemetry-instrumentation-faraday (0.14.0)
+      opentelemetry-api (~> 0.14.0)
+    opentelemetry-instrumentation-graphql (0.14.0)
+      opentelemetry-api (~> 0.14.0)
+    opentelemetry-instrumentation-mongo (0.14.0)
+      opentelemetry-api (~> 0.14.0)
+    opentelemetry-instrumentation-mysql2 (0.14.0)
+      opentelemetry-api (~> 0.14.0)
+    opentelemetry-instrumentation-net_http (0.14.0)
+      opentelemetry-api (~> 0.14.0)
+      opentelemetry-common (~> 0.14.0)
+    opentelemetry-instrumentation-rack (0.14.0)
+      opentelemetry-api (~> 0.14.0)
+    opentelemetry-instrumentation-rails (0.14.0)
+      opentelemetry-api (~> 0.14.0)
+      opentelemetry-instrumentation-rack (~> 0.14.0)
+    opentelemetry-instrumentation-redis (0.14.0)
+      opentelemetry-api (~> 0.14.0)
+      opentelemetry-common (~> 0.14.0)
+    opentelemetry-instrumentation-restclient (0.14.0)
+      opentelemetry-api (~> 0.14.0)
+    opentelemetry-instrumentation-ruby_kafka (0.14.0)
+      opentelemetry-api (~> 0.14.0)
+    opentelemetry-instrumentation-sidekiq (0.14.0)
+      opentelemetry-api (~> 0.14.0)
+      opentelemetry-common (~> 0.14.0)
+    opentelemetry-instrumentation-sinatra (0.14.0)
+      opentelemetry-api (~> 0.14.0)
+    opentelemetry-sdk (0.14.0)
+      opentelemetry-api (~> 0.14.0)
+      opentelemetry-common (~> 0.14.0)
+    puma (3.12.6)
+    rack (2.2.3)
+    rack-protection (2.1.0)
+      rack
+    redis (4.2.5)
+    redis-sinatra (1.4.2)
+      redis-store (>= 1.1, < 2)
+      sinatra (>= 1, < 3)
+    redis-store (1.9.0)
+      redis (>= 4, < 5)
+    ruby2_keywords (0.0.4)
+    sinatra (2.1.0)
+      mustermann (~> 1.0)
+      rack (~> 2.2)
+      rack-protection (= 2.1.0)
+      tilt (~> 2.0)
+    sinatra-contrib (2.1.0)
+      multi_json
+      mustermann (~> 1.0)
+      rack-protection (= 2.1.0)
+      sinatra (= 2.1.0)
+      tilt (~> 2.0)
+    spacex (1.0.4)
+      faraday (~> 0.9)
+      faraday_middleware (~> 0.12)
+      hashie (= 3.6.0)
+    thrift (0.14.0)
+    tilt (2.0.10)
+
+PLATFORMS
+  ruby
+
+DEPENDENCIES
+  opentelemetry-api
+  opentelemetry-exporter-jaeger
+  opentelemetry-exporter-otlp
+  opentelemetry-instrumentation-all
+  opentelemetry-sdk
+  puma (~> 3.11)
+  redis-sinatra
+  sinatra
+  sinatra-contrib
+  spacex
+
+RUBY VERSION
+   ruby 2.6.3p62
+
+BUNDLED WITH
+   1.17.3

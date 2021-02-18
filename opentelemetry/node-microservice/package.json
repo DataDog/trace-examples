@@ -1,0 +1,20 @@
+{
+  "name": "sample_otel_node_app",
+  "version": "1.0.0",
+  "description": "Demonstrating configuration options in opentelemetry-js",
+  "main": "index.js",
+  "private": true,
+  "dependencies": {
+    "@octokit/rest": "^18.0.6",
+    "@opentelemetry/api": "^0.15.0",
+    "@opentelemetry/exporter-collector": "^0.15.0",
+    "@opentelemetry/node": "^0.15.0",
+    "@opentelemetry/plugins-node-core-and-contrib": "^0.13.1",
+    "@opentelemetry/tracing": "^0.15.0",
+    "axios": "^0.21.0",
+    "express": "^4.17.1",
+    "mongodb": "^3.6.4",
+    "signalfx-tracing": "^0.10.0",
+    "winston": "^3.3.3"
+  }
+}
