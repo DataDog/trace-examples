@@ -34,4 +34,11 @@ To make individual requests to the sandbox:
   minikube service python-microservice --url
   ```
 
-2. visit the url returned by the command above in your browser or via `curl`:
+2. visit the url returned by the command above in your browser or via `curl`
+
+### Example Output
+
+![example_1](https://user-images.githubusercontent.com/14250318/108424500-443b3300-7207-11eb-9b6b-9551cc21dd02.png)
+![example_2](https://user-images.githubusercontent.com/14250318/108424526-4b624100-7207-11eb-89c4-fb8f7f57da37.png)
+
+
