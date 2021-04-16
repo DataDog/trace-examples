@@ -25,11 +25,8 @@ logging.config.dictConfig({
     }
 })
 
-# If not patched yet, you can patch mysql specifically
-patch(mysql=True)
-
 # This will report a span with the default settings
-conn = MySQLdb.connect(user="test", password="test", host="localhost", port=3306, database="test")
+conn = MySQLdb.connect(user="test", passwd="test", host="mysql", port=3306, db="test")
 cursor = conn.cursor()
 cursor.execute("SHOW TABLES")
 
