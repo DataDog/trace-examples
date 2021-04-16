@@ -37,3 +37,8 @@ services:
       SOME_RANDOM_VALUE: hey_you
     volumes:
       - $PWD/django_14_app:/var/www/html/app
+
+  influxdb:
+    image: influxdb:1.6-alpine
+    ports:
+      - "127.0.0.1:8086:8086"
