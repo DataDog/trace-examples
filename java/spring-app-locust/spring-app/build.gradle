@@ -1,0 +1,44 @@
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:2.0.5.RELEASE")
+    }
+}
+
+apply plugin: 'java'
+apply plugin: 'idea'
+apply plugin: 'org.springframework.boot'
+apply plugin: 'io.spring.dependency-management'
+
+bootJar {
+    baseName = 'trace-examples'
+    version =  '0.1.0'
+}
+
+repositories {
+    mavenCentral()
+}
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+dependencies {
+    compile("org.springframework.boot:spring-boot-starter-web")
+    testCompile("junit:junit")
+}
+
+bootRun {
+    // jvmArgs '-Ddd.jmxfetch.enabled=true'
+    // jvmArgs '-Dcom.sun.management.jmxremote'
+    // jvmArgs '-Dcom.sun.management.jmxremote.port=9013'
+    // jvmArgs '-Dcom.sun.management.jmxremote.local.only=false'
+    // jvmArgs '-Dcom.sun.management.jmxremote.ssl=false'
+    // jvmArgs '-Dcom.sun.management.jmxremote.authenticate=false'
+    jvmArgs "-javaagent:../dd-java-agent.jar"
+
+    // jvmArgs '-Ddatadog.slf4j.simpleLogger.defaultLogLevel=debug'
+    // jvmArgs '-Ddd.writer.type=LoggingWriter'
+}
+
