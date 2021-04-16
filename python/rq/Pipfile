@@ -1,0 +1,14 @@
+[[source]]
+url = "https://pypi.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[packages]
+ddtrace = {editable = true,path = "/Users/kyle.verhoog/dev/dd-trace-py"}
+rq = "==1.1.0"
+redis = "==3.3.8"
+
+[dev-packages]
+
+[requires]
+python_version = "3.7"
