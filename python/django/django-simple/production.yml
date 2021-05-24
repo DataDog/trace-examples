@@ -1,0 +1,11 @@
+version: '3'
+
+services:
+  django:
+    build:
+      context: .
+      dockerfile: ./compose/production/django/Dockerfile
+    image: ddtrace_django_production_django
+    env_file:
+      - ./.envs/.production/.django
+    command: /start

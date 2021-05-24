@@ -1,0 +1,5 @@
+# PRECAUTION: avoid production dependencies that aren't in development
+
+-r base.txt
+
+gunicorn==20.1.0  # https://github.com/benoitc/gunicorn
