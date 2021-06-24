@@ -1,6 +1,6 @@
 # [ASGI](https://asgi.readthedocs.io/en/latest/) [(startlette)](https://www.starlette.io/) Example App
 
-This is an example ASGI starlette app to send traces as well as test manual instrumentation of ddtrace ASGI integration.
+This is an example ASGI starlette app to send traces as well as test manual instrumentation of ddtrace ASGI integration. Note that you can apply the same method to other ASGI frameworks, like daphne.
 
 ## Code Requirements
 
@@ -13,7 +13,9 @@ The best way to get started is to clone this repo and run:
 
 ### Execution:
 
-If you already have datadog agent running as well as ASGI server: ```uvicorn```, you could run: ```uvicorn app:app```.
+If you already have datadog agent running as well as ASGI server: ```uvicorn```, you could run: ```uvicorn app:app```. Otherwise, prepend `uvicorn` with `ddtrace-run`, like so:
+
+`ddtrace-run uvicorn app:app`
 
 Then open your browser to http://127.0.0.1:8000
 
