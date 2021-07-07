@@ -6,6 +6,7 @@ services:
       - DD_ENV
       - DD_TRACE_DEBUG
       - DD_TRACE_ENABLED
+      - DD_RUNTIME_METRICS_ENABLED
       - DD_LOGS_INJECTION=true
       - DD_AGENT_HOST=agent
     volumes:
@@ -20,6 +21,7 @@ services:
       - DD_ENV
       - DD_TRACE_DEBUG
       - DD_TRACE_ENABLED
+      - DD_RUNTIME_METRICS_ENABLED
       - DD_LOGS_INJECTION=true
       - DD_AGENT_HOST=agent
     labels:
@@ -30,6 +32,7 @@ services:
       - DD_ENV
       - DD_TRACE_DEBUG
       - DD_TRACE_ENABLED
+      - DD_RUNTIME_METRICS_ENABLED
       - DD_LOGS_INJECTION=true
       - DD_AGENT_HOST=agent
     labels:
