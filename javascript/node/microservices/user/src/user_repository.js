@@ -11,6 +11,11 @@ const users = [
     _id: 'bob',
     name: 'Bob',
     age: 30
+  },
+  {
+    _id: 'charles',
+    name: 'Charles',
+    age: 28
   }
 ]
 
@@ -29,7 +34,7 @@ db.collection('users').then(col => {
 const userRepository = {
   all () {
     return db.collection('users')
-      .then(col => col.find({}).toArray())
+      .then(col => col.find({}, { batchSize: 2 }).toArray())
   }
 }
 
