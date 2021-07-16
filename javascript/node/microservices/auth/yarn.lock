@@ -258,10 +258,10 @@ core-util-is@~1.0.0:
   resolved "https://registry.yarnpkg.com/core-util-is/-/core-util-is-1.0.2.tgz#b5fd54220aa2bc5ab57aab7140c940754503c1a7"
   integrity sha1-tf1UIgqivFq1eqtxQMlAdUUDwac=
 
-dd-trace@^1.0.0-beta.0:
-  version "1.0.0-beta.0"
-  resolved "https://registry.yarnpkg.com/dd-trace/-/dd-trace-1.0.0-beta.0.tgz#ba893a6001d1a315741f1422a7453f19ea2894ac"
-  integrity sha512-lg0DKmbKlOzH7ufCvW8jofZcgrL+3j1ZvXkASFs94yZsAo6DyN2JcwKqJAxIMG7VHxj/BH1GE5ZW/6g0DLXfrg==
+dd-trace@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/dd-trace/-/dd-trace-1.0.0.tgz#33bb92aaa491b1eabfd20ab0f8504507266c4f96"
+  integrity sha512-cbilNBik/wqRq6gsphLqux9WMOnkqBV+OJozCpecJNsfCZ0NITbqAEfGODtXtef0s2j/sIQx9cF5J+Ipbf+uJw==
   dependencies:
     "@types/node" "^10.12.18"
     form-data "^3.0.0"
