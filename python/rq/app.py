@@ -15,12 +15,13 @@ while True:
     job, rargs = choice(jobs)
     args = rargs()
 
-    with tracer.trace('main', service='rq-app') as span:
+    with tracer.trace('main') as span:
         print(f'submitting job {job.__name__} with args {args}')
         job = q.enqueue(job, *args, job_id=job.__name__)
-        with tracer.trace('meantime', service='rq-app'):
-            sleep(0.25)
+        with tracer.trace('meantime'):
+            sleep(0.1)
         # print(job.get_status())
-        with tracer.trace('handle results', service='rq-app'):
+        with tracer.trace('handle results'):
             q.fetch_job(job.id)
-        sleep(random())
+
+    sleep(0.5)

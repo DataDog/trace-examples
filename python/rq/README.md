@@ -18,8 +18,9 @@ $ docker-compose up -d
 To install the Python dependencies into virtual environment:
 
 ```sh
-$ pipenv install
-$ pipenv sh
+$ virtualenv --python=python3 .venv/
+$ source .venv/bin/activate
+$ pip install -r requirements.txt
 ```
 
 *Note:* you must have an agent running on your machine that will collect the
@@ -30,16 +31,12 @@ information about the agent. Make sure you install the *trace* agent!
 In a separate shell start the `rq` worker:
 
 ```sh
-$ ddtrace-run rq worker
+$ DD_SERVICE=worker ddtrace-run rq worker
 ```
 
 
-## Examples
-
-### Autoinstrumented Example
-
-Run with:
+Then start the app with:
 
 ```sh
-$ DATADOG_TRACE_DEBUG=true ddtrace-run python app.py
+$ DD_SERVICE=app ddtrace-run python app.py
 ```
