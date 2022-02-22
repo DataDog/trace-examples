@@ -12,11 +12,11 @@ services:
 
   app:
     environment:
-      - 'DATADOG_TRACE_AGENT_HOSTNAME=agent'
+      - 'DD_TRACE_AGENT_HOSTNAME=agent'
       - 'DD_LOGGING_RATE_LIMIT=0'
-      - 'DATADOG_TRACE_DEBUG=true'
-      - 'DATADOG_PATCH_MODULES=futures:true,tornado:true'
-      # - 'DATADOG_PATCH_MODULES=asyncio:false'
+      - 'DD_TRACE_DEBUG=true'
+      - 'DD_PATCH_MODULES=futures:true,tornado:true'
+      # - 'DD_PATCH_MODULES=asyncio:false'
       # uncomment to enable async debugging information
       # - 'PYTHONASYNCIODEBUG=1'
     build: .

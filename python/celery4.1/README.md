@@ -16,7 +16,7 @@ $ pipenv shell
 Run with:
 
 ```sh
-$ DATADOG_TRACE_DEBUG=true ddtrace-run celery -A consumer worker --loglevel=info
+$ DD_TRACE_DEBUG=true ddtrace-run celery -A consumer worker --loglevel=info
 ```
 
 and in a new shell/env:

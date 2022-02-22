@@ -25,7 +25,7 @@ To do this we can run the following command:
 $ python 1_first_trace.py
 ```
 
-We set `DATADOG_SERVICE_NAME` manually here so we know what to look for in the
+We set `DD_SERVICE` manually here so we know what to look for in the
 Datadog trace dashboard.
 
 `ddopentrace-run` installs the Datadog tracer and runs the application. After

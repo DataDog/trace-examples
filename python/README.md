@@ -6,7 +6,7 @@ Here are some apps to simplify the process of debugging issues with the tracer, 
 
 In order to collect traces, you can spin up an agent.
 
-In order to provide the datadog api key, an environment variable `DATADOG_API_KEY` has to be set. You can use your
+In order to provide the datadog api key, an environment variable `DD_API_KEY` has to be set. You can use your
 `.bashrc` or `.bash_profile` files.
 
 From this folder:

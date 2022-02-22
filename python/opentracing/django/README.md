@@ -51,7 +51,7 @@ Since the Datadog tracing is, by default, disabled when running in debug mode,
 we manually enable it in `settings.py`:
 
 ```python
-DATADOG_TRACE = {
+DD_TRACE = {
     'ENABLED': True,
 }
 ```

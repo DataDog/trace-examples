@@ -1,2 +1,2 @@
 pylibmc==1.6.0
-ddtrace==0.16
+ddtrace
