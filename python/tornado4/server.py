@@ -140,7 +140,7 @@ def make_app(settings={}):
 
 if __name__ == "__main__":
     settings = {
-        'DD_trace': {
+        'datadog_trace': {
             'default_service': 'tornado-website',
         }
     }
