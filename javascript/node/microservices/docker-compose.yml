@@ -3,7 +3,7 @@ services:
   api-gateway:
     build: api-gateway
     environment:
-      - DD_ENV
+      - DD_ENV=dev
       - DD_TRACE_DEBUG
       - DD_TRACE_ENABLED
       - DD_LOGS_INJECTION=true
