@@ -17,7 +17,7 @@ services:
   auth:
     build: auth
     environment:
-      - DD_ENV
+      - DD_ENV=dev2
       - DD_TRACE_DEBUG
       - DD_TRACE_ENABLED
       - DD_LOGS_INJECTION=true
