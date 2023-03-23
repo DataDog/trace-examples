@@ -11,7 +11,7 @@ services:
     environment:
       - DD_APM_ENABLED=true
       - DD_APM_NON_LOCAL_TRAFFIC=true
-      - DD_API_KEY=${DD_API_KEY}      
+      - DD_API_KEY=${DD_API_KEY}
   dynamodb:
     image: amazon/dynamodb-local:latest
     ports:
@@ -23,7 +23,7 @@ services:
       - AWS_ACCESS_KEY_ID=${AWS_ACCESS_KEY_ID}
       - AWS_SECRET_ACCESS_KEY=${AWS_SECRET_ACCESS_KEY}
       - DD_AGENT_HOST=datadog-agent
-      - DATADOG_TRACE_DEBUG=true
+      - DD_TRACE_DEBUG=true
     depends_on:
       - dynamodb
       - datadog-agent

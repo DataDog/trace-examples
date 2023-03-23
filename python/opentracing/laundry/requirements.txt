@@ -1,2 +1,2 @@
-ddtrace==0.14.0
+ddtrace
 opentracing==2.0.0

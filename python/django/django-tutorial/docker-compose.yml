@@ -7,8 +7,8 @@ services:
     build: .
     command: ddtrace-run python manage.py runserver 0.0.0.0:8000
     environment:
-      - 'DATADOG_TRACE_AGENT_HOSTNAME=agent'
-      - 'DATADOG_TRACE_DEBUG=true'
+      - 'DD_TRACE_AGENT_HOSTNAME=agent'
+      - 'DD_TRACE_DEBUG=true'
     ports:
       - '8000:8000'
 

@@ -18,7 +18,7 @@ INSTALLED_APPS = [
     'ddtrace.contrib.django',
 ]
 
-DATADOG_TRACE = {
+DD_TRACE = {
     'DEFAULT_SERVICE': 'django-tutorial-docker',
     'TAGS': {'env': 'dev'},
     'AGENT_HOSTNAME': 'agent',

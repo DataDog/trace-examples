@@ -8,14 +8,15 @@ from ddtrace.contrib.aiohttp import trace_app
 
 
 # env vars for deploying purpose
-DATADOG_TRACER = os.getenv('DATADOG_TRACER', 'localhost')
+DD_AGENT_HOST = os.getenv('DD_AGENT_HOST', 'localhost')
+DD_AGENT_PORT = os.getenv('DD_AGENT_PORT', '8126')
 HOSTNAME = os.getenv('APP_HOSTNAME', '127.0.0.1')
 PORT = int(os.getenv('APP_PORT', '8000'))
 BASE_DIR = os.path.dirname(os.path.realpath(__file__))
 STATIC_DIR = os.path.join(BASE_DIR, 'statics')
 
 # configure the tracer
-tracer.configure(hostname=DATADOG_TRACER)
+tracer.configure(hostname=DD_AGENT_HOST, port=DD_AGENT_PORT)
 
 
 async def handle(request):

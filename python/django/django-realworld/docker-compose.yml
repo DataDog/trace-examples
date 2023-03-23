@@ -5,10 +5,10 @@ services:
       - agent
     build: './django-realworld-example-app'
     environment:
-      - 'DATADOG_TRACE_AGENT_HOSTNAME=agent'
-      - 'DATADOG_TRACE_DEBUG=true'
+      - 'DD_TRACE_AGENT_HOSTNAME=agent'
+      - 'DD_TRACE_DEBUG=true'
       - 'DD_LOGGING_RATE_LIMIT=0'
-      - 'DD_SERVICE_NAME=django-realworld'
+      - 'DD_SERVICE=django-realworld'
     ports:
       - '3000:3000'
 

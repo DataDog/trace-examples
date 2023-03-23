@@ -7,8 +7,8 @@ from ddtrace import tracer, Pin, patch
 from ddtrace.contrib.asyncio import context_provider, helpers
 
 
-DATADOG_TRACER = os.getenv('DATADOG_TRACER', 'localhost')
-tracer.configure(hostname=DATADOG_TRACER, context_provider=context_provider)
+DD_AGENT_HOST = os.getenv('DD_AGENT_HOST', 'localhost')
+tracer.configure(hostname=DD_AGENT_HOST, context_provider=context_provider)
 
 
 # patch redis

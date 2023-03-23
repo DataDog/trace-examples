@@ -34,12 +34,12 @@ information about the agent. Make sure you install the *trace* agent!
 Run with:
 
 ```sh
-$ DATADOG_TRACE_DEBUG=true ddtrace-run python producer.py
+$ DD_TRACE_DEBUG=true ddtrace-run python producer.py
 ```
 
 and in a new shell/env:
 
 ```sh
-$ DATADOG_TRACE_DEBUG=true ddtrace-run python consumer.py
+$ DD_TRACE_DEBUG=true ddtrace-run python consumer.py
 ```
 
