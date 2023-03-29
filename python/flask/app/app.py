@@ -19,6 +19,9 @@ from flask_cors import CORS
 # Utilities
 import requests
 
+#Images
+from  pyunsplash import PyUnsplash
+
 # Internal
 from .blueprint import bp
 from .exceptions import AppException
@@ -88,6 +91,14 @@ def index():
             description=['Endpoint for this page, which uses <code>render_template()</code>.'],
             links=[
                 dict(label='GET /', url=url_for('index')),
+            ],
+        ),
+        dict(
+            rule='GET /image',
+            description=[
+                'Endpoint to retrieve an image from the PyUnsplash library.'
+                ],
+            links=[dict(label='GET /image', url=url_for('image')),
             ],
         ),
         dict(
@@ -189,6 +200,22 @@ def index():
         ),
     ]
     return render_template('index.jinja2', routes=routes)
+
+# Endpoint which retrieves an image
+@app.route('/image')
+def image():
+    pyuns = PyUnsplash(api_key="aGkM_2OSlblMITvJXOelIs6kWPcbgT_F7U07phUPYdU")
+    photos = pyuns.photos(type_='random', count=1, featured=True, query="splash")
+    [photo] = photos.entries
+    print(photo.id, photo.link_download)
+
+    @after_this_request
+    def after_image(response):
+        print('HOOK: after_this_request')
+        return response
+    
+    return photo.link_download
+
 
 
 # Endpoint which makes uses `requests`
