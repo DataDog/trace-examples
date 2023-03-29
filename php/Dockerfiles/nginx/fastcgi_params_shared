@@ -1,0 +1,3 @@
+fastcgi_param DD_SHARED_VALUE "Some shared value";
+fastcgi_param DD_AGENT_HOST agent;
+fastcgi_param DD_TRACE_URL_AS_RESOURCE_NAMES_ENABLED true;
