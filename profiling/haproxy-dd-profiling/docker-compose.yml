@@ -1,0 +1,40 @@
+version: "3.0"
+
+services:
+  proxy:
+    image: haproxytech/haproxy-alpine:2.4
+    volumes: 
+      - ./:/usr/local/etc/haproxy:ro
+    ports:
+      - "3833:3833"
+    expose:
+      - "3836"
+      - "3837"
+  datadog-agent:
+    image: datadog/agent:latest
+    env_file:
+      - docker.env
+    environment:
+      DD_APM_ENABLED: 'true'
+      DD_APM_PROFILING_DD_URL: 'http://proxy:3836/api/v2/profile'
+      DD_APM_NON_LOCAL_TRAFFIC: 'true'
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - /proc/:/host/proc/:ro
+      - /sys/fs/cgroup:/host/sys/fs/cgroup:ro
+    expose:
+      - "8126"
+    depends_on:
+      - proxy
+  pyfib:
+    build: ./pyfib
+    env_file:
+      - docker.env
+    environment:
+      DD_PROFILING_ENABLED: 'true'
+      DD_TRACE_DEBUG: 'true'
+      DD_SERVICE: 'pyfib-haproxy-test'
+      DD_AGENT_HOST: 'datadog-agent'
+    depends_on:
+      - datadog-agent
+
