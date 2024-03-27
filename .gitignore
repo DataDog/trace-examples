@@ -1,6 +1,9 @@
 
-# Created by https://www.gitignore.io/api/macos,linux,windows
-# Edit at https://www.gitignore.io/?templates=macos,linux,windows
+# Created by https://www.gitignore.io/api/macos,linux,windows,dotenv
+# Edit at https://www.gitignore.io/?templates=macos,linux,windows,dotenv
+
+### dotenv ###
+.env
 
 ### Linux ###
 *~
