@@ -6,6 +6,9 @@ services:
       - DD_ENV
       - DD_TRACE_DEBUG
       - DD_TRACE_ENABLED
+      - DD_TRACING_ENABLED=true
+      - DD_RUNTIME_METRICS_ENABLED=true
+      - DD_PROFILING_ENABLED=true
       - DD_LOGS_INJECTION=true
       - DD_AGENT_HOST=agent
     volumes:
@@ -20,6 +23,9 @@ services:
       - DD_ENV
       - DD_TRACE_DEBUG
       - DD_TRACE_ENABLED
+      - DD_TRACING_ENABLED=true
+      - DD_RUNTIME_METRICS_ENABLED=true
+      - DD_PROFILING_ENABLED=true
       - DD_LOGS_INJECTION=true
       - DD_AGENT_HOST=agent
     labels:
@@ -30,12 +36,15 @@ services:
       - DD_ENV
       - DD_TRACE_DEBUG
       - DD_TRACE_ENABLED
+      - DD_TRACING_ENABLED=true
+      - DD_RUNTIME_METRICS_ENABLED=true
+      - DD_PROFILING_ENABLED=true
       - DD_LOGS_INJECTION=true
       - DD_AGENT_HOST=agent
     labels:
       com.datadoghq.ad.logs: '[{"source": "docker", "service": "user"}]'
   agent:
-    image: datadog/agent:6.14.1
+    image: datadog/agent:7.52.0
     environment:
       - DD_ENV
       - DD_TAGS="env:${DD_ENV}"
@@ -46,7 +55,9 @@ services:
       - DD_APM_ANALYZED_SPANS=api-gateway|express.request=1,auth|express.request=1,user|express.request=1
       - DD_BIND_HOST=0.0.0.0
       - DD_LOGS_ENABLED=true
+      - DD_REMOTE_CONFIGURATION_ENABLED=true
       - DD_API_KEY
+      - DD_SITE
       - DD_DD_URL
       - DD_APM_DD_URL
     volumes:
