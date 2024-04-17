@@ -1,0 +1,3 @@
+rootProject.name = 'trace-examples'
+
+include ':spring-app'
