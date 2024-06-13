@@ -1,0 +1,20 @@
+FROM php:7.3-fpm
+
+RUN apt-get update \
+    && apt-get install -y libmcrypt-dev \
+    && pecl install mcrypt-1.0.3 \
+    && docker-php-ext-enable mcrypt \
+    && docker-php-ext-install mysqli \
+    && rm -rf /var/lib/apt/lists/*
+
+# Install composer
+RUN php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');" \
+    && php composer-setup.php  --install-dir="/usr/bin" --filename=composer \
+    && php -r "unlink('composer-setup.php');" \
+    && composer self-update
+
+ARG DD_TRACE_VERSION
+
+# Install DDTrace deb
+ADD https://github.com/DataDog/dd-trace-php/releases/download/${DD_TRACE_VERSION}/datadog-php-tracer_${DD_TRACE_VERSION}_amd64.deb datadog-php-tracer.deb
+RUN dpkg -i datadog-php-tracer.deb
