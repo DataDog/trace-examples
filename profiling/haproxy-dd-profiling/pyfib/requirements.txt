@@ -1,0 +1,9 @@
+attrs==21.2.0
+click==8.0.1
+ddtrace==0.49.3
+MarkupSafe==2.0.1
+packaging==21.0
+protobuf==3.17.3
+pyparsing==2.4.7
+six==1.16.0
+tenacity==7.0.0
