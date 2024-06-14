@@ -1,0 +1,40 @@
+plugins {
+    id 'java'
+    id 'application'
+    id "com.github.johnrengelman.shadow" version "5.2.0"
+}
+
+version '0.1.0'
+
+shadowJar {
+    archiveFileName = "consumer-${version}.jar"
+}
+
+sourceCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    compile 'com.rabbitmq:amqp-client:5.8.0'
+    compile group: 'org.apache.commons', name: 'commons-lang3', version: '3.10'
+    compile group: 'com.datadoghq', name: 'dd-trace-ot', version: '0.47.0'
+    //compile group: 'io.opentracing.contrib', name: 'opentracing-rabbitmq-client', version: '0.1.9'
+    compile 'com.squareup.okhttp3:okhttp:4.5.0'
+
+}
+
+ext {
+    javaMainClass = "com.datadog.pej.Main"
+}
+
+application {
+    mainClassName = javaMainClass
+}
+
+jar {
+    manifest {
+        attributes 'Main-Class': 'com.datadog.pej.Main'
+    }
+}

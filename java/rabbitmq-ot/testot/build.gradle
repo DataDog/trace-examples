@@ -1,0 +1,44 @@
+plugins {
+    id 'java'
+    id 'application'
+    id "com.github.johnrengelman.shadow" version "5.2.0"
+}
+
+version '0.1.0'
+
+shadowJar {
+    archiveFileName = "testot-${version}.jar"
+}
+
+
+
+sourceCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    compile group: 'com.datadoghq', name: 'dd-trace-ot', version: '0.47.0'
+    compileOnly'org.projectlombok:lombok:1.18.10'
+    annotationProcessor'org.projectlombok:lombok:1.18.10'
+    compile group: 'org.slf4j', name: 'slf4j-simple', version: '1.7.30'
+}
+
+
+ext {
+    javaMainClass = "Main"
+}
+
+application {
+    mainClassName = javaMainClass
+}
+
+
+jar {
+    manifest {
+        attributes 'Main-Class': 'Main'
+    }
+}
+
+
