@@ -1,7 +1,6 @@
-version: "3.4"
+version: '3.4'
 
 services:
-
   agent:
     image: datadog/agent:latest
     volumes:
@@ -124,7 +123,31 @@ services:
     environment:
       DD_AGENT_HOST: agent
       DD_TRACE_APP_NAME: symfony_php56_apache
-      DD_TRACE_DEBUG: "true"
+      DD_TRACE_DEBUG: 'true'
+
+  nginx:
+    build:
+      context: Dockerfiles/nginx
+    volumes:
+      - ./apps:/var/www/public
+      - ./Dockerfiles/nginx/default.conf:/etc/nginx/conf.d/default.conf
+      - ./Dockerfiles/nginx/fastcgi_params_shared:/etc/nginx/fastcgi_params_shared
+    depends_on:
+      - php-fpm-73
+    ports:
+      - '5678:80'
+
+  php-fpm-73:
+    build:
+      context: Dockerfiles/php-fpm
+      dockerfile: Dockerfile73
+      args:
+        - DD_TRACE_VERSION=${DD_TRACE_VERSION}
+    depends_on:
+      - agent
+      - mysql
+    volumes:
+      - ./apps:/var/www/public
 
 volumes:
   composer-cache:
