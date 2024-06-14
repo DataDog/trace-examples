@@ -11,6 +11,7 @@ requests = "*"
 flask-caching = "*"
 flask-cors = "*"
 flask-limiter = "*"
+pyunsplash = "*"
 
 [dev-packages]
 
