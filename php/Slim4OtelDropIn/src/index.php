@@ -1,7 +1,7 @@
 <?php
 
 declare(strict_types=1);
-require 'vendor/autoload.php';
+require_once 'vendor/autoload.php';
 
 use DI\Bridge\Slim\Bridge;
 use DI\ContainerBuilder;
@@ -82,12 +82,15 @@ $app->add(function (Request $request, RequestHandler $handler) use ($tracer) {
         ->setParent($parent)
         ->setSpanKind(SpanKind::KIND_SERVER)
         ->startSpan();
+
+    $root->addEvent("Root OTEL Span Starting!");
     $scope = $root->activate();
 
     try {
         $response = $handler->handle($request);
         $root->setStatus($response->getStatusCode() < 500 ? StatusCode::STATUS_OK : StatusCode::STATUS_ERROR);
     } finally {
+        $root->addEvent("Root OTEL Span Ending!", [ 'final_status_code' => $response->getStatusCode() ]);
         $root->end();
         $scope->detach();
     }
