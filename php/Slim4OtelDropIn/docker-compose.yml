@@ -1,9 +1,11 @@
 x-otel-common:
-  &otel-common
+  &otel-and-dd-common
   version: '3.7'
   OTEL_LOG_LEVEL: info 
-  OTEL_PHP_AUTOLOAD_ENABLED: "true"
-  DD_TRACE_OTEL_ENABLED: "true"
+  OTEL_TRACES_SAMPLER: parentbased_always_on
+  OTEL_EXPORTER_OTLP_ENDPOINT: http://agent:4318
+  DD_TRACE_OTEL_ENABLED: true
+  DD_TRACE_ENABLED: true
   DD_AGENT_HOST: agent
 
 services:
@@ -17,6 +19,7 @@ services:
     environment:
       - DD_API_KEY=<DD_API_KEY>
       - DD_ENV=trace-examples-php
+      - DD_OTLP_CONFIG_RECEIVER_PROTOCOLS_HTTP_ENDPOINT=0.0.0.0:4318
 
   service-one:
     image: php-service-with-dd-tracer
@@ -26,7 +29,7 @@ services:
     ports:
       - '8000:8000'
     environment:
-      <<: *otel-common
+      <<: *otel-and-dd-common
       OTEL_SERVICE_NAME: service-one
       OTEL_RESOURCE_ATTRIBUTES: 'service.version=0.1'
 
@@ -36,7 +39,7 @@ services:
     volumes:
       - './src:/usr/src/myapp'
     environment:
-      <<: *otel-common
+      <<: *otel-and-dd-common
       OTEL_SERVICE_NAME: service-two
       OTEL_RESOURCE_ATTRIBUTES: 'service.version=0.2'
 
@@ -46,6 +49,6 @@ services:
     volumes:
       - './src:/usr/src/myapp'
     environment:
-      <<: *otel-common
+      <<: *otel-and-dd-common
       OTEL_SERVICE_NAME: service-three
       OTEL_RESOURCE_ATTRIBUTES: 'service.version=0.3'

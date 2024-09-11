@@ -13,6 +13,7 @@
     "php": ">=8.1",
     "open-telemetry/sdk": "^1.0",
     "open-telemetry/api": "^1.0",
+    "open-telemetry/exporter-otlp": "^1.0",
     "guzzlehttp/guzzle": "*",
     "php-http/guzzle7-adapter": "*",
     "slim/slim": "~4",
