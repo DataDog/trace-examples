@@ -83,14 +83,13 @@ $app->add(function (Request $request, RequestHandler $handler) use ($tracer) {
         ->setSpanKind(SpanKind::KIND_SERVER)
         ->startSpan();
 
-    $root->addEvent("Root OTEL Span Starting!");
+    $root->addEvent("OTEL Root Span Starting.");
     $scope = $root->activate();
 
     try {
         $response = $handler->handle($request);
         $root->setStatus($response->getStatusCode() < 500 ? StatusCode::STATUS_OK : StatusCode::STATUS_ERROR);
     } finally {
-        $root->addEvent("Root OTEL Span Ending!", [ 'final_status_code' => $response->getStatusCode() ]);
         $root->end();
         $scope->detach();
     }
@@ -127,6 +126,10 @@ $app->get('/two/{name}', function (Response $response, $name) use ($tracer) {
     usleep((int) (0.3 * 1e6));
     $span->setStatus(StatusCode::STATUS_OK)->end();
     $response->getBody()->write(\json_encode(['some' => 'data', 'user' => $name]));
+
+    $spanWithLink = $tracer->spanBuilder('span-with-link')
+        ->addLink($span->getContext())
+        ->startSpan();
 
     return $response->withAddedHeader('Content-Type', 'application/json');
 });
