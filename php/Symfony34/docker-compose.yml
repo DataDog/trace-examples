@@ -1,0 +1,132 @@
+version: "3.4"
+
+services:
+
+  agent:
+    image: datadog/agent:latest
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+      - /proc/:/host/proc/:ro
+      - /sys/fs/cgroup/:/host/sys/fs/cgroup:ro
+    environment:
+      - DD_API_KEY=${DATADOG_API_KEY}
+      - DD_APM_ENABLED=true
+      - DD_APM_ENV=trace-examples-php
+
+  mysql:
+    image: mysql:5.7
+    environment:
+      - MYSQL_ROOT_PASSWORD=test
+      - MYSQL_PASSWORD=test
+      - MYSQL_USER=test
+      - MYSQL_DATABASE=test
+    volumes:
+      - mysql-data:/var/lib/mysql
+    ports:
+      - 3306:3306
+
+  redis:
+    image: "circleci/redis:4.0-alpine"
+    volumes:
+      - redis-data:/data
+
+  laravel42_php56_apache:
+    build:
+      context: .
+      dockerfile: Dockerfiles/Dockerfile_php56_apache
+      args:
+        - DD_TRACE_VERSION=${DD_TRACE_VERSION}
+        - WEB_APP_PATH=Laravel42
+    volumes:
+      - composer-cache:/root/.composer/cache
+    depends_on:
+      - agent
+    ports:
+      - 8042:80
+    environment:
+      DD_AGENT_HOST: agent
+      DD_TRACE_APP_NAME: laravel42_php56_apache
+      DD_TRACE_DEBUG: "true"
+
+  laravel57_php71_nginx_fpm:
+    build:
+      context: .
+      dockerfile: Dockerfiles/Dockerfile_php71_nginx_fpm
+      args:
+        - DD_TRACE_VERSION=${DD_TRACE_VERSION}
+        - WEB_APP_PATH=Laravel57
+    volumes:
+      - composer-cache:/root/.composer/cache
+      - ./Laravel57:/var/www
+    depends_on:
+      - agent
+      - mysql
+    ports:
+      - 7057:80
+    environment:
+      DD_AGENT_HOST: agent
+      DD_TRACE_APP_NAME: laravel57_php71_nginx_fpm
+      DD_TRACE_DEBUG: "true"
+
+  laravel57_php72_nginx_fpm:
+    build:
+      context: .
+      dockerfile: Dockerfiles/Dockerfile_php72_nginx_fpm
+      args:
+        - DD_TRACE_VERSION=${DD_TRACE_VERSION}
+        - WEB_APP_PATH=Laravel57
+    volumes:
+      - composer-cache:/root/.composer/cache
+      - ./Laravel57:/var/www
+    depends_on:
+      - agent
+      - mysql
+    ports:
+      - 7059:80
+    environment:
+      DD_AGENT_HOST: agent
+      DD_TRACE_APP_NAME: laravel57_php72_nginx_fpm
+      DD_TRACE_DEBUG: "true"
+
+  laravel57_php72_apache_fpm:
+    build:
+      context: .
+      dockerfile: Dockerfiles/Dockerfile_php72_apache_fpm
+      args:
+        - DD_TRACE_VERSION=${DD_TRACE_VERSION}
+        - WEB_APP_PATH=Laravel57
+    volumes:
+      - composer-cache:/root/.composer/cache
+    depends_on:
+      - agent
+      - mysql
+      - redis
+    ports:
+      - 7058:80
+    environment:
+      DD_AGENT_HOST: agent
+      DD_TRACE_APP_NAME: laravel57_php72_apache_fpm
+      DD_TRACE_DEBUG: "true"
+
+  symfony34_php56_apache:
+    build:
+      context: .
+      dockerfile: Dockerfiles/Dockerfile_php56_apache
+      args:
+        - DD_TRACE_VERSION=${DD_TRACE_VERSION}
+        - WEB_APP_PATH=Symfony34
+    volumes:
+      - composer-cache:/root/.composer/cache
+    depends_on:
+      - agent
+    ports:
+      - 9034:80
+    environment:
+      DD_AGENT_HOST: agent
+      DD_TRACE_APP_NAME: symfony_php56_apache
+      DD_TRACE_DEBUG: "true"
+
+volumes:
+  composer-cache:
+  mysql-data:
+  redis-data:
