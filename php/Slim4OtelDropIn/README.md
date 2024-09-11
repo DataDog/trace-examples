@@ -12,18 +12,19 @@ $ docker-compose up
 # in a separate terminal
 $ curl localhost:8000/users/otel
 ```
+Update the `&otel-and-dd-common` section at the top of the `docker-compose.yml` to play around and match the screenshots below.
 
 ## Screenshots
 ### Opentelemetry
-# DD_TRACE_ENABLED: false & DD_TRACE_OTEL_ENABLED: false
+`DD_TRACE_ENABLED: false & DD_TRACE_OTEL_ENABLED: false`
 ![Opentelemetry](screenshots/distributed-otel-trace.png?raw=true "DD_TRACE_ENABLED: false & DD_TRACE_OTEL_ENABLED: false")
 
 ### Datadog
-# DD_TRACE_ENABLED: true & DD_TRACE_OTEL_ENABLED: false
+`DD_TRACE_ENABLED: true & DD_TRACE_OTEL_ENABLED: false`
 ![Datadog](screenshots/distributed-dd-trace.png?raw=true "DD_TRACE_ENABLED: true & DD_TRACE_OTEL_ENABLED: false")
 
 ### Opentelemetry + Datadog
-# DD_TRACE_ENABLED: true & DD_TRACE_OTEL_ENABLED: true
+`DD_TRACE_ENABLED: true & DD_TRACE_OTEL_ENABLED: true`
 ![Opentelemetry + Datadog](screenshots/distributed-otel-dd-trace.png?raw=true "DD_TRACE_ENABLED: true & DD_TRACE_OTEL_ENABLED: true")
 
 ## Notes
