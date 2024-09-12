@@ -7,6 +7,7 @@ The example is presented as a [slim framework](https://www.slimframework.com/) s
 
 ## Running the example
 ```bash
+$ docker build -t php-service-with-dd-tracer .
 $ docker-compose run service-one composer install
 $ docker-compose up
 # in a separate terminal

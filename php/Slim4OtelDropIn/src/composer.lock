@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "b96ba4210ba1b48fb506156de2ada249",
+    "content-hash": "f83b82d662105cec7ec6644891e44bdb",
     "packages": [
         {
             "name": "google/protobuf",
@@ -818,6 +818,72 @@
                 "source": "https://github.com/open-telemetry/opentelemetry-php"
             },
             "time": "2024-04-30T18:28:30+00:00"
+        },
+        {
+            "name": "open-telemetry/opentelemetry-auto-slim",
+            "version": "1.0.7",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/opentelemetry-php/contrib-auto-slim.git",
+                "reference": "a4089b16add089d2233e3ff0fdc5ec8b9a1f5620"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/opentelemetry-php/contrib-auto-slim/zipball/a4089b16add089d2233e3ff0fdc5ec8b9a1f5620",
+                "reference": "a4089b16add089d2233e3ff0fdc5ec8b9a1f5620",
+                "shasum": ""
+            },
+            "require": {
+                "ext-opentelemetry": "*",
+                "ext-reflection": "*",
+                "open-telemetry/api": "^1.0",
+                "open-telemetry/sem-conv": "^1.24",
+                "php": "^8.0",
+                "slim/slim": "^4"
+            },
+            "require-dev": {
+                "friendsofphp/php-cs-fixer": "^3",
+                "mockery/mockery": "^1.5",
+                "nyholm/psr7": "*",
+                "open-telemetry/opentelemetry-propagation-server-timing": "*",
+                "open-telemetry/opentelemetry-propagation-traceresponse": "*",
+                "open-telemetry/sdk": "^1.0",
+                "phan/phan": "^5.0",
+                "php-http/mock-client": "*",
+                "phpstan/phpstan": "^1.1",
+                "phpstan/phpstan-mockery": "^1.1.0",
+                "phpstan/phpstan-phpunit": "^1.0",
+                "phpunit/phpunit": "^9.5",
+                "psalm/plugin-phpunit": "^0.18.4",
+                "vimeo/psalm": "^5.0"
+            },
+            "type": "library",
+            "autoload": {
+                "files": [
+                    "_register.php"
+                ],
+                "psr-4": {
+                    "OpenTelemetry\\Contrib\\Instrumentation\\Slim\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "Apache-2.0"
+            ],
+            "description": "OpenTelemetry auto-instrumentation for Slim Framework.",
+            "homepage": "https://opentelemetry.io/docs/php",
+            "keywords": [
+                "instrumentation",
+                "open-telemetry",
+                "opentelemetry",
+                "otel",
+                "slim",
+                "tracing"
+            ],
+            "support": {
+                "source": "https://github.com/opentelemetry-php/contrib-auto-slim/tree/1.0.7"
+            },
+            "time": "2024-06-25T01:39:13+00:00"
         },
         {
             "name": "open-telemetry/sdk",

@@ -1,9 +1,9 @@
 x-otel-common:
   &otel-and-dd-common
   version: '3.7'
-  OTEL_LOG_LEVEL: info 
-  OTEL_TRACES_SAMPLER: parentbased_always_on
+  OTEL_LOG_LEVEL: info
   OTEL_EXPORTER_OTLP_ENDPOINT: http://agent:4318
+  OTEL_PHP_AUTOLOAD_ENABLED: true
   DD_TRACE_OTEL_ENABLED: true
   DD_TRACE_ENABLED: true
   DD_AGENT_HOST: agent
