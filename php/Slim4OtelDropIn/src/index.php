@@ -78,12 +78,10 @@ $app->add(function (Request $request, RequestHandler $handler) use ($tracer) {
     $routeContext = RouteContext::fromRequest($request);
     $route = $routeContext->getRoute();
     $root = $tracer->spanBuilder($route->getPattern())
-        ->setStartTimestamp((int) ($request->getServerParams()['REQUEST_TIME_FLOAT'] * 1e9))
         ->setParent($parent)
         ->setSpanKind(SpanKind::KIND_SERVER)
         ->startSpan();
 
-    $root->addEvent("OTEL Root Span Starting.");
     $scope = $root->activate();
 
     try {
@@ -127,9 +125,11 @@ $app->get('/two/{name}', function (Response $response, $name) use ($tracer) {
     $span->setStatus(StatusCode::STATUS_OK)->end();
     $response->getBody()->write(\json_encode(['some' => 'data', 'user' => $name]));
 
-    $spanWithLink = $tracer->spanBuilder('span-with-link')
+    $spanWithLink = $tracer->spanBuilder('span-with-link-and-event')
         ->addLink($span->getContext())
         ->startSpan();
+
+    $spanWithLink->addEvent("ServiceTwo Span With SpanEvent", [ 'service_name' => 'two' ]);
 
     return $response->withAddedHeader('Content-Type', 'application/json');
 });
