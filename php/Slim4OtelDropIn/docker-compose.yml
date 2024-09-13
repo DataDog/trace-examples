@@ -1,0 +1,54 @@
+x-otel-common:
+  &otel-and-dd-common
+  version: '3.7'
+  OTEL_LOG_LEVEL: info
+  OTEL_EXPORTER_OTLP_ENDPOINT: http://agent:4318
+  OTEL_PHP_AUTOLOAD_ENABLED: true
+  DD_TRACE_OTEL_ENABLED: true
+  DD_TRACE_ENABLED: true
+  DD_AGENT_HOST: agent
+
+services:
+
+  agent:
+    image: datadog/agent:latest
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+      - /proc/:/host/proc/:ro
+      - /sys/fs/cgroup/:/host/sys/fs/cgroup:ro
+    environment:
+      - DD_API_KEY=<DD_API_KEY>
+      - DD_ENV=trace-examples-php
+      - DD_OTLP_CONFIG_RECEIVER_PROTOCOLS_HTTP_ENDPOINT=0.0.0.0:4318
+
+  service-one:
+    image: php-service-with-dd-tracer
+    command: [ 'php', '-S', '0.0.0.0:8000' ]
+    volumes:
+      - './src:/usr/src/myapp'
+    ports:
+      - '8000:8000'
+    environment:
+      <<: *otel-and-dd-common
+      OTEL_SERVICE_NAME: service-one
+      OTEL_RESOURCE_ATTRIBUTES: 'service.version=0.1'
+
+  service-two:
+    image: php-service-with-dd-tracer
+    command: [ 'php', '-S', '0.0.0.0:8000' ]
+    volumes:
+      - './src:/usr/src/myapp'
+    environment:
+      <<: *otel-and-dd-common
+      OTEL_SERVICE_NAME: service-two
+      OTEL_RESOURCE_ATTRIBUTES: 'service.version=0.2'
+
+  service-three:
+    image: php-service-with-dd-tracer
+    command: [ 'php', '-S', '0.0.0.0:8000' ]
+    volumes:
+      - './src:/usr/src/myapp'
+    environment:
+      <<: *otel-and-dd-common
+      OTEL_SERVICE_NAME: service-three
+      OTEL_RESOURCE_ATTRIBUTES: 'service.version=0.3'
