@@ -1,7 +1,7 @@
 # Distributed Tracing Example
 This example uses `docker-compose`, and illustrates the distributed tracing functionality of OpenTelemetry with Datadog's Drop In support enabled. An HTTP request to service-one will make multiple asynchronous HTTP requests, each of which is injected with a `traceparent` header, it includes examples of adding Attributes, Links and Events to spans.
 
-All trace data is sent to the [Datadog Agent](https://opentelemetry.io/docs/collector/), where they are forwarded to Datadog after you set your `DD_API_KEY`.
+All trace data is sent through the [Datadog Agent Endpoint](https://docs.datadoghq.com/containers/docker/apm/?tab=linux#docker-network) when `DD_TRACE_ENABLED` is `true` otherwise is sent using the [Datadog Agent OTLP Ingestion]([https://docs.datadoghq.com/opentelemetry/interoperability/otlp_ingest_in_the_agent/?tab=host](https://docs.datadoghq.com/opentelemetry/interoperability/otlp_ingest_in_the_agent/?tab=docker#enabling-otlp-ingestion-on-the-datadog-agent)), where they are forwarded to Datadog after you set your `DD_API_KEY` in the `docker-compose.yml` file.
 
 The example is presented as a [slim framework](https://www.slimframework.com/) single-file application for simplicity, and uses Guzzle as an HTTP client. The same application source is used for all services.
 
