@@ -1,12 +1,18 @@
 extensions:
+
 receivers:
   otlp:
     protocols:
+       # specifying 0.0.0.0 allows the otel-collector to be accessed from the host machine as well
       grpc:
+        endpoint: 0.0.0.0:4317
       http:
+        endpoint: 0.0.0.0:4318
+
   jaeger:
     protocols:
       thrift_http:
+
   zipkin:
 
 processors:
@@ -14,21 +20,21 @@ processors:
     timeout: 10s
 
 exporters:
+  debug:
+    verbosity: detailed
+
   datadog/api:
     hostname: customhostname
-    version: v1
 
     # tags:
     #   - example:tag
 
     api:
       key: <YOUR_API_KEY>
-  logging:
-    logLevel: info
 
 service:
   pipelines:
     traces:
       receivers: [otlp, zipkin, jaeger]
       processors: [batch]
-      exporters: [datadog/api]
+      exporters: [debug, datadog/api]
