@@ -1,0 +1,84 @@
+# Copyright 2024-Present Datadog, Inc. https://www.datadoghq.com/
+# SPDX-License-Identifier: Apache-2.0
+
+name: Rust OpenTelemetry Example
+
+services:
+  rust-app-ddagent:
+    build:
+      context: rust-app
+      dockerfile: Dockerfile
+    environment:
+      - RUST_LOG=info
+      - OTLP_HOST=ddagent
+      - DD_SERVICE=rust-app-ddagent
+      - DD_ENV=dev
+    ports:
+      - 8080:8080
+    profiles: [rust-app-ddagent]
+
+  rust-app-ddotelexporter:
+    build:
+      context: rust-app
+      dockerfile: Dockerfile
+    environment:
+      - RUST_LOG=info
+      - OTLP_HOST=ddotelexporter
+      - DD_SERVICE=rust-app-ddotelexporter
+      - DD_ENV=dev
+    ports:
+      - 8080:8080
+    profiles: [rust-app-ddotelexporter]
+
+  rust-app-ddotelexportertransformed:
+    build:
+      context: rust-app
+      dockerfile: Dockerfile
+    environment:
+      - RUST_LOG=info
+      - OTLP_HOST=ddotelexportertransformed
+      - DD_SERVICE=rust-app-ddotelexportertransformed
+      - DD_ENV=dev
+    ports:
+      - 8080:8080
+    profiles: [rust-app-ddotelexportertransformed]
+
+  ddagent:
+    image: datadog/agent:7.59.0
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+    environment:
+      - DD_API_KEY=${DATADOG_API_KEY}
+      - DD_LOG_LEVEL=WARN
+      - DD_APM_ENABLED=true
+      - DD_DOGSTATSD_NON_LOCAL_TRAFFIC=1
+      - DD_OTLP_CONFIG_RECEIVER_PROTOCOLS_HTTP_ENDPOINT=0.0.0.0:4318
+      - DD_OTLP_CONFIG_RECEIVER_PROTOCOLS_GRPC_ENDPOINT=0.0.0.0:4317
+    ports:
+      - 4317:4317
+      - 4318:4318
+    profiles: [ddagent, rust-app-ddagent]
+
+  ddotelexporter:
+    image: otel/opentelemetry-collector-contrib:0.113.0
+    command: ["--config=/etc/otel-collector-config.yml"]
+    ports:
+      - "4317:4317/tcp"
+      - "4318:4318/tcp"
+    volumes:
+      - ./ddotelexporter-config.yml:/etc/otel-collector-config.yml
+    environment:
+      - DATADOG_API_KEY=${DATADOG_API_KEY}
+    profiles: [ddotelexporter, rust-app-ddotelexporter]
+
+  ddotelexportertransformed:
+    image: otel/opentelemetry-collector-contrib:0.113.0
+    command: ["--config=/etc/otel-collector-config.yml"]
+    ports:
+      - "4317:4317/tcp"
+      - "4318:4318/tcp"
+    volumes:
+      - ./ddotelexportertransformed-config.yml:/etc/otel-collector-config.yml
+    environment:
+      - DATADOG_API_KEY=${DATADOG_API_KEY}
+    profiles: [ddotelexportertransformed, rust-app-ddotelexportertransformed]

@@ -1,0 +1,5 @@
+# Copyright 2024-Present Datadog, Inc. https://www.datadoghq.com/
+# SPDX-License-Identifier: Apache-2.0
+
+[toolchain]
+channel = "1.80.1" # min 1.80 for axum tracing middleware that depends on opentelemetry 0.26
