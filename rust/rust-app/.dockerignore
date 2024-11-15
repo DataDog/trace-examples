@@ -1,0 +1,5 @@
+/.gitignore
+/.vscode
+/Dockerfile
+/LICENSE-3rdparty.yml
+/target
