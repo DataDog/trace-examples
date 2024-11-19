@@ -39,7 +39,7 @@ def send_request():
         data = {"message": "Hello from the first server!"}
 
         # Send the request to the second server
-        response = requests.post("http://localhost:5001/receive", headers=outgoing_headers, json=data)
+        response = requests.post("http://localhost:5001/receive", headers=outgoing_headers, json=data, timeout=5)
 
         # Print the response
         print("send_request#response: ", response.text)
