@@ -78,4 +78,4 @@ if __name__ == '__main__':
         span.context.set_baggage_item("key3", "value3")
         headers = {}
         HTTPPropagator.inject(span.context, headers)
-        requests.post("http://localhost:5000/send", headers=headers)
+        requests.post("http://localhost:5000/send", headers=headers, timeout=5)
