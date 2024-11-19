@@ -43,7 +43,12 @@ def send_request():
 
         # Print the response
         print("send_request#response: ", response.text)
-        return jsonify({"status": "Request sent to second server"}), 200
+
+        # Test remove_all_baggage_items()
+        span.context.remove_all_baggage_items()
+        print("send_request#remove_all_baggage_items: ", span.context.get_all_baggage_items())
+
+        return jsonify({"status": "Example complete"}), 200
 
 @app2.route('/receive', methods=['POST'])
 def receive_request():
@@ -54,10 +59,6 @@ def receive_request():
     # Test get_all_baggage_items
     all_baggage = context.get_all_baggage_items()
     print("receive_request#all_baggage: ", all_baggage)
-
-    # Test remove_all_baggage_items()
-    span.context.remove_all_baggage_items()
-    print("receive_request#remove_all_baggage_items: ", span.context.get_all_baggage_items())
 
     return jsonify({"all_baggage": all_baggage}), 200
 
