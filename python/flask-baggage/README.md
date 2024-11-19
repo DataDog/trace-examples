@@ -11,6 +11,6 @@ pipenv install
 pipenv run python app.py
 ```
 
-From there, your terminal will open two Flask apps on ports 5000 and 5001 and then send a request to the app on port 5000 to show Baggage being propagated to the app on port 5001
+From there, your terminal will open two Flask apps on ports 5000 and 5001 and then send a request to the app on port 5000 to show Baggage being propagated to the app on port 5001.
 
 Afterward, you may cancel the app or make requests to the individual apps to test out baggage propagation.
