@@ -1,0 +1,39 @@
+version: "3"
+
+services:
+  agent:
+    image: datadog/agent:latest
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+      - /proc/:/host/proc/:ro
+      - /sys/fs/cgroup/:/host/sys/fs/cgroup:ro
+    ports:
+      - 127.0.0.1:8126:8126/tcp
+      - 127.0.0.1:8125:8125/udp
+    environment:
+      - DD_API_KEY=${DD_API_KEY}
+      - DD_APM_ENABLED=true
+      - DD_APM_NON_LOCAL_TRAFFIC=true
+      - DD_LOG_LEVEL=INFO
+      - DD_DOGSTATSD_NON_LOCAL_TRAFFIC=true
+      - DD_AC_EXCLUDE=name:datadog-agent
+  app_dev:
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    command: ddtrace-run python manage.py runserver 0.0.0.0:8000
+    environment:
+      - DD_ENV=test
+      - "DD_TRACE_AGENT_URL=http://agent:8126"
+      - DD_SERVICE=django-test
+      - DD_DJANGO_CACHE_SERVICE_NAME=cache
+      - DD_DJANGO_DATABASE_SERVICE_NAME=django-test
+      - DD_DJANGO_USE_HANDLER_RESOURCE_FORMAT=true
+      - DD_SQLITE_SERVICE=test-db
+      - DD_PROFILING_ENABLED=true
+      # - DD_TRACE_DEBUG=true
+    ports:
+      - 8000:8000
+    volumes:
+      - .:/project
+
