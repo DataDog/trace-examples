@@ -20,7 +20,7 @@ opentelemetry-instrumentation-wsgi==0.17b0
 opentelemetry-propagator-b3==0.17b0
 opentelemetry-proto==0.17b0
 opentelemetry-sdk==0.17b0
-protobuf==3.13.0
+protobuf==6.33.2
 requests==2.24.0
 six==1.15.0
 structlog==20.2.0
