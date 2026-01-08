@@ -7,7 +7,7 @@
     "dd-trace": "^5.9.0",
     "express": "^4.16.2",
     "express-winston": "^3.1.0",
-    "redis": "^2.8.0",
+    "redis": "^5.10.0",
     "winston": "^3.2.1"
   }
 }
