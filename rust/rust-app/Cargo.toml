@@ -9,7 +9,7 @@ edition = "2021"
 [dependencies]
 anyhow = "1.0"
 axum = "0.7"
-axum-tracing-opentelemetry = "0.23"
+axum-tracing-opentelemetry = "0.33"
 futures = "0.3"
 lazy_static = "1.4"
 opentelemetry = "0.26"
