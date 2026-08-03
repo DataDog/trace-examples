@@ -9,5 +9,12 @@
     "express-winston": "^3.1.0",
     "redis": "^2.8.0",
     "winston": "^3.2.1"
+  },
+  "resolutions": {
+    "protobufjs": "^7.6.5",
+    "shell-quote": "^1.10.0",
+    "path-to-regexp": ">=0.1.13",
+    "lodash": "^4.18.1",
+    "body-parser": "^1.20.6"
   }
 }
