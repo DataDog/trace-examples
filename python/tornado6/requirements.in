@@ -1,5 +1,5 @@
 # application
-tornado==6.0.3
+tornado==6.5.7
 redis
 
 # tracing
