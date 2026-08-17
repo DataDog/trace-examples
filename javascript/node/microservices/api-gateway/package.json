@@ -10,5 +10,9 @@
     "express": "^4.16.2",
     "express-winston": "^3.0.1",
     "winston": "^3.2.1"
+  },
+  "resolutions": {
+    "path-to-regexp": ">=0.1.13",
+    "body-parser": "^1.20.6"
   }
 }
