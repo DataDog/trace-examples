@@ -13,7 +13,7 @@ axum-tracing-opentelemetry = "0.23"
 futures = "0.3"
 lazy_static = "1.4"
 opentelemetry = "0.26"
-opentelemetry_sdk = { version = "0.26", default-features = false, features = ["rt-tokio"] }
+opentelemetry_sdk = { version = "0.31", default-features = false, features = ["rt-tokio"] }
 opentelemetry-otlp = { version = "0.26", features = ["http-proto", "reqwest-client"] }
 opentelemetry-semantic-conventions = { version = "0.26", features = ["semconv_experimental"] }
 opentelemetry-stdout = { version = "0.26", features = ["trace"] }
