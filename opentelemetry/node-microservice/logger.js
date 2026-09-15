@@ -88,7 +88,7 @@ const tracingFormat = function () {
     const span = otel.getSpan(otel.context.active());
     if (span) {
       // convert to dd with:
-      // https://github.com/DataDog/dd-trace-js/blob/master/packages/dd-trace/src/id.js
+      // https://github.com/DataDog/dd-trace-js/blob/main/packages/dd-trace/src/id.js
       const context = span.context();
       const traceIdEnd = context.traceId.slice(context.traceId.length / 2)
       info['dd.trace_id'] = toNumberString(fromString(traceIdEnd,16))
