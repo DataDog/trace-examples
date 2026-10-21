@@ -1,6 +1,6 @@
 # application
 futures
-tornado==4.5.3
+tornado==6.5.7
 redis
 
 # tracing
